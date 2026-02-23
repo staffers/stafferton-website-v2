@@ -8,90 +8,18 @@
   <style>
     body { background: #080808; }
     .admin-page { min-height: 100vh; }
-
-    .admin-login {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .admin-login-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 48px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .admin-login-title {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .admin-login-sub {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 32px;
-    }
-
-    .login-error {
-      background: rgba(255,80,80,0.1);
-      border: 1px solid rgba(255,80,80,0.3);
-      color: #ff6060;
-      font-size: 13px;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      display: none;
-    }
-
-    .section-heading {
-      font-family: var(--font-display);
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .section-sub {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 28px;
-    }
-
+    .admin-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .admin-login-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 48px; width: 100%; max-width: 400px; text-align: center; }
+    .admin-login-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .admin-login-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 32px; }
+    .login-error { background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.3); color: #ff6060; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 16px; display: none; }
+    .section-heading { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .section-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
     textarea.form-textarea { height: 200px; font-family: 'Courier New', monospace; font-size: 13px; }
-
-    .success-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--accent);
-      color: var(--black);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 14px 24px;
-      border-radius: 10px;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.3s;
-      z-index: 999;
-    }
-
-    .success-toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: rgba(255,255,255,0.3);
-      font-size: 15px;
-    }
+    .success-toast { position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--black); font-size: 14px; font-weight: 600; padding: 14px 24px; border-radius: 10px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 999; }
+    .success-toast.show { transform: translateY(0); opacity: 1; }
+    .empty-state { text-align: center; padding: 60px 20px; color: rgba(255,255,255,0.3); font-size: 15px; }
+    .field-hint { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 5px; }
   </style>
 </head>
 <body>
@@ -108,18 +36,18 @@
       <input type="password" class="form-input" id="admin-password" placeholder="Enter password..." autocomplete="current-password">
     </div>
     <button onclick="attemptLogin()" class="form-submit" style="margin-top:8px">Sign In</button>
-    <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:16px">Default: <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">admin123</code> — change in js/cms.js</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:16px">Default: <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">admin123</code></p>
   </div>
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="admin-panel" class="admin-page" style="display:none">
-
   <div class="admin-header">
     <a href="index.html" class="nav-logo"><img src="SCL-LOGO-2018-GREY.png" alt="Stafferton Consulting" style="height:28px" /> <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:var(--font-body);font-weight:400;margin-left:8px">CMS Admin</span></a>
     <div class="admin-nav">
       <button class="admin-nav-btn active" onclick="switchTab('posts', this)">📝 Blog Posts</button>
       <button class="admin-nav-btn" onclick="switchTab('cases', this)">📊 Case Studies</button>
+      <button class="admin-nav-btn" onclick="switchTab('homepage', this)">🏠 Homepage</button>
       <button class="admin-nav-btn" onclick="logout()">Sign Out</button>
     </div>
   </div>
@@ -129,55 +57,51 @@
     <!-- POSTS TAB -->
     <div id="tab-posts" class="admin-section active">
       <div class="section-heading">Blog Posts</div>
-      <p class="section-sub">Manage your blog content. Changes save to local storage.</p>
-
+      <p class="section-sub">Manage your blog content. Changes are saved to this browser.</p>
       <button class="add-new-btn" onclick="showPostForm()">+ New Post</button>
 
-      <!-- New/Edit Form -->
-      <div id="post-form" class="admin-form-card" style="display:none">
-        <div class="admin-form-title" id="post-form-title">New Post</div>
-        <input type="hidden" id="post-id">
+      <div id="pf-form" class="admin-form-card" style="display:none">
+        <div class="admin-form-title" id="pf-form-title">New Post</div>
+        <input type="hidden" id="pf-id">
         <div class="form-group">
           <label class="form-label">Title</label>
-          <input type="text" class="form-input" id="post-title" placeholder="Post title...">
+          <input type="text" class="form-input" id="pf-title" placeholder="Post title...">
         </div>
         <div class="form-group">
           <label class="form-label">Slug (URL)</label>
-          <input type="text" class="form-input" id="post-slug" placeholder="my-post-slug">
+          <input type="text" class="form-input" id="pf-slug" placeholder="my-post-slug">
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
           <div class="form-group">
             <label class="form-label">Category</label>
-            <input type="text" class="form-input" id="post-category" placeholder="SEO">
+            <input type="text" class="form-input" id="pf-category" placeholder="SEO">
           </div>
           <div class="form-group">
             <label class="form-label">Date</label>
-            <input type="text" class="form-input" id="post-date" placeholder="12 Feb 2025">
+            <input type="text" class="form-input" id="pf-date" placeholder="12 Feb 2025">
           </div>
           <div class="form-group">
             <label class="form-label">Read Time</label>
-            <input type="text" class="form-input" id="post-readtime" placeholder="5 min read">
+            <input type="text" class="form-input" id="pf-readtime" placeholder="5 min read">
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Icon (emoji)</label>
-          <input type="text" class="form-input" id="post-icon" placeholder="🤖" style="width:80px">
+          <input type="text" class="form-input" id="pf-icon" placeholder="🤖" style="width:80px">
         </div>
         <div class="form-group">
           <label class="form-label">Excerpt</label>
-          <input type="text" class="form-input" id="post-excerpt" placeholder="Short description for the blog listing...">
+          <input type="text" class="form-input" id="pf-excerpt" placeholder="Short description for the blog listing...">
         </div>
         <div class="form-group">
           <label class="form-label">Content (HTML)</label>
-          <textarea class="form-textarea" id="post-content" placeholder="<p>Your post content in HTML...</p>&#10;<h2>Section heading</h2>&#10;<p>More content...</p>"></textarea>
+          <textarea class="form-textarea" id="pf-content" placeholder="<p>Your post content...</p>&#10;<h2>A subheading</h2>&#10;<p>More content...</p>"></textarea>
         </div>
         <div style="display:flex;gap:12px">
           <button onclick="savePost()" class="form-submit" style="width:auto;padding:12px 28px">Save Post</button>
           <button onclick="cancelPostForm()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:12px 20px;border-radius:10px;cursor:pointer;font-family:var(--font-body);font-size:14px">Cancel</button>
         </div>
       </div>
-
-      <!-- Post List -->
       <div id="posts-list"></div>
     </div>
 
@@ -185,63 +109,72 @@
     <div id="tab-cases" class="admin-section">
       <div class="section-heading">Case Studies</div>
       <p class="section-sub">Add and manage your client success stories.</p>
-
       <button class="add-new-btn" onclick="showCaseForm()">+ New Case Study</button>
 
-      <!-- New/Edit Form -->
-      <div id="case-form" class="admin-form-card" style="display:none">
-        <div class="admin-form-title" id="case-form-title">New Case Study</div>
-        <input type="hidden" id="case-id">
+      <div id="cf-form" class="admin-form-card" style="display:none">
+        <div class="admin-form-title" id="cf-form-title">New Case Study</div>
+        <input type="hidden" id="cf-id">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="form-group">
-            <label class="form-label">Client Name / Headline</label>
-            <input type="text" class="form-input" id="case-name" placeholder="Max's SaaS Scale-Up">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Company</label>
-            <input type="text" class="form-input" id="case-company" placeholder="CloudFlow">
-          </div>
+          <div class="form-group"><label class="form-label">Client Name / Headline</label><input type="text" class="form-input" id="cf-name" placeholder="Max's SaaS Scale-Up"></div>
+          <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-input" id="cf-company" placeholder="CloudFlow"></div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="form-group">
-            <label class="form-label">Role</label>
-            <input type="text" class="form-input" id="case-role" placeholder="CEO / Founder">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Icon (emoji)</label>
-            <input type="text" class="form-input" id="case-icon" placeholder="☁️" style="width:80px">
-          </div>
+          <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-input" id="cf-role" placeholder="CEO / Founder"></div>
+          <div class="form-group"><label class="form-label">Icon (emoji)</label><input type="text" class="form-input" id="cf-icon" placeholder="🏆" style="width:80px"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Description</label>
-          <input type="text" class="form-input" id="case-description" placeholder="Brief description of the work and results...">
-        </div>
+        <div class="form-group"><label class="form-label">Description</label><input type="text" class="form-input" id="cf-description" placeholder="Brief description..."></div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px">
-          <div class="form-group">
-            <label class="form-label">Stat 1 Number</label>
-            <input type="text" class="form-input" id="case-stat1-num" placeholder="50%">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Stat 1 Label</label>
-            <input type="text" class="form-input" id="case-stat1-label" placeholder="Growth in traffic">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Stat 2 Number</label>
-            <input type="text" class="form-input" id="case-stat2-num" placeholder="30%">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Stat 2 Label</label>
-            <input type="text" class="form-input" id="case-stat2-label" placeholder="Increase in revenue">
-          </div>
+          <div class="form-group"><label class="form-label">Stat 1 Number</label><input type="text" class="form-input" id="cf-stat1-num" placeholder="50%"></div>
+          <div class="form-group"><label class="form-label">Stat 1 Label</label><input type="text" class="form-input" id="cf-stat1-label" placeholder="Growth in traffic"></div>
+          <div class="form-group"><label class="form-label">Stat 2 Number</label><input type="text" class="form-input" id="cf-stat2-num" placeholder="30%"></div>
+          <div class="form-group"><label class="form-label">Stat 2 Label</label><input type="text" class="form-input" id="cf-stat2-label" placeholder="Increase in revenue"></div>
         </div>
         <div style="display:flex;gap:12px">
           <button onclick="saveCase()" class="form-submit" style="width:auto;padding:12px 28px">Save Case Study</button>
           <button onclick="cancelCaseForm()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:12px 20px;border-radius:10px;cursor:pointer;font-family:var(--font-body);font-size:14px">Cancel</button>
         </div>
       </div>
-
-      <!-- Cases List -->
       <div id="cases-list"></div>
+    </div>
+
+    <!-- HOMEPAGE TAB -->
+    <div id="tab-homepage" class="admin-section">
+      <div class="section-heading">Homepage Content</div>
+      <p class="section-sub">Edit key homepage text. Note: for deeper edits (services, pricing, team) you'll need to edit index.html directly on GitHub.</p>
+
+      <div class="admin-form-card">
+        <div class="admin-form-title">Hero Section</div>
+        <div class="form-group">
+          <label class="form-label">Hero Title</label>
+          <input type="text" class="form-input" id="hp-hero-title" placeholder="Automate Smarter. Grow Faster. With AI.">
+          <p class="field-hint">The big headline at the top of the page</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hero Subtitle</label>
+          <textarea class="form-textarea" id="hp-hero-subtitle" style="height:80px" placeholder="AI-powered SEO and marketing automation for modern UK businesses."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Button Text</label>
+          <input type="text" class="form-input" id="hp-hero-btn" placeholder="Book a Free Call">
+        </div>
+      </div>
+
+      <div class="admin-form-card">
+        <div class="admin-form-title">CTA Section</div>
+        <div class="form-group">
+          <label class="form-label">CTA Heading</label>
+          <input type="text" class="form-input" id="hp-cta-title" placeholder="Ready to Automate Smarter? Let's Build Together.">
+        </div>
+        <div class="form-group">
+          <label class="form-label">CTA Subtext</label>
+          <textarea class="form-textarea" id="hp-cta-sub" style="height:80px" placeholder="Schedule a call and begin automating your business within days, not months."></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <button onclick="saveHomepage()" class="form-submit" style="width:auto;padding:12px 28px">Save Homepage Content</button>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);max-width:400px">⚠️ Homepage changes save to this browser only. To make them permanent, copy the values into index.html on GitHub.</p>
+      </div>
     </div>
 
   </div>
@@ -249,21 +182,62 @@
 
 <div class="success-toast" id="toast">✓ Saved successfully</div>
 
-
 <script>
-const CMS = { posts: [ { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖", content: "" }, { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝", content: "" }, { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Everything UK businesses need to know.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍", content: "" } ], caseStudies: [ { id: 1, name: "Max's SaaS Scale-Up", company: "CloudFlow", role: "Founder", description: "Full SEO content programme.", stat1_num: "50%", stat1_label: "Reduction in CAC", stat2_num: "75%", stat2_label: "Growth in traffic", icon: "☁️" }, { id: 2, name: "Emily's E-commerce Turnaround", company: "BloomTech", role: "CEO", description: "Structured content strategy.", stat1_num: "60%", stat1_label: "Increase in revenue", stat2_num: "45%", stat2_label: "Improvement in conversion", icon: "🌸" }, { id: 3, name: "Sophia's Retail Breakthrough", company: "Trendify", role: "Marketing Lead", description: "AI-assisted competitor gap analysis.", stat1_num: "40%", stat1_label: "Lift in purchases", stat2_num: "30%", stat2_label: "Growth in retention", icon: "🛍️" } ] };
-(function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; if (d.caseStudies) CMS.caseStudies = d.caseStudies; } } catch(e) {} })();
+const ADMIN_PASSWORD = 'admin123';
 
-// ---- AUTH ----
-const ADMIN_PASSWORD = 'admin123'; // Change this!
+const DEFAULT_DATA = {
+  posts: [
+    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖", content: "<p>Artificial intelligence has moved from novelty to necessity in the world of SEO.</p><h2>What's Actually Changing</h2><p>Three areas are seeing the most disruption: technical auditing, keyword clustering, and content briefing.</p>" },
+    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing — authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝", content: "<p>Boutique agencies often feel outgunned when it comes to content. But volume was always the wrong game to play.</p>" },
+    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍", content: "<p>Local SEO in the UK has its own distinct quirks. The single biggest leverage point remains Google Business Profile.</p>" }
+  ],
+  caseStudies: [
+    { id: 1, name: "Max's SaaS Scale-Up", company: "CloudFlow", role: "Founder", description: "Implemented a full SEO content programme alongside technical optimisation.", stat1_num: "50%", stat1_label: "Reduction in CAC", stat2_num: "75%", stat2_label: "Growth in organic traffic", icon: "☁️" },
+    { id: 2, name: "Emily's E-commerce Turnaround", company: "BloomTech", role: "CEO", description: "Rebuilt site architecture and implemented a structured content strategy.", stat1_num: "60%", stat1_label: "Increase in organic revenue", stat2_num: "45%", stat2_label: "Improvement in conversion", icon: "🌸" },
+    { id: 3, name: "Sophia's Retail Breakthrough", company: "Trendify", role: "Marketing Lead", description: "AI-assisted competitor gap analysis revealed untapped category pages.", stat1_num: "40%", stat1_label: "Lift in repeat purchases", stat2_num: "30%", stat2_label: "Growth in retention", icon: "🛍️" }
+  ],
+  homepage: {
+    heroTitle: "Automate Smarter. Grow Faster. With AI.",
+    heroSubtitle: "AI-powered SEO and marketing automation for modern UK businesses — made simple.",
+    heroBtn: "Book a Free Call",
+    ctaTitle: "Ready to Automate Smarter? Let's Build Together.",
+    ctaSub: "Schedule a call and begin automating your business within days, not months."
+  }
+};
+
+function getData() {
+  try {
+    const stored = localStorage.getItem('cms_data');
+    if (stored) {
+      const d = JSON.parse(stored);
+      return {
+        posts: d.posts || DEFAULT_DATA.posts,
+        caseStudies: d.caseStudies || DEFAULT_DATA.caseStudies,
+        homepage: d.homepage || DEFAULT_DATA.homepage
+      };
+    }
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+
+function saveData(data) {
+  localStorage.setItem('cms_data', JSON.stringify(data));
+  showToast();
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
 
 function attemptLogin() {
-  const pw = document.getElementById('admin-password').value;
-  if (pw === ADMIN_PASSWORD) {
+  if (document.getElementById('admin-password').value === ADMIN_PASSWORD) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
     renderPosts();
     renderCases();
+    loadHomepageFields();
   } else {
     document.getElementById('login-error').style.display = 'block';
   }
@@ -279,7 +253,6 @@ function logout() {
   document.getElementById('admin-password').value = '';
 }
 
-// ---- TABS ----
 function switchTab(tab, btn) {
   document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
@@ -287,125 +260,80 @@ function switchTab(tab, btn) {
   btn.classList.add('active');
 }
 
-// ---- DATA ----
-function getData() {
-  try {
-    const stored = localStorage.getItem('cms_data');
-    if (stored) return JSON.parse(stored);
-  } catch(e) {}
-  return { posts: CMS.posts, caseStudies: CMS.caseStudies };
-}
-
-function saveData(data) {
-  localStorage.setItem('cms_data', JSON.stringify(data));
-  showToast();
-}
-
-function showToast() {
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-
 // ---- POSTS ----
 function renderPosts() {
   const data = getData();
   const list = document.getElementById('posts-list');
-  if (!data.posts.length) {
-    list.innerHTML = '<div class="empty-state">No posts yet. Add your first one above.</div>';
-    return;
-  }
-  list.innerHTML = data.posts.map(p => `
-    <div class="admin-list-item">
-      <div>
-        <div class="admin-item-title">${p.icon} ${p.title}</div>
-        <div class="admin-item-meta">${p.category} · ${p.date} · ${p.readTime} · slug: /${p.slug}</div>
-      </div>
-      <div class="admin-actions">
-        <button class="admin-btn admin-btn-edit" onclick="editPost(${p.id})">Edit</button>
-        <button class="admin-btn admin-btn-delete" onclick="deletePost(${p.id})">Delete</button>
-      </div>
-    </div>
-  `).join('');
+  if (!data.posts.length) { list.innerHTML = '<div class="empty-state">No posts yet.</div>'; return; }
+  list.innerHTML = data.posts.map(p =>
+    '<div class="admin-list-item">' +
+      '<div><div class="admin-item-title">' + p.icon + ' ' + p.title + '</div>' +
+      '<div class="admin-item-meta">' + p.category + ' · ' + p.date + ' · ' + p.readTime + ' · /' + p.slug + '</div></div>' +
+      '<div class="admin-actions">' +
+        '<button class="admin-btn admin-btn-edit" onclick="editPost(' + p.id + ')">Edit</button>' +
+        '<button class="admin-btn admin-btn-delete" onclick="deletePost(' + p.id + ')">Delete</button>' +
+      '</div>' +
+    '</div>'
+  ).join('');
 }
 
 function showPostForm(post) {
-  document.getElementById('post-form').style.display = 'block';
-  if (post) {
-    document.getElementById('post-form-title').textContent = 'Edit Post';
-    document.getElementById('post-id').value = post.id;
-    document.getElementById('post-title').value = post.title;
-    document.getElementById('post-slug').value = post.slug;
-    document.getElementById('post-category').value = post.category;
-    document.getElementById('post-date').value = post.date;
-    document.getElementById('post-readtime').value = post.readTime;
-    document.getElementById('post-icon').value = post.icon;
-    document.getElementById('post-excerpt').value = post.excerpt;
-    document.getElementById('post-content').value = post.content || '';
-  } else {
-    document.getElementById('post-form-title').textContent = 'New Post';
-    document.getElementById('post-id').value = '';
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-slug').value = '';
-    document.getElementById('post-category').value = '';
-    document.getElementById('post-date').value = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-    document.getElementById('post-readtime').value = '5 min read';
-    document.getElementById('post-icon').value = '📝';
-    document.getElementById('post-excerpt').value = '';
-    document.getElementById('post-content').value = '';
-  }
-  document.getElementById('post-form').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('pf-form').style.display = 'block';
+  document.getElementById('pf-form-title').textContent = post ? 'Edit Post' : 'New Post';
+  document.getElementById('pf-id').value = post ? post.id : '';
+  document.getElementById('pf-title').value = post ? post.title : '';
+  document.getElementById('pf-slug').value = post ? post.slug : '';
+  document.getElementById('pf-category').value = post ? post.category : '';
+  document.getElementById('pf-date').value = post ? post.date : new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('pf-readtime').value = post ? post.readTime : '5 min read';
+  document.getElementById('pf-icon').value = post ? post.icon : '📝';
+  document.getElementById('pf-excerpt').value = post ? post.excerpt : '';
+  document.getElementById('pf-content').value = post ? (post.content || '') : '';
+  document.getElementById('pf-form').scrollIntoView({ behavior: 'smooth' });
 }
 
-function cancelPostForm() {
-  document.getElementById('post-form').style.display = 'none';
-}
+function cancelPostForm() { document.getElementById('pf-form').style.display = 'none'; }
 
-function editPost(id) {
-  const data = getData();
-  const post = data.posts.find(p => p.id === id);
-  if (post) showPostForm(post);
-}
+function editPost(id) { const p = getData().posts.find(p => p.id === id); if (p) showPostForm(p); }
 
 function savePost() {
-  const data = getData();
-  const id = document.getElementById('post-id').value;
+  const id = document.getElementById('pf-id').value;
+  const title = document.getElementById('pf-title').value;
+  if (!title) { alert('Please enter a title'); return; }
   const post = {
     id: id ? parseInt(id) : Date.now(),
-    title: document.getElementById('post-title').value,
-    slug: document.getElementById('post-slug').value.toLowerCase().replace(/\s+/g, '-'),
-    category: document.getElementById('post-category').value,
-    date: document.getElementById('post-date').value,
-    readTime: document.getElementById('post-readtime').value,
-    icon: document.getElementById('post-icon').value || '📝',
-    excerpt: document.getElementById('post-excerpt').value,
-    content: document.getElementById('post-content').value,
+    title: title,
+    slug: document.getElementById('pf-slug').value.toLowerCase().replace(/\s+/g,'-') || title.toLowerCase().replace(/[^a-z0-9]+/g,'-'),
+    category: document.getElementById('pf-category').value,
+    date: document.getElementById('pf-date').value,
+    readTime: document.getElementById('pf-readtime').value,
+    icon: document.getElementById('pf-icon').value || '📝',
+    excerpt: document.getElementById('pf-excerpt').value,
+    content: document.getElementById('pf-content').value
   };
-
+  const data = getData();
   if (id) {
     const idx = data.posts.findIndex(p => p.id === parseInt(id));
-    if (idx > -1) data.posts[idx] = post;
+    if (idx > -1) data.posts[idx] = post; else data.posts.unshift(post);
   } else {
     data.posts.unshift(post);
   }
-
   saveData(data);
   cancelPostForm();
   renderPosts();
 }
 
 function deletePost(id) {
-  if (!confirm('Delete this post? This cannot be undone.')) return;
+  if (!confirm('Delete this post?')) return;
   const data = getData();
   data.posts = data.posts.filter(p => p.id !== id);
   saveData(data);
   renderPosts();
 }
 
-// Auto-generate slug from title
-document.getElementById('post-title').addEventListener('input', function() {
-  if (!document.getElementById('post-id').value) {
-    document.getElementById('post-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+document.getElementById('pf-title').addEventListener('input', function() {
+  if (!document.getElementById('pf-id').value) {
+    document.getElementById('pf-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
   }
 });
 
@@ -413,80 +341,62 @@ document.getElementById('post-title').addEventListener('input', function() {
 function renderCases() {
   const data = getData();
   const list = document.getElementById('cases-list');
-  if (!data.caseStudies.length) {
-    list.innerHTML = '<div class="empty-state">No case studies yet. Add your first one above.</div>';
-    return;
-  }
-  list.innerHTML = data.caseStudies.map(c => `
-    <div class="admin-list-item">
-      <div>
-        <div class="admin-item-title">${c.icon} ${c.name}</div>
-        <div class="admin-item-meta">${c.company} · ${c.stat1_num} ${c.stat1_label} · ${c.stat2_num} ${c.stat2_label}</div>
-      </div>
-      <div class="admin-actions">
-        <button class="admin-btn admin-btn-edit" onclick="editCase(${c.id})">Edit</button>
-        <button class="admin-btn admin-btn-delete" onclick="deleteCase(${c.id})">Delete</button>
-      </div>
-    </div>
-  `).join('');
+  if (!data.caseStudies.length) { list.innerHTML = '<div class="empty-state">No case studies yet.</div>'; return; }
+  list.innerHTML = data.caseStudies.map(c =>
+    '<div class="admin-list-item">' +
+      '<div><div class="admin-item-title">' + c.icon + ' ' + c.name + '</div>' +
+      '<div class="admin-item-meta">' + c.company + ' · ' + c.stat1_num + ' ' + c.stat1_label + ' · ' + c.stat2_num + ' ' + c.stat2_label + '</div></div>' +
+      '<div class="admin-actions">' +
+        '<button class="admin-btn admin-btn-edit" onclick="editCase(' + c.id + ')">Edit</button>' +
+        '<button class="admin-btn admin-btn-delete" onclick="deleteCase(' + c.id + ')">Delete</button>' +
+      '</div>' +
+    '</div>'
+  ).join('');
 }
 
 function showCaseForm(cs) {
-  document.getElementById('case-form').style.display = 'block';
-  if (cs) {
-    document.getElementById('case-form-title').textContent = 'Edit Case Study';
-    document.getElementById('case-id').value = cs.id;
-    document.getElementById('case-name').value = cs.name;
-    document.getElementById('case-company').value = cs.company;
-    document.getElementById('case-role').value = cs.role;
-    document.getElementById('case-icon').value = cs.icon;
-    document.getElementById('case-description').value = cs.description;
-    document.getElementById('case-stat1-num').value = cs.stat1_num;
-    document.getElementById('case-stat1-label').value = cs.stat1_label;
-    document.getElementById('case-stat2-num').value = cs.stat2_num;
-    document.getElementById('case-stat2-label').value = cs.stat2_label;
-  } else {
-    document.getElementById('case-form-title').textContent = 'New Case Study';
-    document.getElementById('case-id').value = '';
-    ['case-name','case-company','case-role','case-description','case-stat1-num','case-stat1-label','case-stat2-num','case-stat2-label'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('case-icon').value = '🏆';
-  }
-  document.getElementById('case-form').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('cf-form').style.display = 'block';
+  document.getElementById('cf-form-title').textContent = cs ? 'Edit Case Study' : 'New Case Study';
+  document.getElementById('cf-id').value = cs ? cs.id : '';
+  document.getElementById('cf-name').value = cs ? cs.name : '';
+  document.getElementById('cf-company').value = cs ? cs.company : '';
+  document.getElementById('cf-role').value = cs ? cs.role : '';
+  document.getElementById('cf-icon').value = cs ? cs.icon : '🏆';
+  document.getElementById('cf-description').value = cs ? cs.description : '';
+  document.getElementById('cf-stat1-num').value = cs ? cs.stat1_num : '';
+  document.getElementById('cf-stat1-label').value = cs ? cs.stat1_label : '';
+  document.getElementById('cf-stat2-num').value = cs ? cs.stat2_num : '';
+  document.getElementById('cf-stat2-label').value = cs ? cs.stat2_label : '';
+  document.getElementById('cf-form').scrollIntoView({ behavior: 'smooth' });
 }
 
-function cancelCaseForm() {
-  document.getElementById('case-form').style.display = 'none';
-}
+function cancelCaseForm() { document.getElementById('cf-form').style.display = 'none'; }
 
-function editCase(id) {
-  const data = getData();
-  const cs = data.caseStudies.find(c => c.id === id);
-  if (cs) showCaseForm(cs);
-}
+function editCase(id) { const c = getData().caseStudies.find(c => c.id === id); if (c) showCaseForm(c); }
 
 function saveCase() {
-  const data = getData();
-  const id = document.getElementById('case-id').value;
+  const id = document.getElementById('cf-id').value;
+  const name = document.getElementById('cf-name').value;
+  if (!name) { alert('Please enter a name'); return; }
   const cs = {
     id: id ? parseInt(id) : Date.now(),
-    name: document.getElementById('case-name').value,
-    company: document.getElementById('case-company').value,
-    role: document.getElementById('case-role').value,
-    icon: document.getElementById('case-icon').value || '🏆',
-    description: document.getElementById('case-description').value,
-    stat1_num: document.getElementById('case-stat1-num').value,
-    stat1_label: document.getElementById('case-stat1-label').value,
-    stat2_num: document.getElementById('case-stat2-num').value,
-    stat2_label: document.getElementById('case-stat2-label').value,
+    name: name,
+    company: document.getElementById('cf-company').value,
+    role: document.getElementById('cf-role').value,
+    icon: document.getElementById('cf-icon').value || '🏆',
+    description: document.getElementById('cf-description').value,
+    stat1_num: document.getElementById('cf-stat1-num').value,
+    stat1_label: document.getElementById('cf-stat1-label').value,
+    stat2_num: document.getElementById('cf-stat2-num').value,
+    stat2_label: document.getElementById('cf-stat2-label').value
   };
-
+  const data = getData();
   if (id) {
     const idx = data.caseStudies.findIndex(c => c.id === parseInt(id));
-    if (idx > -1) data.caseStudies[idx] = cs;
+    if (idx > -1) data.caseStudies[idx] = cs; else data.caseStudies.unshift(cs);
   } else {
     data.caseStudies.unshift(cs);
   }
-
   saveData(data);
   cancelCaseForm();
   renderCases();
@@ -498,6 +408,28 @@ function deleteCase(id) {
   data.caseStudies = data.caseStudies.filter(c => c.id !== id);
   saveData(data);
   renderCases();
+}
+
+// ---- HOMEPAGE ----
+function loadHomepageFields() {
+  const hp = getData().homepage || DEFAULT_DATA.homepage;
+  document.getElementById('hp-hero-title').value = hp.heroTitle || '';
+  document.getElementById('hp-hero-subtitle').value = hp.heroSubtitle || '';
+  document.getElementById('hp-hero-btn').value = hp.heroBtn || '';
+  document.getElementById('hp-cta-title').value = hp.ctaTitle || '';
+  document.getElementById('hp-cta-sub').value = hp.ctaSub || '';
+}
+
+function saveHomepage() {
+  const data = getData();
+  data.homepage = {
+    heroTitle: document.getElementById('hp-hero-title').value,
+    heroSubtitle: document.getElementById('hp-hero-subtitle').value,
+    heroBtn: document.getElementById('hp-hero-btn').value,
+    ctaTitle: document.getElementById('hp-cta-title').value,
+    ctaSub: document.getElementById('hp-cta-sub').value
+  };
+  saveData(data);
 }
 </script>
 </body>
