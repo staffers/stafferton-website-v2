@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Post — Landio Agency</title>
+  <title>Blog Post — Stafferton Consulting</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     .post-hero {
@@ -70,7 +70,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">land<span>io</span></a>
+  <a href="index.html" class="nav-logo"><img src="SCL-LOGO-2018-GREY.png" alt="Stafferton Consulting" /></a>
   <ul class="nav-links">
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#process">Process</a></li>
@@ -103,14 +103,14 @@
 
 <footer>
   <div class="footer-inner">
-    <a href="index.html" class="nav-logo" style="font-size:18px">land<span style="color:var(--accent)">io</span></a>
+    <a href="index.html" class="footer-logo"><img src="SCL-LOGO-2018-GREY.png" alt="Stafferton Consulting" /></a>
     <div class="footer-links">
       <a href="index.html#services">Services</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
       <a href="admin.html">Admin</a>
     </div>
-    <span class="footer-copy">© 2025 Landio Agency</span>
+    <span class="footer-copy">© 2025 Stafferton Consulting</span>
   </div>
 </footer>
 
@@ -121,7 +121,7 @@ const slug = params.get('slug');
 const post = CMS.posts.find(p => p.slug === slug);
 
 if (post) {
-  document.title = post.title + ' — Landio Agency';
+  document.title = post.title + ' — Stafferton Consulting';
   document.getElementById('post-category').textContent = post.category;
   document.getElementById('post-title').textContent = post.title;
   document.getElementById('post-meta').textContent = post.date + ' · ' + post.readTime;
