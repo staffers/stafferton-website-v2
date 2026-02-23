@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Landio CMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #080808; }
+    .admin-page { min-height: 100vh; }
+
+    .admin-login {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-login-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 48px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .admin-login-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .admin-login-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+    }
+
+    .login-error {
+      background: rgba(255,80,80,0.1);
+      border: 1px solid rgba(255,80,80,0.3);
+      color: #ff6060;
+      font-size: 13px;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 28px;
+    }
+
+    textarea.form-textarea { height: 200px; font-family: 'Courier New', monospace; font-size: 13px; }
+
+    .success-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--accent);
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .success-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.3);
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen" class="admin-login">
+  <div class="admin-login-card">
+    <div style="font-size:36px;margin-bottom:16px">🔐</div>
+    <div class="admin-login-title">Admin Panel</div>
+    <p class="admin-login-sub">Enter the admin password to continue</p>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+    <div class="form-group" style="text-align:left">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-input" id="admin-password" placeholder="Enter password..." autocomplete="current-password">
+    </div>
+    <button onclick="attemptLogin()" class="form-submit" style="margin-top:8px">Sign In</button>
+    <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:16px">Default: <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">admin123</code> — change in js/cms.js</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel" class="admin-page" style="display:none">
+
+  <div class="admin-header">
+    <a href="index.html" class="nav-logo" style="font-size:20px">land<span>io</span> <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:var(--font-body);font-weight:400;margin-left:8px">CMS Admin</span></a>
+    <div class="admin-nav">
+      <button class="admin-nav-btn active" onclick="switchTab('posts', this)">📝 Blog Posts</button>
+      <button class="admin-nav-btn" onclick="switchTab('cases', this)">📊 Case Studies</button>
+      <button class="admin-nav-btn" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-content">
+
+    <!-- POSTS TAB -->
+    <div id="tab-posts" class="admin-section active">
+      <div class="section-heading">Blog Posts</div>
+      <p class="section-sub">Manage your blog content. Changes save to local storage.</p>
+
+      <button class="add-new-btn" onclick="showPostForm()">+ New Post</button>
+
+      <!-- New/Edit Form -->
+      <div id="post-form" class="admin-form-card" style="display:none">
+        <div class="admin-form-title" id="post-form-title">New Post</div>
+        <input type="hidden" id="post-id">
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-input" id="post-title" placeholder="Post title...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Slug (URL)</label>
+          <input type="text" class="form-input" id="post-slug" placeholder="my-post-slug">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-input" id="post-category" placeholder="SEO">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="text" class="form-input" id="post-date" placeholder="12 Feb 2025">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Read Time</label>
+            <input type="text" class="form-input" id="post-readtime" placeholder="5 min read">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Icon (emoji)</label>
+          <input type="text" class="form-input" id="post-icon" placeholder="🤖" style="width:80px">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Excerpt</label>
+          <input type="text" class="form-input" id="post-excerpt" placeholder="Short description for the blog listing...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Content (HTML)</label>
+          <textarea class="form-textarea" id="post-content" placeholder="<p>Your post content in HTML...</p>&#10;<h2>Section heading</h2>&#10;<p>More content...</p>"></textarea>
+        </div>
+        <div style="display:flex;gap:12px">
+          <button onclick="savePost()" class="form-submit" style="width:auto;padding:12px 28px">Save Post</button>
+          <button onclick="cancelPostForm()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:12px 20px;border-radius:10px;cursor:pointer;font-family:var(--font-body);font-size:14px">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Post List -->
+      <div id="posts-list"></div>
+    </div>
+
+    <!-- CASES TAB -->
+    <div id="tab-cases" class="admin-section">
+      <div class="section-heading">Case Studies</div>
+      <p class="section-sub">Add and manage your client success stories.</p>
+
+      <button class="add-new-btn" onclick="showCaseForm()">+ New Case Study</button>
+
+      <!-- New/Edit Form -->
+      <div id="case-form" class="admin-form-card" style="display:none">
+        <div class="admin-form-title" id="case-form-title">New Case Study</div>
+        <input type="hidden" id="case-id">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label">Client Name / Headline</label>
+            <input type="text" class="form-input" id="case-name" placeholder="Max's SaaS Scale-Up">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input type="text" class="form-input" id="case-company" placeholder="CloudFlow">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <input type="text" class="form-input" id="case-role" placeholder="CEO / Founder">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Icon (emoji)</label>
+            <input type="text" class="form-input" id="case-icon" placeholder="☁️" style="width:80px">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <input type="text" class="form-input" id="case-description" placeholder="Brief description of the work and results...">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label">Stat 1 Number</label>
+            <input type="text" class="form-input" id="case-stat1-num" placeholder="50%">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stat 1 Label</label>
+            <input type="text" class="form-input" id="case-stat1-label" placeholder="Growth in traffic">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stat 2 Number</label>
+            <input type="text" class="form-input" id="case-stat2-num" placeholder="30%">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stat 2 Label</label>
+            <input type="text" class="form-input" id="case-stat2-label" placeholder="Increase in revenue">
+          </div>
+        </div>
+        <div style="display:flex;gap:12px">
+          <button onclick="saveCase()" class="form-submit" style="width:auto;padding:12px 28px">Save Case Study</button>
+          <button onclick="cancelCaseForm()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:12px 20px;border-radius:10px;cursor:pointer;font-family:var(--font-body);font-size:14px">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Cases List -->
+      <div id="cases-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="success-toast" id="toast">✓ Saved successfully</div>
+
+<script src="js/cms.js"></script>
+<script>
+// ---- AUTH ----
+const ADMIN_PASSWORD = 'admin123'; // Change this!
+
+function attemptLogin() {
+  const pw = document.getElementById('admin-password').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    renderPosts();
+    renderCases();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+document.getElementById('admin-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') attemptLogin();
+});
+
+function logout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-password').value = '';
+}
+
+// ---- TABS ----
+function switchTab(tab, btn) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- DATA ----
+function getData() {
+  try {
+    const stored = localStorage.getItem('cms_data');
+    if (stored) return JSON.parse(stored);
+  } catch(e) {}
+  return { posts: CMS.posts, caseStudies: CMS.caseStudies };
+}
+
+function saveData(data) {
+  localStorage.setItem('cms_data', JSON.stringify(data));
+  showToast();
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ---- POSTS ----
+function renderPosts() {
+  const data = getData();
+  const list = document.getElementById('posts-list');
+  if (!data.posts.length) {
+    list.innerHTML = '<div class="empty-state">No posts yet. Add your first one above.</div>';
+    return;
+  }
+  list.innerHTML = data.posts.map(p => `
+    <div class="admin-list-item">
+      <div>
+        <div class="admin-item-title">${p.icon} ${p.title}</div>
+        <div class="admin-item-meta">${p.category} · ${p.date} · ${p.readTime} · slug: /${p.slug}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-edit" onclick="editPost(${p.id})">Edit</button>
+        <button class="admin-btn admin-btn-delete" onclick="deletePost(${p.id})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showPostForm(post) {
+  document.getElementById('post-form').style.display = 'block';
+  if (post) {
+    document.getElementById('post-form-title').textContent = 'Edit Post';
+    document.getElementById('post-id').value = post.id;
+    document.getElementById('post-title').value = post.title;
+    document.getElementById('post-slug').value = post.slug;
+    document.getElementById('post-category').value = post.category;
+    document.getElementById('post-date').value = post.date;
+    document.getElementById('post-readtime').value = post.readTime;
+    document.getElementById('post-icon').value = post.icon;
+    document.getElementById('post-excerpt').value = post.excerpt;
+    document.getElementById('post-content').value = post.content || '';
+  } else {
+    document.getElementById('post-form-title').textContent = 'New Post';
+    document.getElementById('post-id').value = '';
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-slug').value = '';
+    document.getElementById('post-category').value = '';
+    document.getElementById('post-date').value = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+    document.getElementById('post-readtime').value = '5 min read';
+    document.getElementById('post-icon').value = '📝';
+    document.getElementById('post-excerpt').value = '';
+    document.getElementById('post-content').value = '';
+  }
+  document.getElementById('post-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelPostForm() {
+  document.getElementById('post-form').style.display = 'none';
+}
+
+function editPost(id) {
+  const data = getData();
+  const post = data.posts.find(p => p.id === id);
+  if (post) showPostForm(post);
+}
+
+function savePost() {
+  const data = getData();
+  const id = document.getElementById('post-id').value;
+  const post = {
+    id: id ? parseInt(id) : Date.now(),
+    title: document.getElementById('post-title').value,
+    slug: document.getElementById('post-slug').value.toLowerCase().replace(/\s+/g, '-'),
+    category: document.getElementById('post-category').value,
+    date: document.getElementById('post-date').value,
+    readTime: document.getElementById('post-readtime').value,
+    icon: document.getElementById('post-icon').value || '📝',
+    excerpt: document.getElementById('post-excerpt').value,
+    content: document.getElementById('post-content').value,
+  };
+
+  if (id) {
+    const idx = data.posts.findIndex(p => p.id === parseInt(id));
+    if (idx > -1) data.posts[idx] = post;
+  } else {
+    data.posts.unshift(post);
+  }
+
+  saveData(data);
+  cancelPostForm();
+  renderPosts();
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post? This cannot be undone.')) return;
+  const data = getData();
+  data.posts = data.posts.filter(p => p.id !== id);
+  saveData(data);
+  renderPosts();
+}
+
+// Auto-generate slug from title
+document.getElementById('post-title').addEventListener('input', function() {
+  if (!document.getElementById('post-id').value) {
+    document.getElementById('post-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  }
+});
+
+// ---- CASES ----
+function renderCases() {
+  const data = getData();
+  const list = document.getElementById('cases-list');
+  if (!data.caseStudies.length) {
+    list.innerHTML = '<div class="empty-state">No case studies yet. Add your first one above.</div>';
+    return;
+  }
+  list.innerHTML = data.caseStudies.map(c => `
+    <div class="admin-list-item">
+      <div>
+        <div class="admin-item-title">${c.icon} ${c.name}</div>
+        <div class="admin-item-meta">${c.company} · ${c.stat1_num} ${c.stat1_label} · ${c.stat2_num} ${c.stat2_label}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-edit" onclick="editCase(${c.id})">Edit</button>
+        <button class="admin-btn admin-btn-delete" onclick="deleteCase(${c.id})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showCaseForm(cs) {
+  document.getElementById('case-form').style.display = 'block';
+  if (cs) {
+    document.getElementById('case-form-title').textContent = 'Edit Case Study';
+    document.getElementById('case-id').value = cs.id;
+    document.getElementById('case-name').value = cs.name;
+    document.getElementById('case-company').value = cs.company;
+    document.getElementById('case-role').value = cs.role;
+    document.getElementById('case-icon').value = cs.icon;
+    document.getElementById('case-description').value = cs.description;
+    document.getElementById('case-stat1-num').value = cs.stat1_num;
+    document.getElementById('case-stat1-label').value = cs.stat1_label;
+    document.getElementById('case-stat2-num').value = cs.stat2_num;
+    document.getElementById('case-stat2-label').value = cs.stat2_label;
+  } else {
+    document.getElementById('case-form-title').textContent = 'New Case Study';
+    document.getElementById('case-id').value = '';
+    ['case-name','case-company','case-role','case-description','case-stat1-num','case-stat1-label','case-stat2-num','case-stat2-label'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('case-icon').value = '🏆';
+  }
+  document.getElementById('case-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelCaseForm() {
+  document.getElementById('case-form').style.display = 'none';
+}
+
+function editCase(id) {
+  const data = getData();
+  const cs = data.caseStudies.find(c => c.id === id);
+  if (cs) showCaseForm(cs);
+}
+
+function saveCase() {
+  const data = getData();
+  const id = document.getElementById('case-id').value;
+  const cs = {
+    id: id ? parseInt(id) : Date.now(),
+    name: document.getElementById('case-name').value,
+    company: document.getElementById('case-company').value,
+    role: document.getElementById('case-role').value,
+    icon: document.getElementById('case-icon').value || '🏆',
+    description: document.getElementById('case-description').value,
+    stat1_num: document.getElementById('case-stat1-num').value,
+    stat1_label: document.getElementById('case-stat1-label').value,
+    stat2_num: document.getElementById('case-stat2-num').value,
+    stat2_label: document.getElementById('case-stat2-label').value,
+  };
+
+  if (id) {
+    const idx = data.caseStudies.findIndex(c => c.id === parseInt(id));
+    if (idx > -1) data.caseStudies[idx] = cs;
+  } else {
+    data.caseStudies.unshift(cs);
+  }
+
+  saveData(data);
+  cancelCaseForm();
+  renderCases();
+}
+
+function deleteCase(id) {
+  if (!confirm('Delete this case study?')) return;
+  const data = getData();
+  data.caseStudies = data.caseStudies.filter(c => c.id !== id);
+  saveData(data);
+  renderCases();
+}
+</script>
+</body>
+</html>

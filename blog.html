@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Landio Agency</title>
+  <meta name="description" content="Insights on AI, SEO, and marketing automation for modern businesses.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">land<span>io</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#process">Process</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="blog.html" style="color:var(--accent)">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section style="padding-top:140px">
+  <div class="section-inner">
+    <span class="section-label">Blog</span>
+    <h1 class="section-title fade-up">Insights &amp; Ideas</h1>
+    <p class="section-subtitle fade-up">AI, SEO, and marketing automation — straight talk, no fluff.</p>
+
+    <div class="blog-grid" id="blog-grid" style="margin-top:60px">
+      <!-- Populated by JS from CMS -->
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" style="text-align:center">
+  <div class="section-inner">
+    <div class="cta-inner">
+      <h2 class="cta-title fade-up">Ready to put this into practice?</h2>
+      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI automation can make the biggest difference.</p>
+      <a href="contact.html" class="btn-primary fade-up">Book a Free Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="nav-logo" style="font-size:18px">land<span style="color:var(--accent)">io</span></a>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <a href="blog.html">Blog</a>
+      <a href="admin.html">Admin</a>
+    </div>
+    <span class="footer-copy">© 2025 Landio Agency</span>
+  </div>
+</footer>
+
+<script src="js/cms.js"></script>
+<script>
+const grid = document.getElementById('blog-grid');
+if (grid && typeof CMS !== 'undefined') {
+  grid.innerHTML = CMS.posts.map(p => `
+    <a href="post.html?slug=${p.slug}" class="blog-card fade-up">
+      <div class="blog-card-img">${p.icon}</div>
+      <div class="blog-card-body">
+        <div class="blog-card-category">${p.category}</div>
+        <h2 class="blog-card-title">${p.title}</h2>
+        <p class="blog-card-excerpt">${p.excerpt}</p>
+        <div class="blog-card-meta">${p.date} · ${p.readTime}</div>
+      </div>
+    </a>
+  `).join('');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  grid.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+}
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
