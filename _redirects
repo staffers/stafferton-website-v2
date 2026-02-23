@@ -1,27 +1,5 @@
-# Cloudflare Pages configuration
-# Place this file in the root of your repository
+# Clean blog URL structure
+/blog/:slug /post.html?slug=:slug 200
 
-[build]
-  publish = "."
-
-[[redirects]]
-  from = "/admin"
-  to = "/admin.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog"
-  to = "/blog.html"
-  status = 200
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
-  status = 200
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+# Keep old URLs working too (redirect to new structure)
+/post.html /blog/ 301
