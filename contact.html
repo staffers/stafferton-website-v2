@@ -32,17 +32,14 @@
     <div class="contact-grid">
       <div class="fade-up">
         <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px">Get in Touch</h3>
-        
         <div style="margin-bottom:32px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Email</div>
-          <a href="/cdn-cgi/l/email-protection#90f8f5fcfcffd0fcf1fef4f9ffbef1f7f5fef3e9" style="font-size:18px;color:var(--white);text-decoration:none"><span class="__cf_email__" data-cfemail="5139343d3d3e113d303f35383e7f3036343f3228">[email&#160;protected]</span></a>
+          <p style="font-size:18px;color:var(--white)">hello <!-- --> at stafferton.co.uk</p>
         </div>
-
         <div style="margin-bottom:40px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Based in</div>
           <p style="font-size:16px;color:rgba(255,255,255,0.7)">England, UK<br><span style="font-size:13px;color:rgba(255,255,255,0.4)">Remote-first, global clients</span></p>
         </div>
-
         <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:24px">
           <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:16px">What to expect on the call:</div>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
@@ -88,4 +85,37 @@
       <a href="index.html#pricing">Pricing</a>
       <a href="blog.html">Blog</a>
       <a href="admin.html">Admin</a>
-    </
+    </div>
+    <span class="footer-copy">© 2025 Stafferton Consulting</span>
+  </div>
+</footer>
+
+<script>
+// Nav
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+const toggle = document.querySelector('.nav-mobile-toggle');
+const links = document.querySelector('.nav-links');
+if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach((el, i) => { el.dataset.delay = i * 100; observer.observe(el); });
+
+// Contact form
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = contactForm.querySelector('.form-submit');
+    btn.textContent = 'Sent! ✓';
+    btn.style.background = '#4CAF50';
+    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; contactForm.reset(); }, 3000);
+  });
+}
+</script>
+</body>
+</html>

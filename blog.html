@@ -29,19 +29,15 @@
     <span class="section-label">Blog</span>
     <h1 class="section-title fade-up">Insights &amp; Ideas</h1>
     <p class="section-subtitle fade-up">AI, SEO, and marketing automation — straight talk, no fluff.</p>
-
-    <div class="blog-grid" id="blog-grid" style="margin-top:60px">
-      <!-- Populated by JS from CMS -->
-    </div>
+    <div class="blog-grid" id="blog-grid" style="margin-top:60px"></div>
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta" style="text-align:center">
   <div class="section-inner">
     <div class="cta-inner">
       <h2 class="cta-title fade-up">Ready to put this into practice?</h2>
-      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI automation can make the biggest difference.</p>
+      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI can make the biggest difference.</p>
       <a href="contact.html" class="btn-primary fade-up">Book a Free Call</a>
     </div>
   </div>
@@ -61,28 +57,52 @@
   </div>
 </footer>
 
-<script src="js/cms.v2.js"></script>
 <script>
-const grid = document.getElementById('blog-grid');
-if (grid && typeof CMS !== 'undefined') {
-  grid.innerHTML = CMS.posts.map(p => `
-    <a href="post.html?slug=${p.slug}" class="blog-card fade-up">
-      <div class="blog-card-img">${p.icon}</div>
-      <div class="blog-card-body">
-        <div class="blog-card-category">${p.category}</div>
-        <h2 class="blog-card-title">${p.title}</h2>
-        <p class="blog-card-excerpt">${p.excerpt}</p>
-        <div class="blog-card-meta">${p.date} · ${p.readTime}</div>
-      </div>
-    </a>
-  `).join('');
+const CMS = {
+  posts: [
+    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖" },
+    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing — authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝" },
+    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍" }
+  ]
+};
+(function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; } } catch(e) {} })();
 
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  grid.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+// Nav scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// Mobile nav
+const toggle = document.querySelector('.nav-mobile-toggle');
+const links = document.querySelector('.nav-links');
+if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach((el, i) => {
+  el.dataset.delay = i * 80;
+  observer.observe(el);
+});
+
+// Render blog grid
+const grid = document.getElementById('blog-grid');
+if (grid) {
+  grid.innerHTML = CMS.posts.map(p =>
+    '<a href="post.html?slug=' + p.slug + '" class="blog-card fade-up">' +
+      '<div class="blog-card-img">' + p.icon + '</div>' +
+      '<div class="blog-card-body">' +
+        '<div class="blog-card-category">' + p.category + '</div>' +
+        '<h2 class="blog-card-title">' + p.title + '</h2>' +
+        '<p class="blog-card-excerpt">' + p.excerpt + '</p>' +
+        '<div class="blog-card-meta">' + p.date + ' · ' + p.readTime + '</div>' +
+      '</div>' +
+    '</a>'
+  ).join('');
+  grid.querySelectorAll('.fade-up').forEach((el, i) => { el.dataset.delay = i * 100; observer.observe(el); });
 }
 </script>
-<script src="js/main.v2.js"></script>
 </body>
 </html>
