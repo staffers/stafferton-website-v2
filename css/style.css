@@ -8,8 +8,8 @@
   --off-white: #f5f4f0;
   --gray: #6b6b6b;
   --light-gray: #e8e6e0;
-  --accent: #c8f065;
-  --accent-dark: #a8d040;
+  --accent: #00b4c8;
+  --accent-dark: #0099aa;
   --card-bg: #141414;
   --card-border: #222222;
   --font-display: 'Plus Jakarta Sans', sans-serif;
@@ -47,15 +47,21 @@ nav.scrolled {
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--white);
+  display: inline-block;
   text-decoration: none;
-  letter-spacing: -0.5px;
 }
 
-.nav-logo span { color: var(--accent); }
+.nav-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
 
 .nav-links {
   display: flex;
@@ -876,7 +882,7 @@ section {
 
 .pricing-card.featured {
   border-color: var(--accent);
-  background: linear-gradient(135deg, #141414 0%, #161a0e 100%);
+  background: linear-gradient(135deg, #141414 0%, #0d1a1c 100%);
 }
 
 .pricing-card:hover {
