@@ -1,5 +1,3 @@
-# Clean blog URL structure
-/blog/:slug /post2.html?slug=:slug 200
-
-# Keep old URLs working too (redirect to new structure)
+# Redirect old ugly URLs to clean ones
 /post.html /blog/ 301
+
