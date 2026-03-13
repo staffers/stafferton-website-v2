@@ -3,1613 +3,730 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Stafferton Digital</title>
-  <meta name="description" content="Insights on AI, SEO, and marketing automation for modern businesses.">
-  <style>
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --black: #0a0a0a;
-  --white: #ffffff;
-  --off-white: #f5f4f0;
-  --gray: #6b6b6b;
-  --light-gray: #e8e6e0;
-  --accent: #00b4c8;
-  --accent-dark: #0099aa;
-  --card-bg: #141414;
-  --card-border: #222222;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--black);
-  color: var(--white);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* ---- NAV ---- */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(10,10,10,0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.3s ease;
-}
-
-nav.scrolled {
-  padding: 14px 40px;
-  background: rgba(10,10,10,0.95);
-}
-
-.nav-logo {
-  display: inline-block;
-  text-decoration: none;
-}
-
-.nav-logo img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-
-.footer-logo img {
-  height: 26px;
-  width: auto;
-  display: block;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--white); }
-
-.nav-cta {
-  background: var(--accent);
-  color: var(--black) !important;
-  padding: 9px 20px;
-  border-radius: 8px;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  transition: background 0.2s !important;
-}
-
-.nav-cta:hover { background: var(--accent-dark) !important; }
-
-.nav-mobile-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-.nav-mobile-toggle span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--white);
-  border-radius: 2px;
-  transition: all 0.3s;
-}
-
-/* ---- HERO ---- */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 140px 40px 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(200,240,101,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,240,101,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
-
-.hero-glow {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 400px;
-  background: radial-gradient(ellipse, rgba(200,240,101,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 28px;
-}
-
-.hero-label::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
-}
-
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 5vw, 72px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin-bottom: 24px;
-}
-
-.hero-title em {
-  font-style: normal;
-  color: var(--accent);
-}
-
-.hero-subtitle {
-  font-size: 16px;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 40px;
-  max-width: 420px;
-  line-height: 1.7;
-}
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: var(--black);
-  padding: 14px 28px;
-  border-radius: 10px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-  display: inline-block;
-}
-
-.btn-primary:hover {
-  background: var(--accent-dark);
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  color: rgba(255,255,255,0.7);
-  font-size: 14px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
-}
-
-.btn-secondary:hover { color: var(--white); }
-.btn-secondary::after { content: '→'; transition: transform 0.2s; }
-.btn-secondary:hover::after { transform: translateX(4px); }
-
-.hero-visual {
-  position: relative;
-}
-
-.hero-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.5;
-}
-
-.hero-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.hero-card-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.hero-card-dots span {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-}
-
-.hero-card-dots span:nth-child(1) { background: #ff5f57; }
-.hero-card-dots span:nth-child(2) { background: #febc2e; }
-.hero-card-dots span:nth-child(3) { background: #28c840; }
-
-.hero-card-title {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-}
-
-.code-block {
-  font-family: 'Courier New', monospace;
-  font-size: 12px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.7);
-}
-
-.code-block .kw { color: #c792ea; }
-.code-block .fn { color: var(--accent); }
-.code-block .str { color: #c3e88d; }
-.code-block .cm { color: #546e7a; }
-.code-block .ln {
-  color: rgba(255,255,255,0.2);
-  display: inline-block;
-  width: 24px;
-  user-select: none;
-}
-
-.hero-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.hero-stat {
-  background: rgba(200,240,101,0.05);
-  border: 1px solid rgba(200,240,101,0.15);
-  border-radius: 10px;
-  padding: 14px;
-  text-align: center;
-}
-
-.hero-stat-num {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.hero-stat-label {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 4px;
-}
-
-/* ---- TICKER ---- */
-.ticker {
-  padding: 16px 0;
-  background: rgba(200,240,101,0.05);
-  border-top: 1px solid rgba(200,240,101,0.1);
-  border-bottom: 1px solid rgba(200,240,101,0.1);
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.ticker-inner {
-  display: inline-flex;
-  gap: 60px;
-  animation: ticker 25s linear infinite;
-}
-
-.ticker-item {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.4);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ticker-item span {
-  color: var(--accent);
-  font-size: 18px;
-  line-height: 1;
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ---- SECTIONS ---- */
-section {
-  padding: 100px 40px;
-}
-
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-label {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-
-.section-subtitle {
-  font-size: 16px;
-  color: rgba(255,255,255,0.5);
-  max-width: 520px;
-  line-height: 1.7;
-}
-
-/* ---- BENEFITS ---- */
-#benefits {
-  background: var(--black);
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--card-border);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 60px;
-}
-
-.benefit-card {
-  background: var(--card-bg);
-  padding: 36px;
-  transition: background 0.3s;
-}
-
-.benefit-card:hover {
-  background: #1a1a1a;
-}
-
-.benefit-icon {
-  width: 44px; height: 44px;
-  background: rgba(200,240,101,0.1);
-  border: 1px solid rgba(200,240,101,0.2);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.benefit-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.benefit-desc {
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-}
-
-/* ---- SERVICES ---- */
-#services {
-  background: #0d0d0d;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 60px;
-}
-
-.service-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 32px;
-  transition: border-color 0.3s, transform 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.service-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.service-card:hover { border-color: rgba(200,240,101,0.3); transform: translateY(-2px); }
-.service-card:hover::after { opacity: 1; }
-
-.service-number {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-  opacity: 0.7;
-}
-
-.service-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.service-desc {
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-.service-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.service-tag {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 6px;
-  padding: 5px 12px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-}
-
-/* ---- FEATURES ---- */
-#features {
-  background: var(--black);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 60px;
-}
-
-.feature-item {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 28px;
-  transition: all 0.3s;
-}
-
-.feature-item:hover {
-  border-color: rgba(200,240,101,0.25);
-  background: #161616;
-}
-
-.feature-icon {
-  font-size: 28px;
-  margin-bottom: 16px;
-}
-
-.feature-name {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.feature-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.6;
-}
-
-/* ---- PROCESS ---- */
-#process {
-  background: #0d0d0d;
-}
-
-.process-steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
-  position: relative;
-}
-
-.process-steps::before {
-  content: '';
-  position: absolute;
-  top: 28px;
-  left: calc(16.66% + 20px);
-  right: calc(16.66% + 20px);
-  height: 1px;
-  background: linear-gradient(90deg, var(--accent), rgba(200,240,101,0.2), var(--accent));
-  opacity: 0.3;
-}
-
-.step-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 32px;
-  position: relative;
-}
-
-.step-num {
-  width: 48px; height: 48px;
-  background: var(--accent);
-  color: var(--black);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 24px;
-}
-
-.step-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  opacity: 0.7;
-  margin-bottom: 8px;
-}
-
-.step-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.step-desc {
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-}
-
-/* ---- CASE STUDIES ---- */
-#case-studies {
-  background: var(--black);
-}
-
-.cases-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 60px;
-}
-
-.case-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 32px;
-  transition: all 0.3s;
-}
-
-.case-card:hover {
-  border-color: rgba(200,240,101,0.2);
-  transform: translateY(-3px);
-}
-
-.case-name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.case-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-.case-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.case-stat-num {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.case-stat-label {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 4px;
-}
-
-/* ---- TESTIMONIALS ---- */
-#testimonials {
-  background: #0d0d0d;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 60px;
-}
-
-.testimonial-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 28px;
-  transition: border-color 0.3s;
-}
-
-.testimonial-card:hover {
-  border-color: rgba(200,240,101,0.2);
-}
-
-.testimonial-stars {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 16px;
-}
-
-.testimonial-stars span {
-  color: var(--accent);
-  font-size: 14px;
-}
-
-.testimonial-text {
-  font-size: 14px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.75;
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.author-avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #333, #555);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  border: 2px solid rgba(200,240,101,0.2);
-  overflow: hidden;
-}
-
-.author-avatar img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-
-.author-name {
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.author-role {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-}
-
-/* ---- INTEGRATIONS ---- */
-#integrations {
-  background: var(--black);
-  text-align: center;
-}
-
-.integrations-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 50px;
-}
-
-.integration-logo {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 14px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.5);
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.integration-logo:hover {
-  border-color: rgba(200,240,101,0.3);
-  color: var(--white);
-}
-
-.integration-logo .icon { font-size: 20px; }
-
-/* ---- PRICING ---- */
-#pricing {
-  background: #0d0d0d;
-}
-
-.pricing-toggle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 40px 0;
-}
-
-.toggle-label {
-  font-size: 14px;
-  color: rgba(255,255,255,0.6);
-}
-
-.toggle-switch {
-  width: 48px;
-  height: 26px;
-  background: var(--card-border);
-  border-radius: 13px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.toggle-switch.active { background: var(--accent); }
-
-.toggle-switch::after {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 20px; height: 20px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.toggle-switch.active::after { transform: translateX(22px); }
-
-.save-badge {
-  background: rgba(200,240,101,0.15);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(200,240,101,0.3);
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.pricing-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 36px;
-  position: relative;
-  transition: all 0.3s;
-}
-
-.pricing-card.featured {
-  border-color: var(--accent);
-  background: linear-gradient(135deg, #141414 0%, #0d1a1c 100%);
-}
-
-.pricing-card:hover {
-  transform: translateY(-4px);
-}
-
-.popular-badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--accent);
-  color: var(--black);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 4px 16px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-.plan-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-
-.plan-price {
-  font-family: var(--font-display);
-  font-size: 52px;
-  font-weight: 800;
-  letter-spacing: -2px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.plan-price sup {
-  font-size: 24px;
-  font-weight: 600;
-  vertical-align: top;
-  margin-top: 10px;
-  display: inline-block;
-}
-
-.plan-period {
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 28px;
-}
-
-.plan-features {
-  list-style: none;
-  margin-bottom: 32px;
-}
-
-.plan-features li {
-  font-size: 14px;
-  color: rgba(255,255,255,0.65);
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.plan-features li::before {
-  content: '✓';
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.plan-btn {
-  display: block;
-  text-align: center;
-  padding: 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.plan-btn-outline {
-  border: 1px solid rgba(255,255,255,0.15);
-  color: var(--white);
-}
-
-.plan-btn-outline:hover {
-  border-color: rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.05);
-}
-
-.plan-btn-filled {
-  background: var(--accent);
-  color: var(--black);
-}
-
-.plan-btn-filled:hover { background: var(--accent-dark); }
-
-/* ---- FAQ ---- */
-#faq {
-  background: var(--black);
-}
-
-.faq-list {
-  max-width: 760px;
-  margin: 60px auto 0;
-}
-
-.faq-item {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.faq-question {
-  width: 100%;
-  background: none;
-  border: none;
-  color: var(--white);
-  text-align: left;
-  padding: 22px 0;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  transition: color 0.2s;
-}
-
-.faq-question:hover { color: var(--accent); }
-
-.faq-icon {
-  width: 28px; height: 28px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 18px;
-  color: var(--accent);
-  transition: all 0.3s;
-}
-
-.faq-item.open .faq-icon {
-  background: var(--accent);
-  color: var(--black);
-  border-color: var(--accent);
-  transform: rotate(45deg);
-}
-
-.faq-answer {
-  font-size: 14px;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.75;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.35s ease;
-}
-
-.faq-item.open .faq-answer {
-  max-height: 300px;
-  padding-bottom: 22px;
-}
-
-/* ---- COMPARISON ---- */
-#comparison {
-  background: #0d0d0d;
-}
-
-.comparison-table {
-  margin-top: 60px;
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.comparison-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.comparison-row:last-child { border-bottom: none; }
-
-.comparison-row.header {
-  background: rgba(200,240,101,0.05);
-}
-
-.comparison-cell {
-  padding: 18px 24px;
-  font-size: 14px;
-  border-right: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.comparison-cell:last-child { border-right: none; }
-
-.comparison-cell.ours { color: var(--white); }
-.comparison-cell.others { color: rgba(255,255,255,0.4); }
-.comparison-cell .check { color: var(--accent); font-weight: 700; }
-.comparison-cell .cross { color: rgba(255,255,255,0.25); }
-
-.comparison-cell.header-cell {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
-}
-
-.comparison-cell.header-cell.ours { color: var(--accent); }
-
-/* ---- CTA ---- */
-#cta {
-  background: var(--black);
-  text-align: center;
-}
-
-.cta-inner {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.cta-label {
-  font-size: 13px;
-  color: rgba(255,255,255,0.35);
-  font-style: italic;
-  margin-bottom: 24px;
-}
-
-.cta-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 60px);
-  font-weight: 800;
-  letter-spacing: -2px;
-  line-height: 1.05;
-  margin-bottom: 24px;
-}
-
-.cta-email {
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 16px;
-  display: inline-block;
-  margin-top: 20px;
-  border-bottom: 1px solid rgba(200,240,101,0.3);
-  transition: border-color 0.2s;
-}
-
-.cta-email:hover { border-color: var(--accent); }
-
-/* ---- FOOTER ---- */
-footer {
-  padding: 40px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover { color: var(--white); }
-
-.footer-copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.25);
-}
-
-/* ---- BLOG ---- */
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.blog-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.3s;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.blog-card:hover {
-  border-color: rgba(200,240,101,0.25);
-  transform: translateY(-4px);
-}
-
-.blog-card-img {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, #1a1a1a, #222);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.blog-card-img::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60px;
-  background: linear-gradient(transparent, var(--card-bg));
-}
-
-.blog-card-body {
-  padding: 24px;
-}
-
-.blog-card-category {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.blog-card-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 10px;
-}
-
-.blog-card-excerpt {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.65;
-  margin-bottom: 16px;
-}
-
-.blog-card-meta {
-  font-size: 11px;
-  color: rgba(255,255,255,0.3);
-}
-
-/* ---- CONTACT ---- */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-top: 60px;
-}
-
-.contact-form {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 40px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 8px;
-}
-
-.form-input,
-.form-textarea {
-  width: 100%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  padding: 13px 16px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--white);
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form-input:focus,
-.form-textarea:focus {
-  border-color: rgba(200,240,101,0.4);
-}
-
-.form-textarea {
-  height: 120px;
-  resize: vertical;
-}
-
-.form-submit {
-  background: var(--accent);
-  color: var(--black);
-  border: none;
-  padding: 14px 28px;
-  border-radius: 10px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-  width: 100%;
-}
-
-.form-submit:hover { background: var(--accent-dark); }
-
-/* ---- ADMIN ---- */
-.admin-header {
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--card-border);
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.admin-nav {
-  display: flex;
-  gap: 12px;
-}
-
-.admin-nav-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--card-border);
-  background: none;
-  color: rgba(255,255,255,0.6);
-  transition: all 0.2s;
-  font-family: var(--font-body);
-}
-
-.admin-nav-btn.active,
-.admin-nav-btn:hover {
-  background: var(--accent);
-  color: var(--black);
-  border-color: var(--accent);
-}
-
-.admin-content {
-  padding: 40px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.admin-section { display: none; }
-.admin-section.active { display: block; }
-
-.admin-list-item {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.admin-item-title {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.admin-item-meta {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 4px;
-}
-
-.admin-actions {
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.admin-btn {
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  font-family: var(--font-body);
-  transition: all 0.2s;
-}
-
-.admin-btn-edit {
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-}
-
-.admin-btn-edit:hover { background: rgba(255,255,255,0.15); }
-
-.admin-btn-delete {
-  background: rgba(255,80,80,0.1);
-  color: #ff6060;
-  border: 1px solid rgba(255,80,80,0.2);
-}
-
-.admin-btn-delete:hover { background: rgba(255,80,80,0.2); }
-
-.admin-form-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 32px;
-  margin-bottom: 24px;
-}
-
-.admin-form-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 24px;
-}
-
-.add-new-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent);
-  color: var(--black);
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  font-family: var(--font-body);
-  margin-bottom: 24px;
-  transition: background 0.2s;
-}
-
-.add-new-btn:hover { background: var(--accent-dark); }
-
-/* ---- ANIMATIONS ---- */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---- RESPONSIVE ---- */
-@media (max-width: 900px) {
-  nav { padding: 16px 20px; }
-  .nav-links { display: none; }
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 62px; left: 0; right: 0;
-    background: rgba(10,10,10,0.98);
-    padding: 24px;
-    gap: 20px;
-    border-bottom: 1px solid var(--card-border);
-    z-index: 99;
-  }
-  .nav-mobile-toggle { display: flex; }
-  section { padding: 70px 20px; }
-  #hero { padding: 120px 20px 60px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-visual { display: none; }
-  .benefits-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
-  .features-grid { grid-template-columns: 1fr 1fr; }
-  .process-steps { grid-template-columns: 1fr; }
-  .process-steps::before { display: none; }
-  .cases-grid { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .comparison-table { overflow-x: auto; }
-  .blog-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  footer { padding: 30px 20px; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
-}
-
-@media (max-width: 600px) {
-  .features-grid { grid-template-columns: 1fr; }
-}
-  </style>
+  <title>Stafferton Digital</title>
+  <meta name="description" content="Stafferton Digital - boutique SEO and analytics consultancy with 21+ years experience. Technical SEO, GA4, CRO and content strategy for ambitious UK businesses.">
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0a0a0a">
+  <!-- Preload critical font weights -->
+  <!-- Preload critical local fonts -->
+  <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://stafferton.site/">
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="https://stafferton.site/" class="nav-logo"><img src="https://stafferton.site/stafferton-logo.png" alt="Stafferton Digital" /></a>
+  <a href="index.html" class="nav-logo"><picture>
+    <source srcset="stafferton-logo.webp" type="image/webp">
+    <img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34">
+  </picture></a>
   <ul class="nav-links">
-    <li><a href="https://stafferton.site/#services">Services</a></li>
-    <li><a href="https://stafferton.site/#process">Process</a></li>
-    <li><a href="https://stafferton.site/#pricing">Pricing</a></li>
-    <li><a href="https://stafferton.site/blog/" style="color:var(--accent)">Blog</a></li>
-    <li><a href="https://stafferton.site/contact.html">Contact</a></li>
-    <li><a href="https://stafferton.site/contact.html" class="nav-cta">Book a Call</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Call</a></li>
   </ul>
   <button class="nav-mobile-toggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<section style="padding-top:140px">
-  <div class="section-inner">
-    <span class="section-label">Blog</span>
-    <h1 class="section-title fade-up">Insights &amp; Ideas</h1>
-    <p class="section-subtitle fade-up">AI, SEO, and marketing automation - straight talk, no fluff.</p>
-    <div class="blog-grid" id="blog-grid" style="margin-top:60px"></div>
-  </div>
-</section>
-
-<section id="cta" style="text-align:center">
-  <div class="section-inner">
-    <div class="cta-inner">
-      <h2 class="cta-title fade-up">Ready to put this into practice?</h2>
-      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI can make the biggest difference.</p>
-      <a href="https://stafferton.site/contact.html" class="btn-primary fade-up">Book a Free Call</a>
+<main>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label fade-up">21 Years of SEO Expertise</div>
+      <h1 class="hero-title fade-up">Maximise Your<br>Website's <em>Potential.</em></h1>
+      <p class="hero-subtitle fade-up">Big agency brains, boutique service. We help ambitious UK businesses grow organic traffic - with over two decades of SEO expertise behind every decision.</p>
+      <div class="hero-actions fade-up">
+        <a href="contact.html" class="btn-primary" aria-label="Book a free call with Stafferton Digital">Book a Free Call</a>
+        <a href="#services" class="btn-secondary">Explore Services</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="hero-card-title">seo_audit_report.py</span>
+        </div>
+        <div class="code-block">
+          <div><span class="ln">1</span> <span class="kw">class</span> <span class="fn">SEOAudit</span>:</div>
+          <div><span class="ln">2</span>   <span class="kw">def</span> <span class="fn">__init__</span>(self, domain):</div>
+          <div><span class="ln">3</span>     self.domain = domain</div>
+          <div><span class="ln">4</span>     self.status = <span class="str">"scanning"</span></div>
+          <div><span class="ln">5</span></div>
+          <div><span class="ln">6</span>   <span class="kw">def</span> <span class="fn">run</span>(self):</div>
+          <div><span class="ln">7</span>     <span class="kw">if</span> self.domain:</div>
+          <div><span class="ln">8</span>       self.status = <span class="str">"complete"</span></div>
+          <div><span class="ln">9</span>       <span class="kw">return</span> <span class="str">"Issues found & fixed!"</span></div>
+          <div><span class="ln">10</span>    <span class="cm"># Analyse, fix, repeat</span></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num count-up" data-target="21" data-suffix="yrs">0yrs</div>
+            <div class="hero-stat-label">SEO experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num count-up" data-target="30" data-suffix="%">0%</div>
+            <div class="hero-stat-label">Avg traffic uplift</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span>🔍</span> Technical SEO</div>
+    <div class="ticker-item"><span>📊</span> GA4 & Analytics</div>
+    <div class="ticker-item"><span>📈</span> Organic Growth</div>
+    <div class="ticker-item"><span>🎯</span> CRO</div>
+    <div class="ticker-item"><span>🤖</span> AI-Assisted SEO</div>
+    <div class="ticker-item"><span>🔗</span> Link Building</div>
+    <div class="ticker-item"><span>📝</span> Content Strategy</div>
+    <div class="ticker-item"><span>⚙️</span> On-Page Optimisation</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item"><span>🔍</span> Technical SEO</div>
+    <div class="ticker-item"><span>📊</span> GA4 & Analytics</div>
+    <div class="ticker-item"><span>📈</span> Organic Growth</div>
+    <div class="ticker-item"><span>🎯</span> CRO</div>
+    <div class="ticker-item"><span>🤖</span> AI-Assisted SEO</div>
+    <div class="ticker-item"><span>🔗</span> Link Building</div>
+    <div class="ticker-item"><span>📝</span> Content Strategy</div>
+    <div class="ticker-item"><span>⚙️</span> On-Page Optimisation</div>
+  </div>
+</div>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:12px">
+      <span class="section-label">Benefits</span>
+    </div>
+    <h2 class="section-title fade-up" style="text-align:center">Big Agency Brains.<br>Boutique Service.</h2>
+    <p class="section-subtitle fade-up" style="text-align:center;margin:0 auto 60px">You get the experience and thinking of a high-end agency - without the bloated costs or layers of account managers.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🧠</div>
+        <div class="benefit-title">Smarter Strategy, Not Just Services</div>
+        <p class="benefit-desc">We don't sell cookie-cutter packages. We dig into your goals, audience, and tech stack to craft solutions that actually move the needle - not just tick boxes.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🤝</div>
+        <div class="benefit-title">Direct Access to the Experts</div>
+        <p class="benefit-desc">No layers of account managers here. You'll work directly with the people doing the work - fast answers, clear thinking, and real results.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">📊</div>
+        <div class="benefit-title">Results You Can See and Measure</div>
+        <p class="benefit-desc">Rankings, traffic, leads, conversions - we live for the numbers that matter. Every win is tracked, reported, and built upon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-label">Services</span>
+    <h2 class="section-title fade-up">Technical Expertise,<br>Real-World Results</h2>
+    <p class="section-subtitle fade-up">We specialise in technical SEO and everything analytics - built around your goals, not off-the-shelf packages</p>
+    <div class="services-grid" style="margin-top:60px">
+      <div class="service-card fade-up">
+        <div class="service-number">01</div>
+        <h3 class="service-title">SEO Audits</h3>
+        <p class="service-desc">Boost rankings and fix issues with a thorough technical SEO audit - analysing site speed, crawlability, indexing, and structure to uncover every opportunity for improvement.</p>
+        <div class="service-tags">
+          <span class="service-tag">Technical SEO</span>
+          <span class="service-tag">Crawl Analysis</span>
+          <span class="service-tag">Core Web Vitals</span>
+        </div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-number">02</div>
+        <h3 class="service-title">On-Page SEO</h3>
+        <p class="service-desc">Targeted keywords, compelling meta tags, high-quality content, and seamless UX - everything needed to drive higher rankings and qualified organic traffic month on month.</p>
+        <div class="service-tags">
+          <span class="service-tag">Keyword Research</span>
+          <span class="service-tag">Content Strategy</span>
+          <span class="service-tag">Meta Optimisation</span>
+        </div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-number">03</div>
+        <h3 class="service-title">Google Analytics & GA4</h3>
+        <p class="service-desc">We have the GA4 expertise to enable smarter decisions. Track engagement, uncover hidden trends, and boost conversions. Your data, your advantage - properly set up and interpreted.</p>
+        <div class="service-tags">
+          <span class="service-tag">GA4 Setup</span>
+          <span class="service-tag">GTM</span>
+          <span class="service-tag">Funnel Tracking</span>
+        </div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-number">04</div>
+        <h3 class="service-title">CRO</h3>
+        <p class="service-desc">More traffic is only half the battle. We test, analyse, and refine - turning clicks into customers with data-driven improvements that compound over time and maximise your ROI.</p>
+        <div class="service-tags">
+          <span class="service-tag">A/B Testing</span>
+          <span class="service-tag">UX Analysis</span>
+          <span class="service-tag">Conversion Funnels</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Features</span>
+      <h2 class="section-title fade-up">Tech-First, Human-Focused</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto 0">From SEO audits to analytics and automation - making complex stuff work beautifully for your business</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item fade-up">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-name">Technical SEO Audits</div>
+        <p class="feature-desc">Deep-dive audits covering crawlability, indexation, site speed, structured data, and everything in between.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-icon">📊</div>
+        <div class="feature-name">GA4 & GTM Implementation</div>
+        <p class="feature-desc">Precise tracking setup so every click, conversion, and customer journey is captured and analysed correctly.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-icon">📝</div>
+        <div class="feature-name">Content Strategy</div>
+        <p class="feature-desc">Data-led content planning that builds topical authority and drives qualified organic traffic at scale.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-name">Conversion Rate Optimisation</div>
+        <p class="feature-desc">Turn more of your existing traffic into leads and customers through testing, analysis, and refinement.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-icon">📈</div>
+        <div class="feature-name">Performance Reporting</div>
+        <p class="feature-desc">Clear, honest reporting on the metrics that matter - rankings, traffic, leads, and revenue impact.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-name">AI-Assisted SEO</div>
+        <p class="feature-desc">We use the latest AI tooling to work faster and smarter - delivering better outcomes without inflating costs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Process</span>
+      <h2 class="section-title fade-up">How We Work</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">Straightforward, transparent, and focused on results from day one.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step-card fade-up">
+        <div class="step-num">01</div>
+        <div class="step-label">Step 1</div>
+        <h3 class="step-title">Discover &amp; Audit</h3>
+        <p class="step-desc">We start with a thorough audit of your website, analytics setup, and competitive landscape - mapping out exactly where you are and what's holding you back.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">02</div>
+        <div class="step-label">Step 2</div>
+        <h3 class="step-title">Strategise &amp; Prioritise</h3>
+        <p class="step-desc">We build a clear, prioritised roadmap - quick wins first, long-term growth second. No fluff, no jargon. Just a plan grounded in data and your business goals.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">03</div>
+        <div class="step-label">Step 3</div>
+        <h3 class="step-title">Execute &amp; Grow</h3>
+        <p class="step-desc">We get to work and keep you informed. Regular reporting, direct communication, and continuous optimisation - results that compound month on month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="case-studies">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Our Clients</span>
+      <h2 class="section-title fade-up">Results That Speak for Themselves</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">A selection of wins from clients we've worked with across the UK and beyond</p>
+    </div>
+    <div class="cases-grid" id="cases-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Reviews</span>
+      <h2 class="section-title fade-up">What Our Clients Say</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">Hear from the people we've worked with</p>
+    </div>
+    <div class="testimonials-grid" style="margin-top:60px">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">"Thank you for all your amazing work over the last few years. Thanks for bringing so much detailed attention and expertise to all you do - I've learned a lot from you and always know our clients are in safe hands."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">🌍</div>
+          <div>
+            <div class="author-name">Astrid</div>
+            <div class="author-role">Luxembourg</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">"I have worked with many other website consultants in the past but I can honestly say that this was the best experience and value that I have had."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">🏙️</div>
+          <div>
+            <div class="author-name">Pippa</div>
+            <div class="author-role">London</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">"Genuinely one of the most knowledgeable SEO consultants I've encountered. The results were clear, the communication was excellent, and the process was completely painless."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">🏡</div>
+          <div>
+            <div class="author-name">Tim</div>
+            <div class="author-role">Surrey</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations">
+  <div class="section-inner">
+    <span class="section-label">Trusted By</span>
+    <h2 class="section-title fade-up">Clients We've Worked With</h2>
+    <p class="section-subtitle fade-up" style="margin:0 auto">A number of the brands we have partnered with over the years</p>
+    <div class="integrations-logos">
+      <div class="integration-logo fade-up"><span class="icon">🏢</span> Scape</div>
+      <div class="integration-logo fade-up"><span class="icon">🏠</span> Downing Students</div>
+      <div class="integration-logo fade-up"><span class="icon">🎬</span> Framestore</div>
+      <div class="integration-logo fade-up"><span class="icon">❤️</span> BSN Social Care</div>
+      <div class="integration-logo fade-up"><span class="icon">📡</span> Satellite Comms Co.</div>
+      <div class="integration-logo fade-up"><span class="icon">🌍</span> Global Brands</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title fade-up">Honest Pricing, No Surprises</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">We don't do off-the-shelf packages. Every engagement is scoped to your goals and budget - no bloated retainers, no hidden costs.</p>
+    </div>
+    <div class="pricing-grid" style="margin-top:48px">
+      <div class="pricing-card fade-up">
+        <div class="plan-name">SEO Audit</div>
+        <div class="plan-price" style="font-size:36px;letter-spacing:-1px">From £500 + VAT</div>
+        <div class="plan-period">one-off (ex. VAT)</div>
+        <ul class="plan-features">
+          <li>Full technical SEO review</li>
+          <li>Crawl & indexation analysis</li>
+          <li>Core Web Vitals assessment</li>
+          <li>Prioritised recommendations</li>
+          <li>Presentation & walkthrough</li>
+        </ul>
+        <a href="contact.html" class="plan-btn plan-btn-outline" aria-label="Get started with an SEO Audit">Get Started</a>
+      </div>
+      <div class="pricing-card featured fade-up">
+        <div class="popular-badge">Popular</div>
+        <div class="plan-name">Monthly Retainer</div>
+        <div class="plan-price" style="font-size:36px;letter-spacing:-1px">Custom</div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li>Ongoing SEO management</li>
+          <li>Monthly reporting & insights</li>
+          <li>Content & on-page optimisation</li>
+          <li>Analytics & tracking support</li>
+          <li>Direct access - no account managers</li>
+        </ul>
+        <a href="contact.html" class="plan-btn plan-btn-filled">Talk to Us</a>
+      </div>
+      <div class="pricing-card fade-up">
+        <div class="plan-name">Project Work</div>
+        <div class="plan-price" style="font-size:36px;letter-spacing:-1px">POA</div>
+        <div class="plan-period">scoped per project</div>
+        <ul class="plan-features">
+          <li>GA4 & GTM implementation</li>
+          <li>Site migrations</li>
+          <li>CRO programmes</li>
+          <li>Analytics consultancy</li>
+          <li>Training & workshops</li>
+        </ul>
+        <a href="contact.html" class="plan-btn plan-btn-outline" aria-label="Get a quote for project work">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">FAQs</span>
+      <h2 class="section-title fade-up">Frequently Asked Questions</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">Straight answers to the questions we get asked most</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">How long does SEO take to show results? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Honest answer - it depends. Technical fixes can show results in weeks. Content and authority building typically takes 3–6 months to gain momentum. We'll always be upfront about realistic timelines for your specific situation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you work with businesses outside the UK? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Yes - we're based in the UK but work with clients globally. We've delivered SEO and analytics projects across Europe, the US, and beyond. Time zones are rarely an issue.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you help with GA4 migration or setup? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Absolutely. GA4 implementation and GTM configuration is one of our core strengths. Whether you need a fresh setup, a migration from Universal Analytics, or a full audit of an existing GA4 property - we've got it covered.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What makes you different from a larger agency? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">You deal directly with the people doing the work - no junior account managers, no briefing chains. You get 21+ years of experience applied to your account, not diluted across a team of graduates. And because our overheads are lower, you get better value.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer one-off projects or retainers only? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Both. We're happy to scope a one-off audit, a GA4 implementation, or a CRO project - or work on an ongoing retainer basis. We'll recommend whatever structure makes most sense for your needs and budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">Comparison</span>
+      <h2 class="section-title fade-up">Boutique vs Big Agency</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">Why more businesses are choosing boutique over bloated</p>
+    </div>
+    <div class="comparison-table fade-up">
+      <div class="comparison-row header">
+        <div class="comparison-cell header-cell" style="color:rgba(255,255,255,0.6)"></div>
+        <div class="comparison-cell header-cell ours">Stafferton ✓</div>
+        <div class="comparison-cell header-cell" style="color:rgba(255,255,255,0.55)">Large Agency</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell" style="color:rgba(255,255,255,0.6)">Who does the work</div>
+        <div class="comparison-cell ours"><span class="check">✓</span> Senior experts on your account</div>
+        <div class="comparison-cell others"><span class="cross">✗</span> Junior staff with senior oversight</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell" style="color:rgba(255,255,255,0.6)">Communication</div>
+        <div class="comparison-cell ours"><span class="check">✓</span> Direct, fast, no layers</div>
+        <div class="comparison-cell others"><span class="cross">✗</span> Account managers & briefing chains</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell" style="color:rgba(255,255,255,0.6)">Strategy</div>
+        <div class="comparison-cell ours"><span class="check">✓</span> Tailored to your business goals</div>
+        <div class="comparison-cell others"><span class="cross">✗</span> Template-driven packages</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell" style="color:rgba(255,255,255,0.6)">Value for money</div>
+        <div class="comparison-cell ours"><span class="check">✓</span> Lower overheads, better ROI</div>
+        <div class="comparison-cell others"><span class="cross">✗</span> Paying for office & headcount</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell" style="color:rgba(255,255,255,0.6)">Reporting</div>
+        <div class="comparison-cell ours"><span class="check">✓</span> Clear, honest, metrics-led</div>
+        <div class="comparison-cell others"><span class="cross">✗</span> Vanity metrics & padded decks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <span class="section-label">About Us</span>
+      <h2 class="section-title fade-up">An Established UK Agency<br>with a Global Reach</h2>
+      <p class="section-subtitle fade-up" style="margin:0 auto">We are an established, dynamic digital marketing consultancy based in the UK — delivering SEO and analytics excellence since 2011.</p>
+    </div>
+    <div class="benefits-grid" style="margin-top:60px">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">📅</div>
+        <div class="benefit-title">Founded 2011</div>
+        <p class="benefit-desc">Over a decade of helping businesses grow their organic presence. We've seen every algorithm update, platform shift, and industry trend — and we're still here delivering results.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🌍</div>
+        <div class="benefit-title">UK-Based, Globally Active</div>
+        <p class="benefit-desc">Headquartered in England, we work with clients across Europe, the US, and beyond. Our boutique size means you always deal directly with the people doing the work.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🎓</div>
+        <div class="benefit-title">PBSA Specialists</div>
+        <p class="benefit-desc">We have a particular specialism in Purpose Built Student Accommodation — working with some of the sector's leading operators on SEO, analytics, and digital strategy.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:8px">Stafferton Consulting Limited &nbsp;·&nbsp; Registered in England &amp; Wales &nbsp;·&nbsp; No. 7626828</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#751d1019191a3506011413131007011a1b5b111c121c011419" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="3058555c5c5f7043445156565542445f5e1e5459575944515c">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="section-inner">
+    <div class="cta-inner">
+      <p class="cta-label fade-up">*Free, no-obligation consultation</p>
+      <h2 class="cta-title fade-up">Small Team, Big Results.<br>Let's Talk.</h2>
+      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Book a free call and find out how we can grow your organic traffic - no fluff, just straight talking.</p>
+      <a href="contact.html" class="btn-primary fade-up" style="font-size:16px;padding:16px 36px">Book a Free Call</a>
+      <div class="fade-up">
+        <a href="contact.html" class="cta-email"><span class="__cf_email__" data-cfemail="4b232e2727240b383f2a2d2d2e393f2425652f222c223f2a27">[email&#160;protected]</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="https://stafferton.site/" class="footer-logo"><img class="footer-logo-img" src="https://stafferton.site/stafferton-logo.png" alt="Stafferton Digital" /></a>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="footer-logo" aria-label="Back to top"><picture>
+    <source srcset="stafferton-logo.webp" type="image/webp">
+    <img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img" />
+  </picture></a>
     <div class="footer-links">
-      <a href="https://stafferton.site/#services">Services</a>
-      <a href="https://stafferton.site/#pricing">Pricing</a>
-      <a href="https://stafferton.site/contact.html">Contact</a>
-      <a href="https://stafferton.site/blog/">Blog</a>
-      <a href="https://stafferton.site/admin.html">Admin</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <a href="blog.html">Blog</a>
+      <a href="admin.html">Admin</a>
     </div>
     <span class="footer-copy">© Stafferton Digital</span>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== CMS DATA =====
 const CMS = {
   posts: [
-    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖" },
-    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing - authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝" },
-    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍" }
+    {
+      id: 1,
+      slug: "ai-automation-seo",
+      category: "SEO",
+      title: "How AI Automation is Transforming SEO in 2025",
+      excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.",
+      date: "12 Feb 2025",
+      readTime: "5 min read",
+      icon: "🤖",
+      content: "<p>Artificial intelligence has moved from novelty to necessity in the world of SEO. Agencies that embraced AI tooling early are now running comprehensive audits in hours rather than days.</p><h2>What's Actually Changing</h2><p>Three areas are seeing the most disruption: technical auditing, keyword clustering, and content briefing. AI tools now handle the grunt work in all three, freeing up strategists to focus on interpretation and client communication.</p>"
+    },
+    {
+      id: 2,
+      slug: "content-strategy-boutique-agencies",
+      category: "Strategy",
+      title: "Content Strategy for Boutique Digital Agencies",
+      excerpt: "Smaller agencies have a unique advantage in content marketing - authenticity. Here's how to turn that into a repeatable growth engine.",
+      date: "5 Feb 2025",
+      readTime: "7 min read",
+      icon: "📝",
+      content: "<p>Boutique agencies often feel outgunned when it comes to content. But volume was always the wrong game to play. The agencies winning on organic search in 2025 are winning on depth, specificity, and genuine expertise.</p><p>Your client case studies are your most powerful content asset.</p>"
+    },
+    {
+      id: 3,
+      slug: "local-seo-guide-2025",
+      category: "Local SEO",
+      title: "The Complete Local SEO Guide for UK Businesses",
+      excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.",
+      date: "28 Jan 2025",
+      readTime: "9 min read",
+      icon: "📍",
+      content: "<p>Local SEO in the UK has its own distinct quirks. The single biggest leverage point for most local businesses remains Google Business Profile - fully optimised, actively managed.</p>"
+    }
+  ],
+  caseStudies: [
+    {
+      id: 1,
+      name: "Global Telco - Organic Traffic Growth",
+      company: "Telecommunications",
+      role: "SEO Consultancy",
+      description: "Consulted with this multi-billion dollar global player in the telecommunications industry to increase qualified organic traffic through technical SEO and content strategy.",
+      stat1_num: "30%",
+      stat1_label: "YoY organic traffic increase",
+      stat2_num: "6",
+      stat2_label: "Months to significant results",
+      icon: "📡"
+    },
+    {
+      id: 2,
+      name: "Student Accommodation - Booking Funnel",
+      company: "PBSA Sector",
+      role: "Analytics & CRO",
+      description: "Implemented comprehensive GA4 booking funnel tracking and CRO across a multi-property student accommodation platform, enabling data-driven decisions at every step.",
+      stat1_num: "100",
+      stat1_label: "% funnel visibility achieved",
+      stat2_num: "12",
+      stat2_label: "Properties tracked",
+      icon: "🏢"
+    },
+    {
+      id: 3,
+      name: "Creative Agency - SEO & Content Strategy",
+      company: "Creative & Production",
+      role: "SEO Strategy",
+      description: "Built and executed a long-term SEO content strategy for a leading creative production company, growing topical authority and driving consistent organic lead generation.",
+      stat1_num: "40",
+      stat1_label: "% increase in organic sessions",
+      stat2_num: "3",
+      stat2_label: "Month average to first page rankings",
+      icon: "🎬"
+    }
   ]
 };
-(function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; } } catch(e) {} })();
 
-// Nav scroll
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+// Merge localStorage overrides
+(function() {
+  try {
+    const stored = localStorage.getItem('cms_data');
+    if (stored) {
+      const data = JSON.parse(stored);
+      if (data.posts) CMS.posts = data.posts;
+      if (data.caseStudies) CMS.caseStudies = data.caseStudies;
+    }
+  } catch(e) {}
+})();
 
-// Mobile nav
-const toggle = document.querySelector('.nav-mobile-toggle');
-const links = document.querySelector('.nav-links');
-if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
-document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0); });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-up').forEach((el, i) => {
-  el.dataset.delay = i * 80;
-  observer.observe(el);
+// ===== SCROLL ANIMATIONS =====
+// Batch DOM reads before writes to avoid forced reflow
+const fadeEls = document.querySelectorAll('.fade-up');
+// Read phase - calculate delays without triggering reflow
+const delayMap = new Map();
+fadeEls.forEach((el) => {
+  const siblings = el.parentElement.querySelectorAll('.fade-up');
+  const idx = Array.from(siblings).indexOf(el);
+  delayMap.set(el, idx * 80);
+});
+// Write phase - set data attributes
+delayMap.forEach((delay, el) => {
+  el.dataset.delay = delay;
+  el.style.willChange = 'opacity, transform';
 });
 
-// Render blog grid
-const grid = document.getElementById('blog-grid');
-if (grid) {
-  grid.innerHTML = CMS.posts.map(p =>
-    '<a href="https://stafferton.site/blog/' + p.slug + '/" class="blog-card fade-up">' +
-      '<div class="blog-card-img">' + p.icon + '</div>' +
-      '<div class="blog-card-body">' +
-        '<div class="blog-card-category">' + p.category + '</div>' +
-        '<h2 class="blog-card-title">' + p.title + '</h2>' +
-        '<p class="blog-card-excerpt">' + p.excerpt + '</p>' +
-        '<div class="blog-card-meta">' + p.date + ' · ' + p.readTime + '</div>' +
-      '</div>' +
-    '</a>'
-  ).join('');
-  grid.querySelectorAll('.fade-up').forEach((el, i) => { el.dataset.delay = i * 100; observer.observe(el); });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      setTimeout(() => {
+        el.classList.add('visible');
+        el.style.willChange = 'auto';
+      }, el.dataset.delay || 0);
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+fadeEls.forEach(el => observer.observe(el));
+
+// ===== NAV SCROLL =====
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ===== MOBILE NAV =====
+const toggle = document.querySelector('.nav-mobile-toggle');
+const links = document.querySelector('.nav-links');
+if (toggle) {
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
 }
-</script>
-</body>
-</html>
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => links.classList.remove('open'));
+});
+
+// ===== FAQ =====
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ===== PRICING TOGGLE (removed) =====
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el, target, suffix) {
+  let start = 0;
+  const end = parseInt(target);
+  const increment = end / (1500 / 16);
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= end) {
+      el.textContent = end + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(start) + suffix;
+    }
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = true;
+      animateCounter(entry.target, entry.target.dataset.target, entry.target.dataset.suffix !== undefined ? entry.target.dataset.suffix : '%');
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
+
+// ===== RENDER CASE STUDIES =====
+const casesGrid = document.getElementById('cases-grid');
+if (casesGrid) {
+  casesGrid.innerHTML = CMS.caseStudies.map(c => {
+    const s1 = c.stat1_num.replace(/[0-9]/g, '');
+    const s2 = c.stat2_num.replace(/[0-9]/g, '');
+    return '<div class="case-card fade-up">' +
+      '<div style="font-size:32px;margin-bottom:16px">' + c.icon + '</div>' +
+      '<h3 class="case-name">' + c.name + '</h3>' +
+      '<p class="case-desc">' + c.description + '</p>' +
+      '<div class="case-stats">' +
+        '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat1_num) + '" data-suffix="' + s1 + '">0' + s1 + '</div><div class="case-stat-label">' + c.stat1_label + '</div></div>' +
+        '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat2_num) + '" data-suffix="' + s2 + '">0' + s2 + '</div>
