@@ -632,35 +632,22 @@ const CMS = {
 })();
 
 // ===== SCROLL ANIMATIONS =====
-// Batch DOM reads before writes to avoid forced reflow
-const fadeEls = document.querySelectorAll('.fade-up');
-// Read phase - calculate delays without triggering reflow
-const delayMap = new Map();
-fadeEls.forEach((el) => {
-  const siblings = el.parentElement.querySelectorAll('.fade-up');
-  const idx = Array.from(siblings).indexOf(el);
-  delayMap.set(el, idx * 80);
-});
-// Write phase - set data attributes
-delayMap.forEach((delay, el) => {
-  el.dataset.delay = delay;
-  el.style.willChange = 'opacity, transform';
-});
-
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const el = entry.target;
       setTimeout(() => {
-        el.classList.add('visible');
-        el.style.willChange = 'auto';
-      }, el.dataset.delay || 0);
-      observer.unobserve(el);
+        entry.target.classList.add('visible');
+      }, entry.target.dataset.delay || 0);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.1 });
 
-fadeEls.forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-up').forEach((el, i) => {
+  const siblings = el.parentElement.querySelectorAll('.fade-up');
+  const idx = Array.from(siblings).indexOf(el);
+  el.dataset.delay = idx * 80;
+  observer.observe(el);
+});
 
 // ===== NAV SCROLL =====
 const nav = document.querySelector('nav');
