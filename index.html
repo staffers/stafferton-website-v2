@@ -642,11 +642,23 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.fade-up').forEach((el, i) => {
-  const siblings = el.parentElement.querySelectorAll('.fade-up');
-  const idx = Array.from(siblings).indexOf(el);
-  el.dataset.delay = idx * 80;
-  observer.observe(el);
+// Set delays then observe - use rAF to ensure layout is complete
+requestAnimationFrame(() => {
+  document.querySelectorAll('.fade-up').forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    // If already in viewport on load, make visible immediately
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const siblings = el.parentElement.querySelectorAll('.fade-up');
+      const idx = Array.from(siblings).indexOf(el);
+      setTimeout(() => el.classList.add('visible'), idx * 80);
+    } else {
+      // Below fold - use observer
+      const siblings = el.parentElement.querySelectorAll('.fade-up');
+      const idx = Array.from(siblings).indexOf(el);
+      el.dataset.delay = idx * 80;
+      observer.observe(el);
+    }
+  });
 });
 
 // ===== NAV SCROLL =====
