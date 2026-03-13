@@ -18,12 +18,13 @@
   <style>
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+    body>nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
     .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
     .nav-logo picture{display:block;line-height:0}
     .nav-logo img{height:34px;width:160px;display:block}
     .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
     .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
+    .nav-cta{background:var(--accent);color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600}
     .nav-mobile-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
     .nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}
     @media(max-width:900px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px}.nav-mobile-toggle{display:flex}}
@@ -59,7 +60,6 @@
       <h1 class="section-title fade-up">Let's Talk</h1>
       <p class="section-subtitle fade-up" style="margin:0 auto">Book a free discovery call or drop us a message. No pressure, no sales pitch - just a straight conversation about your goals.</p>
     </div>
-
     <div class="contact-grid">
       <div class="fade-up">
         <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:var(--white)">Get in Touch</h3>
@@ -86,7 +86,6 @@
           </ul>
         </div>
       </div>
-
       <div class="contact-form fade-up">
         <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:var(--white)">Send a Message</h3>
         <form id="contact-form">
@@ -111,10 +110,10 @@
         <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
           <div style="font-size:48px;margin-bottom:16px">&#10003;</div>
           <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px">Message sent!</h3>
-          <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We'll get back to you within one business day.</p>
+          <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We'll be in touch within one business day.</p>
         </div>
         <div id="form-error" style="display:none;text-align:center;padding:20px;background:rgba(255,50,50,0.1);border-radius:8px;margin-top:16px">
-          <p style="color:rgba(255,100,100,0.9)">Something went wrong. Please email us directly at <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a></p>
+          <p style="color:rgba(255,100,100,0.9)">Something went wrong - please email <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a></p>
         </div>
       </div>
     </div>
@@ -122,7 +121,6 @@
 </section>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="footer-logo" aria-label="Back to top">
@@ -131,7 +129,7 @@
         <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
       </picture>
     </a>
-    <nav class="footer-links" aria-label="Footer navigation">
+    <div class="footer-links">
       <a href="/#services">Services</a>
       <a href="/#process">Process</a>
       <a href="/#pricing">Pricing</a>
@@ -139,14 +137,13 @@
       <a href="/#about">About</a>
       <a href="/blog/">Blog</a>
       <a href="/contact.html">Contact</a>
-    </nav>
+    </div>
     <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:24px">Stafferton Consulting Limited &nbsp;&middot;&nbsp; Registered in England &amp; Wales &nbsp;&middot;&nbsp; No. 7626828</p>
     <p style="color:rgba(255,255,255,0.3);font-size:12px;margin-top:8px">&copy; 2025 Stafferton Digital. All rights reserved.</p>
   </div>
 </footer>
 
 <script>
-// Nav
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 const toggle = document.querySelector('.nav-mobile-toggle');
@@ -154,7 +151,6 @@ const navLinks = document.querySelector('.nav-links');
 if (toggle) toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-// Fade-up animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
@@ -166,16 +162,13 @@ function initFadeUp() {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight) {
       setTimeout(() => el.classList.add('visible'), i * 100);
-    } else {
-      observer.observe(el);
-    }
+    } else { observer.observe(el); }
   });
 }
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initFadeUp);
 } else { initFadeUp(); }
 
-// Contact form -> CF Worker
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', async function(e) {
