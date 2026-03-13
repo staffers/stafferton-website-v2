@@ -1,4 +1,4 @@
-# Landio — Static Site for Cloudflare Pages
+# Stafferton — Static Site for Cloudflare Pages
 
 A clean, dark-themed agency site inspired by the Landio Framer template. Built as a fully static site with a simple localStorage-based CMS for blog posts and case studies.
 
