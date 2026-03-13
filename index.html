@@ -13,7 +13,8 @@
   <meta name="theme-color" content="#0a0a0a">
   <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="css/style.css"></noscript>
   <link rel="canonical" href="https://stafferton.site/">
   <style>
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
@@ -24,7 +25,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo"><img src="stafferton-logo.png" alt="Stafferton Digital" /></a>
+  <a href="index.html" class="nav-logo"><picture><source srcset="/stafferton-logo.webp" type="image/webp"><img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" fetchpriority="high"></picture></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
@@ -352,12 +353,6 @@
       <h2 class="section-title fade-up">Honest Pricing, No Surprises</h2>
       <p class="section-subtitle fade-up" style="margin:0 auto">We don't do off-the-shelf packages. Every engagement is scoped to your goals and budget - no bloated retainers, no hidden costs.</p>
     </div>
-    <div class="pricing-toggle">
-      <span class="toggle-label">Monthly</span>
-      <div class="toggle-switch" id="pricing-toggle" role="switch" aria-checked="false" tabindex="0"></div>
-      <span class="toggle-label">Yearly</span>
-      <span class="save-badge">Save 20%</span>
-    </div>
     <div class="pricing-grid" style="margin-top:48px">
       <div class="pricing-card fade-up">
         <div class="plan-name">SEO Audit</div>
@@ -506,7 +501,7 @@
     </div>
     <div style="text-align:center;margin-top:48px">
       <p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:8px">Stafferton Consulting Limited &nbsp;&middot;&nbsp; Registered in England &amp; Wales &nbsp;&middot;&nbsp; No. 7626828</p>
-      <p style="color:rgba(255,255,255,0.55);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;&middot;&nbsp; <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a></p>
+      <p style="color:rgba(255,255,255,0.55);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#563e333a3a39162522373030332422393878323f313f22373a" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="1a727f7676755a696e7b7c7c7f686e7574347e737d736e7b76">[email&#160;protected]</span></a></p>
     </div>
   </div>
 </section>
@@ -543,7 +538,7 @@
 </footer>
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== CMS DATA =====
 const CMS = {
   posts: [
@@ -733,7 +728,7 @@ if (casesGrid) {
         '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat2_num) + '" data-suffix="' + s2 + '">0' + s2 + '</div><div class="case-stat-label">' + c.stat2_label + '</div></div>' +
       '</div>' +
     '</div>';
-  }).join('');
+   }).join('');
   casesGrid.querySelectorAll('.fade-up').forEach((el, i) => {
     el.dataset.delay = i * 80;
     observer.observe(el);
