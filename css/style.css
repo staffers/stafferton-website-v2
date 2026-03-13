@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -52,7 +52,7 @@ nav.scrolled {
 }
 
 .nav-logo img {
-  height: 32px;
+  height: 40px;
   width: auto;
   display: block;
 }
@@ -283,7 +283,7 @@ nav.scrolled {
 
 .hero-card-title {
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
 }
 
 .code-block {
@@ -329,7 +329,7 @@ nav.scrolled {
 
 .hero-stat-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   margin-top: 4px;
 }
 
@@ -352,7 +352,7 @@ nav.scrolled {
 .ticker-item {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -698,7 +698,7 @@ section {
 
 .case-stat-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   margin-top: 4px;
 }
 
@@ -775,7 +775,7 @@ section {
 
 .author-role {
   font-size: 11px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
 }
 
 /* ---- INTEGRATIONS ---- */
@@ -932,7 +932,7 @@ section {
 
 .plan-period {
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 28px;
 }
 
@@ -1091,9 +1091,9 @@ section {
 .comparison-cell:last-child { border-right: none; }
 
 .comparison-cell.ours { color: var(--white); }
-.comparison-cell.others { color: rgba(255,255,255,0.4); }
+.comparison-cell.others { color: rgba(255,255,255,0.6); }
 .comparison-cell .check { color: var(--accent); font-weight: 700; }
-.comparison-cell .cross { color: rgba(255,255,255,0.25); }
+.comparison-cell .cross { color: rgba(255,255,255,0.5); }
 
 .comparison-cell.header-cell {
   font-family: var(--font-display);
@@ -1116,7 +1116,7 @@ section {
 
 .cta-label {
   font-size: 13px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
   font-style: italic;
   margin-bottom: 24px;
 }
@@ -1166,7 +1166,7 @@ footer {
 
 .footer-links a {
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1175,7 +1175,7 @@ footer {
 
 .footer-copy {
   font-size: 13px;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
 }
 
 /* ---- BLOG ---- */
@@ -1252,7 +1252,7 @@ footer {
 
 .blog-card-meta {
   font-size: 11px;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.55);
 }
 
 /* ---- CONTACT ---- */
@@ -1385,7 +1385,7 @@ footer {
 
 .admin-item-meta {
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   margin-top: 4px;
 }
 
@@ -1504,4 +1504,13 @@ footer {
 
 @media (max-width: 600px) {
   .features-grid { grid-template-columns: 1fr; }
+}
+
+/* Footer logo greyscale + scroll-to-top */
+.footer-logo-img {
+  filter: grayscale(100%) brightness(0.7);
+  transition: filter 0.3s ease;
+}
+.footer-logo:hover .footer-logo-img {
+  filter: grayscale(0%) brightness(1);
 }
