@@ -19,6 +19,14 @@
   <style>
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+    .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
+    .nav-logo picture{display:block;line-height:0}
+    .nav-logo img{height:34px;width:160px;display:block}
+    .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
+    .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
+    .nav-mobile-toggle{display:none}
+    @media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
   </style>
 </head>
 <body>
@@ -501,7 +509,7 @@
     </div>
     <div style="text-align:center;margin-top:48px">
       <p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:8px">Stafferton Consulting Limited &nbsp;&middot;&nbsp; Registered in England &amp; Wales &nbsp;&middot;&nbsp; No. 7626828</p>
-      <p style="color:rgba(255,255,255,0.55);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#563e333a3a39162522373030332422393878323f313f22373a" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="1a727f7676755a696e7b7c7c7f686e7574347e737d736e7b76">[email&#160;protected]</span></a></p>
+      <p style="color:rgba(255,255,255,0.55);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;&middot;&nbsp; <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a></p>
     </div>
   </div>
 </section>
@@ -515,30 +523,71 @@
       <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Book a free call and find out how we can grow your organic traffic - no fluff, just straight talking.</p>
       <a href="contact.html" class="btn-primary fade-up" style="font-size:16px;padding:16px 36px">Book a Free Call</a>
       <div class="fade-up">
-        <a href="contact.html" class="cta-email">hello <!-- -->@ stafferton.co.uk</a>
+        <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a>
       </div>
     </div>
   </div>
 </section>
 
 </main>
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="footer-logo" aria-label="Back to top"><picture><source srcset="/stafferton-logo.webp" type="image/webp"><img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" /></picture></a>
-    <div class="footer-links">
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="contact.html">Contact</a>
-      <a href="blog.html">Blog</a>
-      <a href="admin.html">Admin</a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="footer-logo" aria-label="Back to top">
+          <picture>
+            <source srcset="/stafferton-logo.webp" type="image/webp">
+            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
+          </picture>
+        </a>
+        <p>Boutique SEO &amp; analytics consultancy. Big agency brains, boutique service.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html" class="nav-cta" style="background:none;padding:0;border-radius:0;font-weight:400;color:rgba(255,255,255,0.55)">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="/#services">SEO</a></li>
+          <li><a href="/#services">Analytics</a></li>
+          <li><a href="/#services">CRO</a></li>
+          <li><a href="/#services">Paid Media</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Expertise</div>
+        <ul class="footer-col-links">
+          <li><a href="/#services">PBSA Marketing</a></li>
+          <li><a href="/#services">Booking Funnel Optimisation</a></li>
+          <li><a href="/#services">Technical SEO for Property</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-col-links">
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
+      </div>
     </div>
-    <span class="footer-copy">© Stafferton Digital</span>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <strong>&copy; Stafferton Digital.</strong> Stafferton Consulting Limited is a company registered in England &amp; Wales (Company No. 07626828).<br>
+        Registered office: 124 City Road, London, EC1V 2NX, United Kingdom.<br>
+        Stafferton Digital is a trading name of Stafferton Consulting Limited.
+      </div>
+    </div>
   </div>
 </footer>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== CMS DATA =====
 const CMS = {
   posts: [
@@ -728,7 +777,7 @@ if (casesGrid) {
         '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat2_num) + '" data-suffix="' + s2 + '">0' + s2 + '</div><div class="case-stat-label">' + c.stat2_label + '</div></div>' +
       '</div>' +
     '</div>';
-   }).join('');
+  }).join('');
   casesGrid.querySelectorAll('.fade-up').forEach((el, i) => {
     el.dataset.delay = i * 80;
     observer.observe(el);
