@@ -21,7 +21,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" /></a>
+  <a href="index.html" class="nav-logo"><picture><source srcset="stafferton-logo.webp" type="image/webp"><img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" /></picture></a>
   <ul class="nav-links">
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#process">Process</a></li>
@@ -49,7 +49,7 @@
         <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px">Get in Touch</h3>
         <div style="margin-bottom:32px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Email</div>
-          <p style="font-size:18px;color:var(--white)">hello@stafferton.digital</p>
+          <p style="font-size:18px;color:var(--white)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3aba6afafac83b0b7a2a5a5a6b1b7acadeda7aaa4aab7a2af">[email&#160;protected]</a></p>
         </div>
         <div style="margin-bottom:40px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Based in</div>
@@ -94,7 +94,7 @@
 
 <footer>
   <div class="footer-inner">
-    <a href="index.html" class="footer-logo" aria-label="Back to home"><img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img" /></a>
+    <a href="index.html" class="footer-logo" aria-label="Back to home"><picture><source srcset="stafferton-logo.webp" type="image/webp"><img src="stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img" /></picture></a>
     <div class="footer-links">
       <a href="index.html#services">Services</a>
       <a href="index.html#pricing">Pricing</a>
@@ -105,7 +105,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Nav
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
@@ -125,12 +125,4 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const btn = contactForm.querySelector('.form-submit');
-    btn.textContent = 'Sent! ✓';
-    btn.style.background = '#4CAF50';
-    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; contactForm.reset(); }, 3000);
-  });
-}
-</script>
-</body>
-</html>
+    const btn = contactForm.querySelector('.fo
