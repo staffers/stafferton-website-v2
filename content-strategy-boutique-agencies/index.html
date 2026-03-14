@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog - Stafferton Digital</title>
-  <meta name="description" content="Insights on AI, SEO, and marketing automation for modern businesses.">
   <style>
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1513,157 +1512,96 @@ footer {
   .features-grid { grid-template-columns: 1fr; }
 }
   </style>
-  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  <style>
+    .post-hero { padding: 140px 40px 60px; max-width: 760px; margin: 0 auto; }
+    .post-content { max-width: 760px; margin: 0 auto; padding: 0 40px 100px; font-size: 16px; line-height: 1.85; color: rgba(255,255,255,0.75); }
+    .post-content h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--white); margin: 40px 0 16px; }
+    .post-content p { margin-bottom: 20px; }
+    .post-content a { color: var(--accent); }
+    .post-back { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .post-back:hover { color: var(--white); }
+    .post-category { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .post-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+    .post-meta { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 40px; }
+    .post-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 40px; }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo"><img src="/stafferton-logo.png" alt="Stafferton Digital" /></a>
+  <a href="https://stafferton.site/index.html" class="nav-logo"><img src="https://stafferton.site/stafferton-logo.png" alt="Stafferton Digital" /></a>
   <ul class="nav-links">
-    <li><a href="/#services">Services</a></li>
-    <li><a href="/#process">Process</a></li>
-    <li><a href="/#pricing">Pricing</a></li>
-    <li><a href="/blog/" style="color:var(--accent)">Blog</a></li>
-    <li><a href="/contact.html">Contact</a></li>
-    <li><a href="/contact.html" class="nav-cta">Book a Call</a></li>
+    <li><a href="https://stafferton.site/index.html#services">Services</a></li>
+    <li><a href="https://stafferton.site/index.html#process">Process</a></li>
+    <li><a href="https://stafferton.site/index.html#pricing">Pricing</a></li>
+    <li><a href="https://stafferton.site/blog.html" style="color:var(--accent)">Blog</a></li>
+    <li><a href="https://stafferton.site/contact.html">Contact</a></li>
+    <li><a href="https://stafferton.site/contact.html" class="nav-cta">Book a Call</a></li>
   </ul>
   <button class="nav-mobile-toggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<section style="padding-top:140px">
-  <div class="section-inner">
-    <span class="section-label">Blog</span>
-    <h1 class="section-title fade-up">Insights &amp; Ideas</h1>
-    <p class="section-subtitle fade-up">AI, SEO, and marketing automation - straight talk, no fluff.</p>
-    <div class="blog-grid" id="blog-grid" style="margin-top:60px"></div>
-  </div>
+<div class="post-hero">
+  <a href="https://stafferton.site/blog/" class="post-back">← Back to Blog</a>
+  <div id="post-category" class="post-category"></div>
+  <h1 id="post-title" class="post-title">Loading...</h1>
+  <div id="post-meta" class="post-meta"></div>
+  <div class="post-divider"></div>
+</div>
+
+<div class="post-content" id="post-content"></div>
+
+<section style="background:#0d0d0d;padding:80px 40px;text-align:center">
+  <h2 class="section-title" style="font-size:36px">Ready to Automate?</h2>
+  <p style="color:rgba(255,255,255,0.5);margin-bottom:28px">Let's talk about what we can build for your business.</p>
+  <a href="https://stafferton.site/contact.html" class="btn-primary">Book a Free Call</a>
 </section>
 
-<section id="cta" style="text-align:center">
-  <div class="section-inner">
-    <div class="cta-inner">
-      <h2 class="cta-title fade-up">Ready to put this into practice?</h2>
-      <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI can make the biggest difference.</p>
-      <a href="/contact.html" class="btn-primary fade-up">Book a Free Call</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     STAFFERTON FOOTER — paste this in ALL pages
-     Replace everything from <footer> to </footer> inclusive
-     ═══════════════════════════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-top">
-
-      <div class="footer-brand">
-        <a href="/" onclick="if(window.location.pathname==='/'){window.scrollTo({top:0,behavior:'smooth'});return false;}" class="footer-logo" aria-label="Back to top">
-          <picture>
-            <source srcset="/stafferton-logo.webp" type="image/webp">
-            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
-          </picture>
-        </a>
-        <p>Boutique SEO &amp; analytics consultancy.<br>Big agency brains, boutique service.</p>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-col-links">
-          <li><a href="/#about">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-          <li><a href="/contact.html">Book a Call</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Services</div>
-        <ul class="footer-col-links">
-          <li><a href="/technical-seo-property-websites.html">SEO</a></li>
-          <li><a href="/#services">Analytics</a></li>
-          <li><a href="/#services">CRO</a></li>
-          <li><a href="/#services">Paid Media</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Expertise</div>
-        <ul class="footer-col-links">
-          <li><a href="/pbsa-marketing-strategy.html">PBSA Marketing</a></li>
-          <li><a href="/student-accommodation-booking-funnel.html">Booking Funnel Optimisation</a></li>
-          <li><a href="/technical-seo-property-websites.html">Technical SEO for Property</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Legal</div>
-        <ul class="footer-col-links">
-          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="/terms.html">Terms</a></li>
-        </ul>
-      </div>
-
+    <a href="https://stafferton.site/index.html" class="footer-logo"><img class="footer-logo-img" src="https://stafferton.site/stafferton-logo.png" alt="Stafferton Digital" /></a>
+    <div class="footer-links">
+      <a href="https://stafferton.site/index.html#services">Services</a>
+      <a href="https://stafferton.site/blog.html">Blog</a>
+      <a href="https://stafferton.site/contact.html">Contact</a>
+      <a href="https://stafferton.site/admin.html">Admin</a>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        <strong>&copy; Stafferton Digital.</strong> Stafferton Consulting Limited is a company registered in England &amp; Wales (Company No. 07626828).<br>
-        Registered office: 124 City Road, London, EC1V 2NX, United Kingdom.<br>
-        Stafferton Digital is a trading name of Stafferton Consulting Limited.
-      </div>
-    </div>
+    <span class="footer-copy">© Stafferton Digital</span>
   </div>
 </footer>
-
 
 <script>
 const CMS = {
   posts: [
-    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖" },
-    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing - authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝" },
-    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍" }
+    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖", content: "<p>Artificial intelligence has moved from novelty to necessity in the world of SEO. Agencies that embraced AI tooling early are now running comprehensive audits in hours rather than days.</p><h2>What's Actually Changing</h2><p>Three areas are seeing the most disruption: technical auditing, keyword clustering, and content briefing. AI tools now handle the grunt work in all three, freeing up strategists to focus on interpretation and client communication.</p>" },
+    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing - authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝", content: "<p>Boutique agencies often feel outgunned when it comes to content. But volume was always the wrong game to play. The agencies winning on organic search in 2025 are winning on depth, specificity, and genuine expertise.</p><p>Your client case studies are your most powerful content asset.</p>" },
+    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍", content: "<p>Local SEO in the UK has its own distinct quirks. The single biggest leverage point for most local businesses remains Google Business Profile - fully optimised and actively managed.</p>" }
   ]
 };
 (function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; } } catch(e) {} })();
 
-// Nav scroll
+// Nav
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
-
-// Mobile nav
 const toggle = document.querySelector('.nav-mobile-toggle');
 const links = document.querySelector('.nav-links');
 if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0); });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-up').forEach((el, i) => {
-  el.dataset.delay = i * 80;
-  observer.observe(el);
-});
-
-// Render blog grid
-const grid = document.getElementById('blog-grid');
-if (grid) {
-  grid.innerHTML = CMS.posts.map(p =>
-    '<a href="/blog/' + p.slug + '/" class="blog-card fade-up">' +
-      '<div class="blog-card-img">' + p.icon + '</div>' +
-      '<div class="blog-card-body">' +
-        '<div class="blog-card-category">' + p.category + '</div>' +
-        '<h2 class="blog-card-title">' + p.title + '</h2>' +
-        '<p class="blog-card-excerpt">' + p.excerpt + '</p>' +
-        '<div class="blog-card-meta">' + p.date + ' · ' + p.readTime + '</div>' +
-      '</div>' +
-    '</a>'
-  ).join('');
-  grid.querySelectorAll('.fade-up').forEach((el, i) => { el.dataset.delay = i * 100; observer.observe(el); });
+// Load post
+const params = new URLSearchParams(window.location.search);
+const post = CMS.posts.find(p => p.slug === 'content-strategy-boutique-agencies');
+if (post) {
+  document.title = post.title + ' - Stafferton Digital';
+  document.getElementById('post-category').textContent = post.category;
+  document.getElementById('post-title').textContent = post.title;
+  document.getElementById('post-meta').textContent = post.date + ' · ' + post.readTime;
+  document.getElementById('post-content').innerHTML = post.content || '<p>' + post.excerpt + '</p>';
+} else {
+  document.getElementById('post-title').textContent = 'Post not found';
+  document.getElementById('post-content').innerHTML = '<p>Sorry, this post could not be found. <a href="https://stafferton.site/blog.html">Back to blog →</a></p>';
 }
 </script>
 </body>
