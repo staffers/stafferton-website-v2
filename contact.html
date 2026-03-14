@@ -65,7 +65,7 @@
         <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:var(--white)">Get in Touch</h3>
         <div style="margin-bottom:28px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Email</div>
-          <p style="font-size:18px;color:var(--white)"><a href="mailto:hello@stafferton.digital" style="color:var(--white);text-decoration:none">hello@stafferton.digital</a></p>
+          <p style="font-size:18px;color:var(--white)"><a href="/cdn-cgi/l/email-protection#c0a8a5acacaf80b3b4a1a6a6a5b2b4afaeeea4a9a7a9b4a1ac" style="color:var(--white);text-decoration:none"><span class="__cf_email__" data-cfemail="b8d0ddd4d4d7f8cbccd9dededdcaccd7d696dcd1dfd1ccd9d4">[email&#160;protected]</span></a></p>
         </div>
         <div style="margin-bottom:28px">
           <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Based in</div>
@@ -113,7 +113,7 @@
           <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We'll be in touch within one business day.</p>
         </div>
         <div id="form-error" style="display:none;text-align:center;padding:20px;background:rgba(255,50,50,0.1);border-radius:8px;margin-top:16px">
-          <p style="color:rgba(255,100,100,0.9)">Something went wrong - please email <a href="mailto:hello@stafferton.digital" style="color:var(--accent)">hello@stafferton.digital</a></p>
+          <p style="color:rgba(255,100,100,0.9)">Something went wrong - please email <a href="/cdn-cgi/l/email-protection#640c0108080b2417100502020116100b0a4a000d030d100508" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="bbd3ded7d7d4fbc8cfdadddddec9cfd4d595dfd2dcd2cfdad7">[email&#160;protected]</span></a></p>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@
         <ul class="footer-col-links">
           <li><a href="/#about">About</a></li>
           <li><a href="/contact.html">Contact</a></li>
-          <li><a href="/contact.html" class="nav-cta" style="background:none;padding:0;border-radius:0;font-weight:400;color:rgba(255,255,255,0.55)">Book a Call</a></li>
+          <li><a href="/contact.html">Book a Call</a></li>
         </ul>
       </div>
       <div>
@@ -177,7 +177,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 const toggle = document.querySelector('.nav-mobile-toggle');
@@ -224,21 +224,4 @@ if (contactForm) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (res.ok) {
-        contactForm.style.display = 'none';
-        successEl.style.display = 'block';
-      } else {
-        errorEl.style.display = 'block';
-        btn.textContent = 'Send Message';
-        btn.disabled = false;
-      }
-    } catch(err) {
-      errorEl.style.display = 'block';
-      btn.textContent = 'Send Message';
-      btn.disabled = false;
-    }
-  });
-}
-</script>
-</body>
-</html>
+      if (

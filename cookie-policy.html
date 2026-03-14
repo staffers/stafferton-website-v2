@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found - Stafferton Digital</title>
-  <meta name="robots" content="noindex">
+  <title>Cookie Policy - Stafferton Digital</title>
+  <meta name="description" content="Cookie Policy for Stafferton Digital. This site currently uses no cookies.">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
   <style>
-    .fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
-    .fade-up.visible{opacity:1;transform:translateY(0)}
     body>nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
     .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
     .nav-logo picture{display:block;line-height:0}
@@ -21,9 +17,18 @@
     .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
     .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
     .nav-cta{background:#00b4c8;color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600}
-    .nav-mobile-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-    .nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}
-    @media(max-width:900px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px}.nav-mobile-toggle{display:flex}}
+    .nav-mobile-toggle{display:none}
+    @media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
+    .legal-page{max-width:780px;margin:0 auto;padding:140px 40px 80px}
+    .legal-page h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;font-weight:800;margin-bottom:8px}
+    .legal-page .updated{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:48px}
+    .legal-page h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:700;color:#00b4c8;margin:40px 0 12px}
+    .legal-page p,.legal-page li{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:12px}
+    .legal-page ul{padding-left:20px;margin-bottom:16px}
+    .legal-page a{color:#00b4c8;text-decoration:none}
+    .legal-page a:hover{text-decoration:underline}
+    .no-cookies-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,180,200,0.1);border:1px solid rgba(0,180,200,0.3);border-radius:8px;padding:14px 20px;margin:24px 0 40px;font-size:14px;color:rgba(255,255,255,0.8)}
+    .no-cookies-badge span{font-size:24px}
     footer{padding:60px 40px 40px;border-top:1px solid rgba(255,255,255,0.06)}
     .footer-inner{max-width:1200px;margin:0 auto}
     .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
@@ -37,16 +42,7 @@
     .footer-legal strong{color:rgba(255,255,255,0.5)}
     .footer-logo-img{filter:grayscale(100%) brightness(0.7);transition:filter 0.3s ease}
     .footer-logo:hover .footer-logo-img{filter:grayscale(0%) brightness(1)}
-    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
-  </style>
-  <style>
-    .error-page{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 40px 80px}
-    .error-code{font-family:"Plus Jakarta Sans",sans-serif;font-size:120px;font-weight:800;color:#00b4c8;line-height:1;margin-bottom:16px;opacity:0.8}
-    .error-title{font-family:"Plus Jakarta Sans",sans-serif;font-size:36px;font-weight:800;color:#fff;margin-bottom:16px}
-    .error-msg{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:36px;max-width:440px;line-height:1.7}
-    .error-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-    .btn-primary{background:#00b4c8;color:#000;font-weight:700;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px}
-    .btn-secondary{border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px}
+    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}.legal-page{padding:120px 20px 60px}}
   </style>
 </head>
 <body>
@@ -72,18 +68,31 @@
 </nav>
 
 <main>
-<div class="error-page">
-  <div>
-    <div class="error-code">404</div>
-    <h1 class="error-title">Page not found</h1>
-    <p class="error-msg">This page doesn't exist or may have moved. Let's get you back on track.</p>
-    <div class="error-actions">
-      <a href="/" class="btn-primary">Back to Home</a>
-      <a href="/blog/" class="btn-secondary">Read the Blog</a>
-      <a href="/contact.html" class="btn-secondary">Get in Touch</a>
+  <div class="legal-page">
+    <h1>Cookie Policy</h1>
+    <p class="updated">Last updated: March 2026</p>
+
+    <div class="no-cookies-badge">
+      <span>🍪</span>
+      <span>Good news — this website currently uses <strong>no cookies</strong> and sets no tracking of any kind.</span>
     </div>
+
+    <h2>What are cookies?</h2>
+    <p>Cookies are small text files stored on your device by websites you visit. They're used for various purposes including keeping you logged in, remembering preferences, and tracking behaviour for analytics or advertising.</p>
+
+    <h2>Our current approach</h2>
+    <p>The Stafferton Digital website is a static site with no analytics, no advertising, and no third-party tracking scripts. We do not set any cookies on your device when you visit this site.</p>
+    <p>The only data processed when you visit is standard server log data handled by Cloudflare (our hosting provider) for infrastructure and security purposes. This is not used to identify or profile individual visitors.</p>
+
+    <h2>If we add analytics in future</h2>
+    <p>We may add privacy-respecting analytics in future — for example, using GA4 configured with analytics storage denied by default, which does not set identifying cookies. If we introduce any cookies that require your consent, we will update this policy and add an appropriate consent mechanism before doing so.</p>
+
+    <h2>Third-party services</h2>
+    <p>Our contact form is processed via Cloudflare Pages Functions and MailChannels. Neither service sets cookies in your browser as part of this process.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about cookies or data? Email <a href="mailto:hello@stafferton.digital">hello@stafferton.digital</a> or see our <a href="/privacy-policy.html">Privacy Policy</a> for full details on how we handle personal data.</p>
   </div>
-</div>
 </main>
 
 <footer>
@@ -155,7 +164,6 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.
 const toggle = document.querySelector('.nav-mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
 if (toggle) toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 </script>
 </body>
 </html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Accommodation Booking Funnel Optimisation | GA4 Tracking | Stafferton Digital</title>
+  <meta name="description" content="Expert GA4 funnel tracking and CRO for student accommodation booking platforms. We track every step from landing page to payment — and fix where students drop out.">
+  <link rel="canonical" href="https://stafferton.digital/student-accommodation-booking-funnel">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  <style>
+    body>nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+    .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
+    .nav-logo picture{display:block;line-height:0}
+    .nav-logo img{height:34px;width:160px;display:block}
+    .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
+    .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
+    .nav-cta{background:#00b4c8;color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600}
+    .nav-mobile-toggle{display:none}
+    @media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
+    .sp-hero{padding:140px 40px 80px;max-width:900px;margin:0 auto;text-align:center}
+    .sp-hero .section-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00b4c8;margin-bottom:16px}
+    .sp-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:52px;font-weight:800;line-height:1.15;margin-bottom:24px}
+    .sp-hero p{font-size:18px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:680px;margin:0 auto 40px}
+    .sp-hero .hero-cta{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center}
+    .btn-primary{background:#00b4c8;color:#000;font-weight:700;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px;transition:background 0.2s}
+    .btn-primary:hover{background:#00c8de}
+    .btn-secondary{border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);font-weight:500;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px;transition:all 0.2s}
+    .btn-secondary:hover{border-color:rgba(255,255,255,0.5);color:#fff}
+    .sp-section{padding:60px 40px;max-width:900px;margin:0 auto}
+    .sp-section h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;margin-bottom:16px}
+    .sp-section h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:700;color:#00b4c8;margin:32px 0 10px}
+    .sp-section p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:16px}
+    .sp-section ul{padding-left:0;margin-bottom:20px;list-style:none}
+    .sp-section ul li{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;padding:6px 0 6px 20px;position:relative}
+    .sp-section ul li::before{content:"→";position:absolute;left:0;color:#00b4c8}
+    .sp-section a{color:#00b4c8;text-decoration:none}
+    .sp-section a:hover{text-decoration:underline}
+    .sp-divider{border:none;border-top:1px solid rgba(255,255,255,0.07);margin:20px 40px}
+    /* Funnel diagram */
+    .funnel-wrap{margin:40px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+    .funnel-step{width:100%;max-width:560px;position:relative}
+    .funnel-step-inner{background:#141414;border:1px solid #222;border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:border-color 0.2s}
+    .funnel-step-inner:hover{border-color:#00b4c8}
+    .funnel-step-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;color:#00b4c8;background:rgba(0,180,200,0.1);border-radius:6px;padding:4px 10px;min-width:32px;text-align:center}
+    .funnel-step-text h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+    .funnel-step-text p{font-size:13px;color:rgba(255,255,255,0.5);margin:0}
+    .funnel-arrow{text-align:center;color:rgba(0,180,200,0.5);font-size:22px;padding:4px 0;line-height:1}
+    /* Code/event block */
+    .event-block{background:#0d1a1c;border:1px solid rgba(0,180,200,0.2);border-radius:10px;padding:20px 24px;margin:16px 0;font-family:monospace;font-size:13px;color:rgba(255,255,255,0.75);overflow-x:auto}
+    .event-block .key{color:#00b4c8}
+    .event-block .val{color:#a8e6cf}
+    /* Issue cards */
+    .issue-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .issue-card{background:#141414;border:1px solid #222;border-radius:12px;padding:24px}
+    .issue-card .ic-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ff6b6b;margin-bottom:8px}
+    .issue-card h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+    .issue-card p{font-size:14px;color:rgba(255,255,255,0.6);margin:0;line-height:1.7}
+    .related-pages{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .related-card{background:#141414;border:1px solid #222;border-radius:12px;padding:24px;text-decoration:none;transition:border-color 0.2s}
+    .related-card:hover{border-color:#00b4c8}
+    .related-card .rc-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:8px}
+    .related-card h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:6px}
+    .related-card p{font-size:13px;color:rgba(255,255,255,0.5);margin:0}
+    .cta-band{background:linear-gradient(135deg,#0d2a2e,#0a1a1c);border:1px solid rgba(0,180,200,0.2);border-radius:16px;padding:48px;text-align:center;margin:48px 40px}
+    .cta-band h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;margin-bottom:12px}
+    .cta-band p{font-size:16px;color:rgba(255,255,255,0.65);margin-bottom:28px}
+    footer{padding:60px 40px 40px;border-top:1px solid rgba(255,255,255,0.06)}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+    .footer-brand p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-top:16px;max-width:220px}
+    .footer-col-title{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:16px}
+    .footer-col-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+    .footer-col-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none}
+    .footer-col-links a:hover{color:#fff}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px}
+    .footer-legal{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.8}
+    .footer-legal strong{color:rgba(255,255,255,0.5)}
+    .footer-logo-img{filter:grayscale(100%) brightness(0.7);transition:filter 0.3s ease}
+    .footer-logo:hover .footer-logo-img{filter:grayscale(0%) brightness(1)}
+    @media(max-width:900px){
+      .sp-hero{padding:120px 20px 60px}
+      .sp-hero h1{font-size:34px}
+      .sp-section{padding:40px 20px}
+      .issue-grid{grid-template-columns:1fr}
+      .related-pages{grid-template-columns:1fr}
+      .cta-band{margin:32px 20px;padding:32px 24px}
+      .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+      .footer-brand{grid-column:1/-1}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><picture>
+    <source srcset="/stafferton-logo.webp" type="image/webp">
+    <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" fetchpriority="high">
+  </picture></a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/tools.html">Tools</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+    <li><a href="/contact.html" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+
+<div class="sp-hero">
+  <span class="section-label">Analytics &amp; CRO</span>
+  <h1>Student Accommodation Booking Funnel Optimisation</h1>
+  <p>Most PBSA operators know their traffic numbers. Almost none know precisely where in the booking flow they are losing students — or why. We fix that.</p>
+  <div class="hero-cta">
+    <a href="/contact.html" class="btn-primary">Book a 20-minute Review</a>
+    <a href="/pbsa-marketing-strategy" class="btn-secondary">PBSA Marketing Strategy</a>
+  </div>
+</div>
+
+<hr class="sp-divider">
+
+<div class="sp-section">
+  <h2>The PBSA Booking Funnel</h2>
+  <p>A student accommodation booking journey typically spans five to seven steps across multiple pages and sessions. Each transition is a point of potential drop-off. Without granular tracking, you are guessing at where the leakage is happening.</p>
+
+  <div class="funnel-wrap">
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">01</div>
+        <div class="funnel-step-text"><h4>Landing Page / Search Result</h4><p>Organic or paid entry — city, university, or brand search</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">02</div>
+        <div class="funnel-step-text"><h4>Property Page</h4><p>Location, amenities, proximity to campus, social proof</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">03</div>
+        <div class="funnel-step-text"><h4>Room Type Selection</h4><p>En-suite, studio, cluster flat — price and feature comparison</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">04</div>
+        <div class="funnel-step-text"><h4>Availability &amp; Date Selection</h4><p>Academic year, tenancy length, move-in date</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">05</div>
+        <div class="funnel-step-text"><h4>Personal Details &amp; Account Creation</h4><p>Often the highest single drop-off point</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">06</div>
+        <div class="funnel-step-text"><h4>Payment / Deposit</h4><p>Booking fee or deposit — often via iframe payment provider</p></div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">
+      <div class="funnel-step-inner">
+        <div class="funnel-step-num">07</div>
+        <div class="funnel-step-text"><h4>Booking Confirmation</h4><p>The conversion event — and the start of retention</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="sp-divider">
+
+<div class="sp-section">
+  <h2>GA4 Funnel Tracking for PBSA</h2>
+  <p>Modern PBSA booking platforms are almost always single-page applications or multi-step flows that do not generate new page loads between steps. Standard GA4 page view tracking misses most of it. Proper measurement requires custom event tracking via Google Tag Manager, with events fired at each funnel step regardless of URL changes.</p>
+
+  <h3>The event structure we implement</h3>
+  <p>We use a standardised <code>booking_funnel_step</code> event with consistent parameters across the entire flow, enabling clean funnel reporting in GA4 Explorations:</p>
+
+  <div class="event-block">
+    <span class="key">event_name:</span> <span class="val">"booking_funnel_step"</span><br>
+    <span class="key">booking_step:</span> <span class="val">"room_type_selected"</span><br>
+    <span class="key">property_name:</span> <span class="val">"Scape Shoreditch"</span><br>
+    <span class="key">step_number:</span> <span class="val">3</span><br>
+    <span class="key">step_url:</span> <span class="val">"/book/room-type"</span>
+  </div>
+
+  <h3>Technical challenges we solve</h3>
+  <ul>
+    <li>SPA history-change detection — firing events on virtual page transitions without full reloads</li>
+    <li>Cross-domain tracking — when booking platforms sit on a separate subdomain or third-party URL</li>
+    <li>Payment iframe attribution — capturing the conversion even when the final step is inside an embedded iframe</li>
+    <li>Property detection — dynamically identifying which property a user is booking without hardcoding</li>
+    <li>Session continuity — maintaining attribution across multi-session booking journeys</li>
+  </ul>
+</div>
+
+<hr class="sp-divider">
+
+<div class="sp-section">
+  <h2>Attribution Across Multi-Property Sites</h2>
+  <p>Large PBSA operators face an attribution challenge that most analytics setups are not built to handle. A student might discover a brand through a Google search for "student accommodation Leeds", visit three different property pages, leave, return via a paid social ad, and then book a room in Manchester. Standard last-click attribution gives all credit to the paid ad and tells you nothing useful.</p>
+  <p>We build attribution models that account for the multi-session, multi-property nature of PBSA journeys — giving you a realistic view of which channels and touchpoints are actually driving bookings, not just the last click before conversion.</p>
+</div>
+
+<hr class="sp-divider">
+
+<div class="sp-section">
+  <h2>Common Drop-Off Points — and How to Fix Them</h2>
+
+  <div class="issue-grid">
+    <div class="issue-card">
+      <div class="ic-tag">High Drop-Off</div>
+      <h4>Account creation wall</h4>
+      <p>Forcing account creation before students can see pricing or availability loses a large proportion of early-stage browsers. Guest checkout or deferred registration typically improves funnel progression significantly.</p>
+    </div>
+    <div class="issue-card">
+      <div class="ic-tag">High Drop-Off</div>
+      <h4>Opaque total pricing</h4>
+      <p>Students who reach the payment step and encounter unexpected fees — admin charges, holding deposits not shown earlier — abandon at high rates. Transparent pricing earlier in the funnel outperforms reveal-at-payment consistently.</p>
+    </div>
+    <div class="issue-card">
+      <div class="ic-tag">High Drop-Off</div>
+      <h4>Availability shown too late</h4>
+      <p>If a student selects a property, browses room types, and only then discovers their preferred dates are unavailable, the session is lost. Surfacing availability earlier — even at the property page level — reduces wasted funnel progression.</p>
+    </div>
+    <div class="issue-card">
+      <div class="ic-tag">High Drop-Off</div>
+      <h4>Mobile flow not tested</h4>
+      <p>A growing proportion of PBSA research happens on mobile, even if final booking often moves to desktop. A mobile experience that breaks at the date selection or payment step loses students who never return.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="sp-divider">
+
+<div class="sp-section">
+  <h2>Related Expertise</h2>
+  <div class="related-pages">
+    <a href="/pbsa-marketing-strategy" class="related-card">
+      <div class="rc-label">Deep Dive</div>
+      <h4>PBSA Marketing Strategy</h4>
+      <p>Seasonality, international acquisition, SEO vs paid — the full marketing picture for PBSA operators.</p>
+    </a>
+    <a href="/technical-seo-property-websites" class="related-card">
+      <div class="rc-label">Deep Dive</div>
+      <h4>Technical SEO for Property Platforms</h4>
+      <p>Schema, indexation, multi-location architecture and international SEO for property sites.</p>
+    </a>
+  </div>
+</div>
+
+</main>
+
+<div class="cta-band">
+  <h2>Know exactly where your bookings are being lost.</h2>
+  <p>We audit booking funnels, implement proper GA4 tracking, and identify the specific points where students are dropping out. Let us show you what your data is actually telling you.</p>
+  <a href="/contact.html" class="btn-primary">Book a 20-minute SEO &amp; Analytics Review</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <a href="/" onclick="if(window.location.pathname==='/'){window.scrollTo({top:0,behavior:'smooth'});return false;}" class="footer-logo" aria-label="Back to top">
+          <picture>
+            <source srcset="/stafferton-logo.webp" type="image/webp">
+            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
+          </picture>
+        </a>
+        <p>Boutique SEO &amp; analytics consultancy.<br>Big agency brains, boutique service.</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html">Book a Call</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="/#services">SEO</a></li>
+          <li><a href="/#services">Analytics</a></li>
+          <li><a href="/#services">CRO</a></li>
+          <li><a href="/#services">Paid Media</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Expertise</div>
+        <ul class="footer-col-links">
+          <li><a href="/#services">PBSA Marketing</a></li>
+          <li><a href="/#services">Booking Funnel Optimisation</a></li>
+          <li><a href="/#services">Technical SEO for Property</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-col-links">
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <strong>&copy; Stafferton Digital.</strong> Stafferton Consulting Limited is a company registered in England &amp; Wales (Company No. 07626828).<br>
+        Registered office: 124 City Road, London, EC1V 2NX, United Kingdom.<br>
+        Stafferton Digital is a trading name of Stafferton Consulting Limited.
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+const toggle = document.querySelector('.nav-mobile-toggle');
+const navLinks = document.querySelector('.nav-links');
+if (toggle) toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+</script>
+</body>
+</html>
