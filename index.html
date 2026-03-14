@@ -567,7 +567,7 @@
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-col-links">
-          <li><a href="/#services">SEO</a></li>
+          <li><a href="/technical-seo-property-websites.html">SEO</a></li>
           <li><a href="/#services">Analytics</a></li>
           <li><a href="/#services">CRO</a></li>
           <li><a href="/#services">Paid Media</a></li>
@@ -576,9 +576,9 @@
       <div>
         <div class="footer-col-title">Expertise</div>
         <ul class="footer-col-links">
-          <li><a href="/#services">PBSA Marketing</a></li>
-          <li><a href="/#services">Booking Funnel Optimisation</a></li>
-          <li><a href="/#services">Technical SEO for Property</a></li>
+          <li><a href="/pbsa-marketing-strategy.html">PBSA Marketing</a></li>
+          <li><a href="/student-accommodation-booking-funnel.html">Booking Funnel Optimisation</a></li>
+          <li><a href="/technical-seo-property-websites.html">Technical SEO for Property</a></li>
         </ul>
       </div>
       <div>
@@ -788,4 +788,16 @@ if (casesGrid) {
       '<p class="case-desc">' + c.description + '</p>' +
       '<div class="case-stats">' +
         '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat1_num) + '" data-suffix="' + s1 + '">0' + s1 + '</div><div class="case-stat-label">' + c.stat1_label + '</div></div>' +
-        '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat2_num)
+        '<div><div class="case-stat-num count-up" data-target="' + parseInt(c.stat2_num) + '" data-suffix="' + s2 + '">0' + s2 + '</div><div class="case-stat-label">' + c.stat2_label + '</div></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  casesGrid.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+    observer.observe(el);
+  });
+  casesGrid.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
+}
+</script>
+</body>
+</html>
