@@ -1552,79 +1552,24 @@ footer {
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     STAFFERTON FOOTER — paste this in ALL pages
-     Replace everything from <footer> to </footer> inclusive
-     ═══════════════════════════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-top">
-
-      <div class="footer-brand">
-        <a href="/" onclick="if(window.location.pathname==='/'){window.scrollTo({top:0,behavior:'smooth'});return false;}" class="footer-logo" aria-label="Back to top">
-          <picture>
-            <source srcset="/stafferton-logo.webp" type="image/webp">
-            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
-          </picture>
-        </a>
-        <p>Boutique SEO &amp; analytics consultancy.<br>Big agency brains, boutique service.</p>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-col-links">
-          <li><a href="/#about">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-          <li><a href="/contact.html">Book a Call</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Services</div>
-        <ul class="footer-col-links">
-          <li><a href="/technical-seo-property-websites.html">SEO</a></li>
-          <li><a href="/#services">Analytics</a></li>
-          <li><a href="/#services">CRO</a></li>
-          <li><a href="/#services">Paid Media</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Expertise</div>
-        <ul class="footer-col-links">
-          <li><a href="/pbsa-marketing-strategy.html">PBSA Marketing</a></li>
-          <li><a href="/student-accommodation-booking-funnel.html">Booking Funnel Optimisation</a></li>
-          <li><a href="/technical-seo-property-websites.html">Technical SEO for Property</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Legal</div>
-        <ul class="footer-col-links">
-          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="/terms.html">Terms</a></li>
-        </ul>
-      </div>
-
+    <a href="/" class="footer-logo"><img class="footer-logo-img" src="/stafferton-logo.png" alt="Stafferton Digital" /></a>
+    <div class="footer-links">
+      <a href="/#services">Services</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/blog/">Blog</a>
+      <a href="/admin.html">Admin</a>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        <strong>&copy; Stafferton Digital.</strong> Stafferton Consulting Limited is a company registered in England &amp; Wales (Company No. 07626828).<br>
-        Registered office: 124 City Road, London, EC1V 2NX, United Kingdom.<br>
-        Stafferton Digital is a trading name of Stafferton Consulting Limited.
-      </div>
-    </div>
+    <span class="footer-copy">© Stafferton Digital</span>
   </div>
 </footer>
-
 
 <script>
 const CMS = {
   posts: [
-    { id: 1, slug: "ai-automation-seo", category: "SEO", title: "How AI Automation is Transforming SEO in 2025", excerpt: "Discover how forward-thinking agencies are using AI to automate keyword research, content optimisation, and technical audits at scale.", date: "12 Feb 2025", readTime: "5 min read", icon: "🤖" },
-    { id: 2, slug: "content-strategy-boutique-agencies", category: "Strategy", title: "Content Strategy for Boutique Digital Agencies", excerpt: "Smaller agencies have a unique advantage in content marketing - authenticity. Here's how to turn that into a repeatable growth engine.", date: "5 Feb 2025", readTime: "7 min read", icon: "📝" },
-    { id: 3, slug: "local-seo-guide-2025", category: "Local SEO", title: "The Complete Local SEO Guide for UK Businesses", excerpt: "Google's local search landscape has evolved significantly. This guide covers everything UK businesses need to know to dominate their local market.", date: "28 Jan 2025", readTime: "9 min read", icon: "📍" }
+    { id: 1, slug: "new-website-launch", category: "News", title: "Stafferton Digital: New Website, Built for Speed", excerpt: "We have launched a new website. It is fast, it is clean, and it scores 97/95/100/100 on PageSpeed Insights mobile. Here is a brief note on what we built and what is coming next.", date: "March 2026", readTime: "3 min read", icon: "📊", image: "/blog/new-website-launch/pagespeed-scores.svg" }
   ]
 };
 (function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; } } catch(e) {} })();
@@ -1654,7 +1599,7 @@ const grid = document.getElementById('blog-grid');
 if (grid) {
   grid.innerHTML = CMS.posts.map(p =>
     '<a href="/blog/' + p.slug + '/" class="blog-card fade-up">' +
-      '<div class="blog-card-img">' + p.icon + '</div>' +
+      '<div class="blog-card-img">' + (p.image ? '<img src="' + p.image + '" alt="' + p.title + '" style="width:100%;height:100%;object-fit:cover;border-radius:8px">' : p.icon) + '</div>' +
       '<div class="blog-card-body">' +
         '<div class="blog-card-category">' + p.category + '</div>' +
         '<h2 class="blog-card-title">' + p.title + '</h2>' +
