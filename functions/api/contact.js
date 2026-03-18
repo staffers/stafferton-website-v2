@@ -1,4 +1,5 @@
 // Cloudflare Pages Function: functions/api/contact.js
+// LIVE VERSION - stafferton.digital
 // Uses Resend API for email sending
 
 export async function onRequestPost(context) {
@@ -14,7 +15,7 @@ export async function onRequestPost(context) {
     }
 
     const emailBody = [
-      "New enquiry via stafferton.site contact form",
+      "New enquiry via stafferton.digital contact form",
       "",
       "Name:    " + name,
       "Email:   " + email,
@@ -24,11 +25,11 @@ export async function onRequestPost(context) {
       message,
       "",
       "---",
-      "Sent via stafferton.site/contact"
+      "Sent via stafferton.digital/contact"
     ].join("\n");
 
     const payload = {
-      from: "Stafferton Website <noreply@stafferton.site>",
+      from: "Stafferton Website <noreply@stafferton.digital>",
       to: ["hello@stafferton.digital"],
       reply_to: email,
       subject: "New enquiry from " + name,
