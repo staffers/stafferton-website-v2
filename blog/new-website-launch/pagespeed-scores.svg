@@ -1,0 +1,30 @@
+<svg width="100%" viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+  <rect width="680" height="340" fill="#0a0a0a" rx="12"/>
+  <rect x="1" y="1" width="678" height="338" fill="none" stroke="#222" stroke-width="1" rx="12"/>
+  <text x="340" y="44" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#00b4c8">PAGESPEED INSIGHTS</text>
+  <text x="340" y="72" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="22" font-weight="800" fill="#ffffff">stafferton.digital — Mobile</text>
+  <text x="340" y="94" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="rgba(255,255,255,0.4)">18 March 2026</text>
+  <line x1="60" y1="110" x2="620" y2="110" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <circle cx="130" cy="200" r="58" fill="none" stroke="#222" stroke-width="6"/>
+  <circle cx="130" cy="200" r="58" fill="none" stroke="#0cce6b" stroke-width="6" stroke-dasharray="340 364" stroke-dashoffset="91" stroke-linecap="round" transform="rotate(-90 130 200)"/>
+  <text x="130" y="193" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="32" font-weight="800" fill="#ffffff">97</text>
+  <text x="130" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">/ 100</text>
+  <text x="130" y="277" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.7)">Performance</text>
+  <circle cx="283" cy="200" r="58" fill="none" stroke="#222" stroke-width="6"/>
+  <circle cx="283" cy="200" r="58" fill="none" stroke="#0cce6b" stroke-width="6" stroke-dasharray="330 364" stroke-dashoffset="91" stroke-linecap="round" transform="rotate(-90 283 200)"/>
+  <text x="283" y="193" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="32" font-weight="800" fill="#ffffff">95</text>
+  <text x="283" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">/ 100</text>
+  <text x="283" y="277" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.7)">Accessibility</text>
+  <circle cx="436" cy="200" r="58" fill="none" stroke="#222" stroke-width="6"/>
+  <circle cx="436" cy="200" r="58" fill="none" stroke="#00b4c8" stroke-width="6" stroke-dasharray="364 364" stroke-dashoffset="91" stroke-linecap="round" transform="rotate(-90 436 200)"/>
+  <text x="436" y="193" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="32" font-weight="800" fill="#00b4c8">100</text>
+  <text x="436" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">/ 100</text>
+  <text x="436" y="277" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.7)">Best Practices</text>
+  <circle cx="589" cy="200" r="58" fill="none" stroke="#222" stroke-width="6"/>
+  <circle cx="589" cy="200" r="58" fill="none" stroke="#00b4c8" stroke-width="6" stroke-dasharray="364 364" stroke-dashoffset="91" stroke-linecap="round" transform="rotate(-90 589 200)"/>
+  <text x="589" y="193" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="32" font-weight="800" fill="#00b4c8">100</text>
+  <text x="589" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">/ 100</text>
+  <text x="589" y="277" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.7)">SEO</text>
+  <line x1="60" y1="302" x2="620" y2="302" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="340" y="324" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" fill="rgba(255,255,255,0.3)">Google Lighthouse 13.0.1 — Emulated Moto G Power — 4G throttling</text>
+</svg>
