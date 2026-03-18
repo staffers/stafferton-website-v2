@@ -16,6 +16,9 @@
   <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
   <link rel="canonical" href="https://stafferton.digital/contact.html">
   <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--accent:#00b4c8;--black:#0a0a0a;--white:#ffffff;--card-bg:#141414;--card-border:#222222;--font-display:'Plus Jakarta Sans',sans-serif;--font-body:'DM Sans',sans-serif}
+    body{font-family:var(--font-body);background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden}
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
     body>nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
@@ -23,11 +26,24 @@
     .nav-logo picture{display:block;line-height:0}
     .nav-logo img{height:34px;width:160px;display:block}
     .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
-    .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
+    .nav-links a{font-family:var(--font-body);font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:#fff}
     .nav-cta{background:#00b4c8;color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600}
     .nav-mobile-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
     .nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}
-    @media(max-width:900px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px}.nav-mobile-toggle{display:flex}}
+    .section-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00b4c8;margin-bottom:12px}
+    .section-title{font-family:var(--font-display);font-size:48px;font-weight:800;line-height:1.15;margin-bottom:20px}
+    .section-subtitle{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:600px}
+    .section-inner{max-width:1200px;margin:0 auto;padding:0 40px}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;margin-top:40px;align-items:start}
+    .form-group{margin-bottom:20px}
+    .form-label{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:8px;letter-spacing:0.3px}
+    .form-input,.form-textarea{width:100%;background:#141414;border:1px solid #333;border-radius:8px;padding:12px 16px;color:#fff;font-family:var(--font-body);font-size:15px;transition:border-color 0.2s;outline:none}
+    .form-input:focus,.form-textarea:focus{border-color:#00b4c8}
+    .form-textarea{resize:vertical;min-height:120px}
+    .form-submit{width:100%;background:#00b4c8;color:#000;font-family:var(--font-display);font-size:16px;font-weight:700;padding:16px;border:none;border-radius:10px;cursor:pointer;transition:background 0.2s}
+    .form-submit:hover{background:#00c8de}
+    .form-submit:disabled{opacity:0.6;cursor:not-allowed}
     footer{padding:60px 40px 40px;border-top:1px solid rgba(255,255,255,0.06)}
     .footer-inner{max-width:1200px;margin:0 auto}
     .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
@@ -41,7 +57,18 @@
     .footer-legal strong{color:rgba(255,255,255,0.5)}
     .footer-logo-img{filter:grayscale(100%) brightness(0.7);transition:filter 0.3s ease}
     .footer-logo:hover .footer-logo-img{filter:grayscale(0%) brightness(1)}
-    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
+    @media(max-width:900px){
+      body>nav{padding:16px 20px}
+      .nav-links{display:none}
+      .nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px}
+      .nav-mobile-toggle{display:flex}
+      .section-inner{padding:0 20px}
+      .section-title{font-size:36px}
+      .contact-grid{grid-template-columns:1fr;gap:40px}
+      .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+      .footer-brand{grid-column:1/-1}
+      footer{padding:40px 20px}
+    }
   </style>
 </head>
 <body>
@@ -74,21 +101,21 @@
     </div>
     <div class="contact-grid">
       <div class="fade-up">
-        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:var(--white)">Get in Touch</h3>
+        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:#fff">Get in Touch</h3>
         <div style="margin-bottom:28px">
-          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Email</div>
-          <p style="font-size:18px;color:var(--white)"><a href="mailto:hello@stafferton.digital" style="color:var(--white);text-decoration:none">hello@stafferton.digital</a></p>
+          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:8px">Email</div>
+          <p style="font-size:18px;color:#fff"><a href="mailto:hello@stafferton.digital" style="color:#fff;text-decoration:none">hello@stafferton.digital</a></p>
         </div>
         <div style="margin-bottom:28px">
-          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Based in</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:8px">Based in</div>
           <p style="color:rgba(255,255,255,0.7)">England, UK</p>
         </div>
         <div style="margin-bottom:28px">
-          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Working hours</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:8px">Working hours</div>
           <p style="color:rgba(255,255,255,0.7)">Mon-Fri, 9am-6pm GMT</p>
         </div>
         <div>
-          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">We can help with</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#00b4c8;margin-bottom:12px">We can help with</div>
           <ul style="list-style:none;padding:0;margin:0">
             <li style="color:rgba(255,255,255,0.7);padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.07)">Technical SEO Audits</li>
             <li style="color:rgba(255,255,255,0.7);padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.07)">GA4 &amp; GTM Implementation</li>
@@ -98,8 +125,8 @@
           </ul>
         </div>
       </div>
-      <div class="contact-form fade-up">
-        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:var(--white)">Send a Message</h3>
+      <div class="fade-up">
+        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:24px;color:#fff">Send a Message</h3>
         <form id="contact-form">
           <div class="form-group">
             <label class="form-label">Your Name</label>
@@ -121,7 +148,7 @@
         </form>
         <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
           <div style="font-size:48px;margin-bottom:16px">&#10003;</div>
-          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px">Message sent!</h3>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;margin-bottom:8px">Message sent!</h3>
           <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We will be in touch within one business day.</p>
         </div>
         <div id="form-error" style="display:none;text-align:center;padding:20px;background:rgba(255,50,50,0.1);border-radius:8px;margin-top:16px">
