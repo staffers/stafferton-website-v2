@@ -45,7 +45,6 @@
   </style>
 </head>
 <body>
-
 <nav>
   <a href="/" class="nav-logo"><picture>
     <source srcset="/stafferton-logo.webp" type="image/webp">
@@ -65,7 +64,6 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
-
 <main>
 <section style="padding-top:140px;padding-bottom:100px">
   <div class="section-inner">
@@ -117,14 +115,14 @@
           </div>
           <div class="form-group">
             <label class="form-label">What can we help with?</label>
-            <textarea id="field-message" class="form-textarea" placeholder="Tell us a bit about your business and what you're looking to achieve..." rows="5"></textarea>
+            <textarea id="field-message" class="form-textarea" placeholder="Tell us a bit about your business and what you are looking to achieve..." rows="5"></textarea>
           </div>
           <button type="submit" class="form-submit">Send Message</button>
         </form>
         <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
           <div style="font-size:48px;margin-bottom:16px">&#10003;</div>
           <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px">Message sent!</h3>
-          <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We'll be in touch within one business day.</p>
+          <p style="color:rgba(255,255,255,0.6)">Thanks for getting in touch. We will be in touch within one business day.</p>
         </div>
         <div id="form-error" style="display:none;text-align:center;padding:20px;background:rgba(255,50,50,0.1);border-radius:8px;margin-top:16px">
           <p style="color:rgba(255,100,100,0.9)">Something went wrong - please email <a href="mailto:hello@stafferton.digital" style="color:#00b4c8">hello@stafferton.digital</a></p>
@@ -134,7 +132,6 @@
   </div>
 </section>
 </main>
-
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -190,7 +187,6 @@
     </div>
   </div>
 </footer>
-
 <script>
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
@@ -198,7 +194,6 @@ const toggle = document.querySelector('.nav-mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
 if (toggle) toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
 function initFadeUp() {
   document.querySelectorAll('.fade-up').forEach((el, i) => {
     el.dataset.delay = i * 100;
@@ -213,7 +208,6 @@ function initFadeUp() {
   });
 }
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initFadeUp); } else { initFadeUp(); }
-
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', async function(e) {
