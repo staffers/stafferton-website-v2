@@ -1,7 +1,8 @@
 // Cloudflare Pages Function: functions/api/contact.js
+// Uses Resend API for email sending
 
 export async function onRequestPost(context) {
-  const { request } = context;
+  const { request, env } = context;
   const headers = { "Content-Type": "application/json" };
 
   try {
@@ -27,30 +28,32 @@ export async function onRequestPost(context) {
     ].join("\n");
 
     const payload = {
-      personalizations: [{
-        to: [{ email: "hello@stafferton.digital", name: "Stafferton Digital" }],
-        reply_to: { email: email, name: name }
-      }],
-      from: { email: "noreply@stafferton.site", name: "Stafferton Website" },
+      from: "Stafferton Website <noreply@stafferton.site>",
+      to: ["hello@stafferton.digital"],
+      reply_to: email,
       subject: "New enquiry from " + name,
-      content: [{ type: "text/plain", value: emailBody }]
+      text: emailBody
     };
 
-    const res = await fetch("https://api.mailchannels.net/tx/v1/send", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + env.RESEND_API_KEY
+      },
       body: JSON.stringify(payload)
     });
 
-    if (res.status === 202 || res.status === 200) {
+    const resBody = await res.json();
+
+    if (res.ok) {
       return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
     }
-    const errText = await res.text();
-    console.error("MailChannels error:", res.status, errText);
-    return new Response(JSON.stringify({ error: "Mail failed", detail: errText }), { status: 500, headers });
+    console.error("Resend error:", res.status, JSON.stringify(resBody));
+    return new Response(JSON.stringify({ error: "Mail failed", detail: resBody }), { status: 500, headers });
 
   } catch (err) {
-    console.error("Worker error:", err);
+    console.error("Worker error:", err.message);
     return new Response(JSON.stringify({ error: "Server error" }), { status: 500, headers });
   }
 }
