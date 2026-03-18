@@ -1,5 +1,4 @@
 // Cloudflare Pages Function: functions/api/contact.js
-// Uses MailChannels API (free for CF Workers/Pages) to send email
 
 export async function onRequestPost(context) {
   const { request } = context;
@@ -14,7 +13,7 @@ export async function onRequestPost(context) {
     }
 
     const emailBody = [
-      "New enquiry from stafferton.site",
+      "New enquiry via stafferton.site contact form",
       "",
       "Name:    " + name,
       "Email:   " + email,
@@ -33,7 +32,7 @@ export async function onRequestPost(context) {
         reply_to: { email: email, name: name }
       }],
       from: { email: "noreply@stafferton.site", name: "Stafferton Website" },
-      subject: "New enquiry: " + name + " via stafferton.site",
+      subject: "New enquiry from " + name,
       content: [{ type: "text/plain", value: emailBody }]
     };
 
@@ -47,8 +46,8 @@ export async function onRequestPost(context) {
       return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
     }
     const errText = await res.text();
-    console.error("MailChannels:", res.status, errText);
-    return new Response(JSON.stringify({ error: "Mail failed" }), { status: 500, headers });
+    console.error("MailChannels error:", res.status, errText);
+    return new Response(JSON.stringify({ error: "Mail failed", detail: errText }), { status: 500, headers });
 
   } catch (err) {
     console.error("Worker error:", err);
