@@ -7,6 +7,7 @@
   <meta name="description" content="Technical SEO for property websites, PBSA platforms and real estate portals. Schema markup, multi-location architecture, indexation and international SEO.">
   <link rel="canonical" href="https://stafferton.digital/technical-seo-property-websites">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -21,7 +22,7 @@
     .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
     .nav-cta{background:#00b4c8;color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600}
     .nav-mobile-toggle{display:none}
-    @media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
+    @media(max-width:900px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px;z-index:99}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
     .sp-hero{padding:140px 40px 80px;max-width:900px;margin:0 auto;text-align:center}
     .sp-hero .section-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00b4c8;margin-bottom:16px}
     .sp-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:52px;font-weight:800;line-height:1.15;margin-bottom:24px}
@@ -89,6 +90,7 @@
       .footer-brand{grid-column:1/-1}
     }
   </style>
+  <!-- ANALYTICS_INCLUDE -->
 </head>
 <body>
 

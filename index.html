@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,7 +27,7 @@
     .nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
     .nav-links a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none}
     .nav-mobile-toggle{display:none}
-    @media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
+    @media(max-width:900px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px;z-index:99}.nav-mobile-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-mobile-toggle span{width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px}}
     footer{padding:60px 40px 40px;border-top:1px solid rgba(255,255,255,0.06)}
     .footer-inner{max-width:1200px;margin:0 auto}
     .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
@@ -37,7 +38,7 @@
     .footer-col-links a:hover{color:#fff}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px}
     .footer-legal{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.8}
-    .footer-legal strong{color:rgba(255,255,255,0.5)}
+    .footer-legal strong{color:rgba(255,255,255,0.7)}
     .footer-logo-img{filter:grayscale(100%) brightness(0.7);transition:filter 0.3s ease}
     .footer-logo:hover .footer-logo-img{filter:grayscale(0%) brightness(1)}
     @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
@@ -63,6 +64,7 @@
       .hero-title{font-size:40px}
     }
   </style>
+  <!-- ANALYTICS_INCLUDE -->
 </head>
 <body>
 
@@ -567,10 +569,7 @@
         <p class="benefit-desc">We have a particular specialism in Purpose Built Student Accommodation - working with some of the sector's leading operators on SEO, analytics, and digital strategy.</p>
       </div>
     </div>
-    <div style="text-align:center;margin-top:48px">
-      <p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:8px">Stafferton Consulting Limited &nbsp;&middot;&nbsp; Registered in England &amp; Wales &nbsp;&middot;&nbsp; No. 7626828</p>
-      <p style="color:rgba(255,255,255,0.55);font-size:13px">124, City Road, London, EC1V 2NX &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#82eae7eeeeedc2f1f6e3e4e4e7f0f6edecace6ebe5ebf6e3ee" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="6f070a0303002f1c1b0e09090a1d1b0001410b0608061b0e03">[email&#160;protected]</span></a></p>
-    </div>
+
   </div>
 </section>
 
