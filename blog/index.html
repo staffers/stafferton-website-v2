@@ -1515,6 +1515,7 @@ footer {
   </style>
   <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  <!-- ANALYTICS_INCLUDE -->
 </head>
 <body>
 
@@ -1569,7 +1570,7 @@ footer {
 <script>
 const CMS = {
   posts: [
-    { id: 1, slug: "new-website-launch", category: "News", title: "Stafferton Digital: New Website, Built for Speed", excerpt: "We have launched a new website. It is fast, it is clean, and it scores 97/95/100/100 on PageSpeed Insights mobile. Here is a brief note on what we built and what is coming next.", date: "March 2026", readTime: "3 min read", icon: "📊", image: "/blog/new-website-launch/pagespeed-scores.svg" }
+    { id: 1, slug: "new-website-launch", category: "News", title: "Stafferton Digital: New Website, Built for Speed", excerpt: "We launched stafferton.digital on a pure static HTML stack, hosted on Cloudflare Pages, scoring 99/100/100/100 on PageSpeed Insights mobile. Here is how we built it and what is coming next.", date: "March 2026", readTime: "3 min read", icon: "📊", image: "/blog/new-website-launch/pagespeed-scores.svg" }
   ]
 };
 (function() { try { const s = localStorage.getItem('cms_data'); if (s) { const d = JSON.parse(s); if (d.posts) CMS.posts = d.posts; } } catch(e) {} })();
