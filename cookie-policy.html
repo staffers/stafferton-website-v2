@@ -40,8 +40,8 @@
     .footer-col-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none}
     .footer-col-links a:hover{color:#fff}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px}
-    .footer-legal{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.8}
-    .footer-legal strong{color:rgba(255,255,255,0.5)}
+    .footer-legal{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.8}
+    .footer-legal strong{color:rgba(255,255,255,0.7)}
     .footer-logo-img{filter:grayscale(100%) brightness(0.7);transition:filter 0.3s ease}
     .footer-logo:hover .footer-logo-img{filter:grayscale(0%) brightness(1)}
     @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}.legal-page{padding:120px 20px 60px}}
@@ -85,7 +85,7 @@
     <h2>Third-party services</h2>
     <p>Our contact form is processed via Cloudflare Pages Functions and MailChannels. Neither service sets cookies in your browser as part of this process.</p>
     <h2>Contact</h2>
-    <p>Questions about cookies or data? Email <a href="mailto:hello@stafferton.digital">hello@stafferton.digital</a> or see our <a href="/privacy-policy.html">Privacy Policy</a> for full details on how we handle personal data.</p>
+    <p>Questions about cookies or data? Email <a href="/cdn-cgi/l/email-protection#422a272e2e2d0231362324242730362d2c6c262b252b36232e"><span class="__cf_email__" data-cfemail="29414c454546695a5d484f4f4c5b5d4647074d404e405d4845">[email&#160;protected]</span></a> or see our <a href="/privacy-policy.html">Privacy Policy</a> for full details on how we handle personal data.</p>
   </div>
 </main>
 <footer>
@@ -144,13 +144,8 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 const toggle = document.querySelector('.nav-mobile-toggle');
-const navLinks = document.querySelector('.nav-links');
-if (toggle) toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-</script>
-</body>
-</html>
+const navLinks = document.querySelector(
