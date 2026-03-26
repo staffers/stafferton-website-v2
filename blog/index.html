@@ -1158,11 +1158,71 @@ footer {
 .footer-inner {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin-top: 16px;
+  max-width: 220px;
+}
+
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #00b4c8;
+  margin-bottom: 16px;
+}
+
+.footer-col-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+}
+
+.footer-col-links a:hover { color: #fff; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 28px;
+}
+
+.footer-legal {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+}
+
+.footer-legal strong {
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-logo-img {
+  filter: grayscale(100%) brightness(0.7);
+  transition: filter 0.3s ease;
+}
+
+.footer-logo:hover .footer-logo-img {
+  filter: grayscale(0%) brightness(1);
 }
 
 .footer-links {
@@ -1490,6 +1550,7 @@ footer {
     z-index: 99;
   }
   .nav-mobile-toggle { display: flex; }
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px;z-index:99}
   section { padding: 70px 20px; }
   #hero { padding: 120px 20px 60px; }
   .hero-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -1506,7 +1567,8 @@ footer {
   .blog-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   footer { padding: 30px 20px; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 600px) {
@@ -1520,12 +1582,16 @@ footer {
 <body>
 
 <nav>
-  <a href="/" class="nav-logo"><img src="/stafferton-logo.png" alt="Stafferton Digital" /></a>
+  <a href="/" class="nav-logo"><picture>
+    <source srcset="/stafferton-logo.webp" type="image/webp">
+    <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" fetchpriority="high">
+  </picture></a>
   <ul class="nav-links">
     <li><a href="/#services">Services</a></li>
     <li><a href="/#process">Process</a></li>
     <li><a href="/#pricing">Pricing</a></li>
-    <li><a href="/blog/" style="color:var(--accent)">Blog</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/blog/" style="color:#00b4c8">Blog</a></li>
     <li><a href="/contact.html">Contact</a></li>
     <li><a href="/contact.html" class="nav-cta">Book a Call</a></li>
   </ul>
@@ -1546,26 +1612,69 @@ footer {
 <section id="cta" style="text-align:center">
   <div class="section-inner">
     <div class="cta-inner">
-      <h2 class="cta-title fade-up">Ready to put this into practice?</h2>
+      <h2 class="cta-title fade-up">Ready to talk strategy?</h2>
       <p class="fade-up" style="color:rgba(255,255,255,0.5);margin-bottom:32px">Let's talk about your business and where AI can make the biggest difference.</p>
-      <a href="/contact.html" class="btn-primary fade-up">Book a Free Call</a>
+      <a href="/contact.html" class="btn-primary fade-up">Book a 20-minute Review</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="footer-inner">
-    <a href="/" class="footer-logo"><img class="footer-logo-img" src="/stafferton-logo.png" alt="Stafferton Digital" /></a>
-    <div class="footer-links">
-      <a href="/#services">Services</a>
-      <a href="/#pricing">Pricing</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/blog/">Blog</a>
-      <a href="/admin.html">Admin</a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Back to top">
+          <picture>
+            <source srcset="/stafferton-logo.webp" type="image/webp">
+            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
+          </picture>
+        </a>
+        <p>Boutique SEO &amp; analytics consultancy.<br>Big agency brains, boutique service.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-col-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-col-links">
+          <li><a href="/technical-seo-property-websites.html">SEO</a></li>
+          <li><a href="/#services">Analytics</a></li>
+          <li><a href="/#services">CRO</a></li>
+          <li><a href="/#services">Paid Media</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Expertise</div>
+        <ul class="footer-col-links">
+          <li><a href="/pbsa-marketing-strategy.html">PBSA Marketing</a></li>
+          <li><a href="/student-accommodation-booking-funnel.html">Booking Funnel Optimisation</a></li>
+          <li><a href="/technical-seo-property-websites.html">Technical SEO for Property</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-col-links">
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
+      </div>
     </div>
-    <span class="footer-copy">© Stafferton Digital</span>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <strong>&copy; Stafferton Digital.</strong> Stafferton Consulting Limited is a company registered in England &amp; Wales (Company No. 07626828).<br>
+        Registered office: 124 City Road, London, EC1V 2NX, United Kingdom.<br>
+        Stafferton Digital is a trading name of Stafferton Consulting Limited.
+      </div>
+    </div>
   </div>
 </footer>
+
 
 <script>
 const CMS = {
@@ -1600,7 +1709,7 @@ const grid = document.getElementById('blog-grid');
 if (grid) {
   grid.innerHTML = CMS.posts.map(p =>
     '<a href="/blog/' + p.slug + '/" class="blog-card fade-up">' +
-      '<div class="blog-card-img">' + (p.image ? '<img src="' + p.image + '" alt="' + p.title + '" style="width:100%;height:100%;object-fit:cover;border-radius:8px">' : p.icon) + '</div>' +
+      '<div class="blog-card-img">' + (p.image ? '<img src="' + p.image + '" alt="' + p.title + '" style="width:100%;height:100%;object-fit:cover;border-radius:8px;position:relative;z-index:1">' : p.icon) + '</div>' +
       '<div class="blog-card-body">' +
         '<div class="blog-card-category">' + p.category + '</div>' +
         '<h2 class="blog-card-title">' + p.title + '</h2>' +
