@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Review Badge Generator - Stafferton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0e0f11;
+  --surface: #16181c;
+  --surface2: #1e2128;
+  --border: #363b47;
+  --accent: #04adca;
+  --accent-dim: rgba(4,173,202,.12);
+  --text: #e8eaf0;
+  --muted: #9ba3af;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --radius: 8px;
+  --star: #fbbf24;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-sub {
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  background: var(--surface);
+}
+.nav-tab {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  user-select: none;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── BUTTONS ── */
+.btn {
+  background: var(--accent);
+  color: #0e0f11;
+  border: none;
+  border-radius: var(--radius);
+  padding: 7px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.btn:hover { opacity: .85; }
+.btn.ghost {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn.danger { background: var(--red); color: #fff; }
+.btn.sm { padding: 5px 10px; font-size: 13px; }
+
+/* ── LAYOUT ── */
+.app-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── LEFT CONFIG PANEL ── */
+.config-panel {
+  width: 340px;
+  min-width: 340px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.panel-section-header {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.panel-section-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-row { display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-size: 13px; color: var(--muted); letter-spacing: .03em; }
+.field-input {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  width: 100%;
+  transition: border-color .15s;
+}
+.field-input:focus { outline: none; border-color: var(--accent); }
+.field-input::placeholder { color: var(--muted); }
+.field-input-row { display: flex; gap: 6px; }
+.field-input-row .field-input { flex: 1; }
+
+select.field-input { cursor: pointer; }
+
+/* colour */
+.colour-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.colour-field { display: flex; flex-direction: column; gap: 4px; }
+.colour-swatch-row { display: flex; align-items: center; gap: 6px; }
+.colour-swatch {
+  width: 28px; height: 28px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.colour-swatch input[type="color"] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.colour-hex {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px 7px;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  width: 76px;
+}
+.colour-hex:focus { outline: none; border-color: var(--accent); }
+
+/* toggle */
+.toggle-row { display: flex; align-items: center; justify-content: space-between; }
+.toggle { position: relative; width: 34px; height: 18px; cursor: pointer; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute; inset: 0;
+  background: var(--border); border-radius: 18px; transition: .2s;
+}
+.toggle-slider::before {
+  content: ''; position: absolute;
+  width: 12px; height: 12px; left: 3px; top: 3px;
+  background: #fff; border-radius: 50%; transition: .2s;
+}
+.toggle input:checked + .toggle-slider { background: var(--accent); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+/* range */
+.range-wrap { display: flex; align-items: center; gap: 8px; }
+input[type="range"] {
+  flex: 1; -webkit-appearance: none; height: 3px;
+  background: var(--border); border-radius: 2px; outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  border-radius: 50%; background: var(--accent); cursor: pointer;
+}
+.range-val { font-size: 13px; color: var(--muted); min-width: 28px; text-align: right; }
+
+/* status */
+.status-bar {
+  padding: 7px 10px; border-radius: 6px; font-size: 13px;
+  display: flex; align-items: center; gap: 6px;
+}
+.status-bar.info    { background: rgba(4,173,202,.1);  color: var(--accent); border: 1px solid rgba(4,173,202,.2); }
+.status-bar.success { background: rgba(34,197,94,.1);  color: var(--green);  border: 1px solid rgba(34,197,94,.2); }
+.status-bar.error   { background: rgba(239,68,68,.1);  color: var(--red);    border: 1px solid rgba(239,68,68,.2); }
+.status-bar.loading { background: var(--surface2);     color: var(--muted);  border: 1px solid var(--border); }
+
+/* review cards */
+.review-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px; cursor: pointer;
+  transition: border-color .15s; font-size: 13px; line-height: 1.5;
+}
+.review-card:hover { border-color: var(--accent); }
+.review-card.selected { border-color: var(--accent); background: var(--accent-dim); }
+.review-card-stars { color: var(--star); margin-bottom: 3px; font-size: 13px; }
+.review-card-author { color: var(--muted); margin-top: 3px; }
+
+/* ── RIGHT PREVIEW PANEL ── */
+.preview-panel {
+  flex: 1; overflow-y: auto; padding: 24px;
+  display: flex; flex-direction: column; gap: 20px; align-items: center;
+}
+
+.preview-stage {
+  width: 100%; max-width: 680px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.preview-stage-header {
+  padding: 9px 14px; font-size: 13px; color: var(--muted);
+  border-bottom: 1px solid var(--border); background: var(--surface2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.preview-canvas-wrap {
+  padding: 28px; display: flex; align-items: center; justify-content: center; min-height: 160px;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0px, rgba(255,255,255,.015) 1px, transparent 1px, transparent 10px);
+}
+canvas#badge-canvas { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.4); }
+
+.preview-actions {
+  display: flex; gap: 8px; padding: 12px 14px;
+  border-top: 1px solid var(--border); flex-wrap: wrap;
+}
+
+/* context previews */
+.ctx-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; width: 100%; max-width: 680px; }
+.ctx-box {
+  border-radius: 8px; padding: 14px;
+  display: flex; align-items: center; justify-content: center; min-height: 70px;
+}
+.ctx-box canvas { max-width: 100%; max-height: 60px; }
+.ctx-label { font-size: 13px; color: var(--muted); text-align: center; margin-top: 4px; }
+
+/* embed */
+.embed-wrap { width: 100%; max-width: 680px; }
+.embed-label { font-size: 13px; color: var(--muted); margin-bottom: 6px; letter-spacing: .07em; text-transform: uppercase; }
+.embed-code {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 12px; font-size: 13px; color: var(--accent);
+  word-break: break-all; line-height: 1.6; cursor: pointer; position: relative;
+  transition: border-color .15s;
+}
+.embed-code:hover { border-color: var(--accent); }
+.embed-copied {
+  position: absolute; top: 7px; right: 10px; font-size: 13px; color: var(--green);
+  opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.embed-copied.show { opacity: 1; }
+
+/* ── DASHBOARD VIEW ── */
+#view-dashboard { display: none; padding: 24px; flex: 1; overflow-y: auto; }
+
+.dashboard-header {
+  max-width: 1040px; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.dashboard-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px; max-width: 1040px; margin: 0 auto;
+}
+.badge-card-saved {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; transition: border-color .15s;
+}
+.badge-card-saved:hover { border-color: var(--accent); }
+.badge-card-thumb {
+  padding: 18px; display: flex; align-items: center; justify-content: center;
+  min-height: 100px; background: var(--surface2);
+}
+.badge-card-thumb img { max-width: 100%; max-height: 80px; border-radius: 6px; }
+.badge-card-info { padding: 10px 12px; border-top: 1px solid var(--border); }
+.badge-card-info-name { font-size: 13px; margin-bottom: 2px; }
+.badge-card-info-meta { font-size: 13px; color: var(--muted); }
+.badge-card-actions { display: flex; gap: 6px; padding: 8px 12px; border-top: 1px solid var(--border); }
+
+.empty-state {
+  text-align: center; padding: 70px 20px; color: var(--muted); max-width: 300px; margin: 0 auto;
+}
+.empty-state-icon { font-size: 36px; margin-bottom: 14px; }
+.empty-state h3 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.empty-state p { font-size: 13px; line-height: 1.6; }
+
+/* spinner */
+.spin { animation: spin .8s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: var(--green); color: #fff; font-size: 13px;
+  padding: 10px 18px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  transform: translateY(60px); opacity: 0; transition: all .25s;
+  pointer-events: none;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@media (max-width: 680px) {
+  .app-body { flex-direction: column; }
+  .config-panel { width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); max-height: 60vh; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    ⭐ Review Badges
+    <span class="logo-sub">by Stafferton</span>
+  </div>
+  <div style="font-size:10px;color:var(--muted)">Saves locally in your browser</div>
+</header>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="switchView('generator',this)">Generator</div>
+  <div class="nav-tab" onclick="switchView('dashboard',this)">Saved Badges <span id="badge-count-pill" style="display:none;background:var(--accent);color:#0e0f11;font-size:9px;padding:1px 6px;border-radius:10px;margin-left:4px"></span></div>
+</div>
+
+<!-- ═══ GENERATOR VIEW ═══ -->
+<div id="view-generator" class="app-body">
+
+  <!-- LEFT PANEL -->
+  <div class="config-panel">
+
+    <!-- API KEY -->
+    <div class="panel-section">
+      <div class="panel-section-header">Google Places API Key</div>
+      <div class="panel-section-body">
+        <div id="api-key-status"></div>
+        <div class="field-row">
+          <label class="field-label">API Key (saved in browser)</label>
+          <div class="field-input-row">
+            <input type="password" class="field-input" id="places-api-key" placeholder="AIza…" autocomplete="off">
+            <button class="btn ghost sm" onclick="saveApiKey()">Save</button>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5">
+          Enable <strong>Places API (New)</strong> + <strong>Maps JavaScript API</strong> at
+          <a href="https://console.cloud.google.com" target="_blank" style="color:var(--accent)">Google Cloud Console</a>.
+          Restrict key to your domain.
+        </div>
+      </div>
+    </div>
+
+    <!-- LOOKUP -->
+    <div class="panel-section">
+      <div class="panel-section-header">Business Lookup</div>
+      <div class="panel-section-body">
+        <div class="field-row">
+          <label class="field-label">Google Place ID</label>
+          <div class="field-input-row">
+            <input type="text" class="field-input" id="place-id-input" placeholder="ChIJ…" autocomplete="off">
+            <button class="btn sm" onclick="lookupPlace()" id="lookup-btn">Fetch</button>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5">
+          Find at <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank" style="color:var(--accent)">Place ID Finder</a> — search your business name.
+        </div>
+        <div id="lookup-status"></div>
+        <div id="business-display" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="panel-section">
+      <div class="panel-section-header">Layout & Size</div>
+      <div class="panel-section-body">
+        <div class="field-row">
+          <label class="field-label">Layout</label>
+          <select class="field-input" id="badge-layout" onchange="renderBadge()">
+            <option value="horizontal">Horizontal — rating + stars + count</option>
+            <option value="card">Card — full with business name</option>
+            <option value="compact">Compact — stars + score only</option>
+            <option value="pill">Pill — minimal inline</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label class="field-label">Scale</label>
+          <div class="range-wrap">
+            <input type="range" id="badge-scale" min="0.5" max="2.5" step="0.05" value="1" oninput="document.getElementById('scale-val').textContent=parseFloat(this.value).toFixed(2)+'×';renderBadge()">
+            <span class="range-val" id="scale-val">1.00×</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label">Corner Radius</label>
+          <div class="range-wrap">
+            <input type="range" id="badge-radius" min="0" max="40" step="2" value="12" oninput="document.getElementById('radius-val').textContent=this.value+'px';renderBadge()">
+            <span class="range-val" id="radius-val">12px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLOURS -->
+    <div class="panel-section">
+      <div class="panel-section-header">Colours</div>
+      <div class="panel-section-body">
+        <div class="colour-grid">
+          <div class="colour-field">
+            <label class="field-label">Background</label>
+            <div class="colour-swatch-row">
+              <div class="colour-swatch" id="swatch-bg" style="background:#ffffff">
+                <input type="color" id="colour-bg" value="#ffffff" oninput="syncColour('bg')">
+              </div>
+              <input type="text" class="colour-hex" id="hex-bg" value="#ffffff" oninput="syncHex('bg')" maxlength="7">
+            </div>
+          </div>
+          <div class="colour-field">
+            <label class="field-label">Text</label>
+            <div class="colour-swatch-row">
+              <div class="colour-swatch" id="swatch-text" style="background:#1a1a1a">
+                <input type="color" id="colour-text" value="#1a1a1a" oninput="syncColour('text')">
+              </div>
+              <input type="text" class="colour-hex" id="hex-text" value="#1a1a1a" oninput="syncHex('text')" maxlength="7">
+            </div>
+          </div>
+          <div class="colour-field">
+            <label class="field-label">Stars</label>
+            <div class="colour-swatch-row">
+              <div class="colour-swatch" id="swatch-stars" style="background:#fbbf24">
+                <input type="color" id="colour-stars" value="#fbbf24" oninput="syncColour('stars')">
+              </div>
+              <input type="text" class="colour-hex" id="hex-stars" value="#fbbf24" oninput="syncHex('stars')" maxlength="7">
+            </div>
+          </div>
+          <div class="colour-field">
+            <label class="field-label">Accent</label>
+            <div class="colour-swatch-row">
+              <div class="colour-swatch" id="swatch-accent" style="background:#4285F4">
+                <input type="color" id="colour-accent" value="#4285F4" oninput="syncColour('accent')">
+              </div>
+              <input type="text" class="colour-hex" id="hex-accent" value="#4285F4" oninput="syncHex('accent')" maxlength="7">
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <span style="font-size:10px;color:var(--muted);width:100%;margin-bottom:2px">Quick presets:</span>
+          <button class="btn ghost sm" onclick="applyPreset('white')">White</button>
+          <button class="btn ghost sm" onclick="applyPreset('dark')">Dark</button>
+          <button class="btn ghost sm" onclick="applyPreset('google')">Google</button>
+          <button class="btn ghost sm" onclick="applyPreset('stafferton')">Stafferton</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="panel-section">
+      <div class="panel-section-header">Content</div>
+      <div class="panel-section-body">
+        <div class="toggle-row">
+          <span class="field-label">Show business name</span>
+          <label class="toggle"><input type="checkbox" id="show-name" checked onchange="renderBadge()"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span class="field-label">Show review count</span>
+          <label class="toggle"><input type="checkbox" id="show-count" checked onchange="renderBadge()"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span class="field-label">Show "Google Reviews" label</span>
+          <label class="toggle"><input type="checkbox" id="show-google" checked onchange="renderBadge()"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span class="field-label">Show featured review quote</span>
+          <label class="toggle"><input type="checkbox" id="show-review" onchange="toggleReviewSection()"><span class="toggle-slider"></span></label>
+        </div>
+        <div id="review-section" style="display:none">
+          <div class="field-row" style="margin-top:6px">
+            <label class="field-label">Max quote length</label>
+            <div class="range-wrap">
+              <input type="range" id="review-length" min="40" max="220" step="10" value="120" oninput="document.getElementById('rl-val').textContent=this.value;renderBadge()">
+              <span class="range-val" id="rl-val">120</span>
+            </div>
+          </div>
+          <div id="review-list" style="display:flex;flex-direction:column;gap:6px;margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAVE -->
+    <div class="panel-section">
+      <div class="panel-section-header">Save Locally</div>
+      <div class="panel-section-body">
+        <div class="field-row">
+          <label class="field-label">Badge name</label>
+          <input type="text" class="field-input" id="badge-name" placeholder="e.g. Kudos — Footer Badge">
+        </div>
+        <button class="btn" style="width:100%" onclick="saveBadge()" id="save-btn">Save Badge</button>
+        <div style="font-size:10px;color:var(--muted)">Saves in this browser. Use Export PNG to share.</div>
+      </div>
+    </div>
+
+  </div><!-- /config-panel -->
+
+  <!-- RIGHT PREVIEW PANEL -->
+  <div class="preview-panel">
+
+    <div style="width:100%;max-width:680px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.07em">Live Preview</div>
+    </div>
+
+    <div class="preview-stage" style="width:100%;max-width:680px">
+      <div class="preview-stage-header">
+        <span id="preview-label">Configure and fetch a business to generate</span>
+        <span id="preview-size" style="color:var(--muted)"></span>
+      </div>
+      <div class="preview-canvas-wrap">
+        <canvas id="badge-canvas"></canvas>
+      </div>
+      <div class="preview-actions">
+        <button class="btn" onclick="downloadPNG()">↓ PNG</button>
+        <button class="btn ghost" onclick="downloadJPG()">↓ JPG</button>
+        <button class="btn ghost" onclick="copyEmbedCode()">Copy Embed</button>
+      </div>
+    </div>
+
+    <!-- Context previews -->
+    <div style="width:100%;max-width:680px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.07em">Context Preview</div>
+      <div class="ctx-grid">
+        <div>
+          <div class="ctx-box" style="background:#fff;border:1px solid #e5e7eb"><canvas id="ctx-white"></canvas></div>
+          <div class="ctx-label">White bg</div>
+        </div>
+        <div>
+          <div class="ctx-box" style="background:#111"><canvas id="ctx-dark"></canvas></div>
+          <div class="ctx-label">Dark bg</div>
+        </div>
+        <div>
+          <div class="ctx-box" style="background:linear-gradient(135deg,#4285F4,#34A853)"><canvas id="ctx-colour"></canvas></div>
+          <div class="ctx-label">Colour bg</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embed code -->
+    <div class="embed-wrap">
+      <div class="embed-label">Embed Code</div>
+      <div class="embed-code" onclick="copyEmbedCode()" title="Click to copy">
+        <span id="embed-code-text" style="color:var(--muted)">Generate a badge above to see embed code.</span>
+        <span class="embed-copied" id="embed-copied">Copied!</span>
+      </div>
+    </div>
+
+  </div><!-- /preview-panel -->
+
+</div><!-- /view-generator -->
+
+<!-- ═══ DASHBOARD VIEW ═══ -->
+<div id="view-dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h2 style="font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:3px">Saved Badges</h2>
+      <p id="dash-meta" style="font-size:11px;color:var(--muted)"></p>
+    </div>
+    <button class="btn" onclick="switchView('generator', document.querySelector('.nav-tab'))">+ New Badge</button>
+  </div>
+  <div class="dashboard-grid" id="badge-grid"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──
+let placeData      = null;
+let selectedReview = 0;
+let mapsLoaded     = false;
+let editingId      = null;
+const STORAGE_KEY  = 'stafferton_review_badges';
+
+// ── STORAGE HELPERS ──
+function loadBadgesFromStorage() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+  catch { return []; }
+}
+function saveBadgesToStorage(badges) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(badges));
+}
+function updateBadgeCountPill() {
+  const badges = loadBadgesFromStorage();
+  const pill = document.getElementById('badge-count-pill');
+  if (badges.length > 0) {
+    pill.textContent = badges.length;
+    pill.style.display = 'inline';
+  } else {
+    pill.style.display = 'none';
+  }
+}
+
+// ── VIEW SWITCHING ──
+function switchView(id, el) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const gen   = document.getElementById('view-generator');
+  const dash  = document.getElementById('view-dashboard');
+  gen.style.display  = id === 'generator' ? 'flex' : 'none';
+  dash.style.display = id === 'dashboard' ? 'block' : 'none';
+  if (id === 'dashboard') renderDashboard();
+}
+
+// ── API KEY ──
+function loadApiKey() {
+  const key = localStorage.getItem('stafferton_places_api_key');
+  if (key) {
+    document.getElementById('places-api-key').value = key;
+    setApiKeyStatus('success', '✓ API key loaded');
+    loadMapsScript(key);
+  } else {
+    setApiKeyStatus('info', 'Enter your Places API key to enable business lookup');
+  }
+}
+function saveApiKey() {
+  const key = document.getElementById('places-api-key').value.trim();
+  if (!key) return;
+  localStorage.setItem('stafferton_places_api_key', key);
+  setApiKeyStatus('success', '✓ Saved');
+  loadMapsScript(key);
+}
+function setApiKeyStatus(type, msg) {
+  document.getElementById('api-key-status').innerHTML =
+    `<div class="status-bar ${type}">${msg}</div>`;
+}
+function loadMapsScript(apiKey) {
+  if (mapsLoaded || document.getElementById('maps-script')) return;
+  const s = document.createElement('script');
+  s.id  = 'maps-script';
+  s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=mapsReady`;
+  s.async = true;
+  document.head.appendChild(s);
+}
+window.mapsReady = function() { mapsLoaded = true; };
+
+// ── PLACE LOOKUP ──
+function lookupPlace() {
+  const placeId = document.getElementById('place-id-input').value.trim();
+  if (!placeId) { setLookupStatus('error', 'Enter a Place ID first'); return; }
+  if (!mapsLoaded) { setLookupStatus('error', 'Save your API key first, then retry'); return; }
+  setLookupStatus('loading', '<span class="spin">◌</span> Fetching…');
+  document.getElementById('lookup-btn').textContent = '…';
+  const map     = new google.maps.Map(document.createElement('div'));
+  const service = new google.maps.places.PlacesService(map);
+  service.getDetails(
+    { placeId, fields: ['name','rating','user_ratings_total','reviews','url','formatted_address'] },
+    (place, status) => {
+      document.getElementById('lookup-btn').textContent = 'Fetch';
+      if (status !== google.maps.places.PlacesServiceStatus.OK || !place) {
+        setLookupStatus('error', `Lookup failed (${status}). Check Place ID and API key.`);
+        return;
+      }
+      placeData = { ...place, placeId };
+      setLookupStatus('', '');
+      document.getElementById('business-display').style.display = 'block';
+      document.getElementById('business-display').innerHTML =
+        `<div class="status-bar success">✓ ${place.name} &nbsp;·&nbsp; ★${(place.rating||0).toFixed(1)} &nbsp;·&nbsp; ${(place.user_ratings_total||0).toLocaleString()} reviews</div>`;
+      document.getElementById('badge-name').placeholder = `${place.name} — Review Badge`;
+      buildReviewList(place.reviews || []);
+      renderBadge();
+    }
+  );
+}
+function setLookupStatus(type, msg) {
+  document.getElementById('lookup-status').innerHTML =
+    msg ? `<div class="status-bar ${type}">${msg}</div>` : '';
+}
+function buildReviewList(reviews) {
+  const list = document.getElementById('review-list');
+  list.innerHTML = '';
+  if (!reviews.length) {
+    list.innerHTML = '<p style="font-size:10px;color:var(--muted)">No reviews returned — Places API billing must be enabled for review data.</p>';
+    return;
+  }
+  reviews.forEach((r, i) => {
+    const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
+    const div = document.createElement('div');
+    div.className = 'review-card' + (i===0?' selected':'');
+    div.dataset.idx = i;
+    div.innerHTML = `<div class="review-card-stars">${stars}</div>
+      <div>"${r.text.substring(0,100)}${r.text.length>100?'…':''}"</div>
+      <div class="review-card-author">— ${r.author_name}</div>`;
+    div.onclick = () => {
+      selectedReview = i;
+      document.querySelectorAll('.review-card').forEach(c=>c.classList.remove('selected'));
+      div.classList.add('selected');
+      renderBadge();
+    };
+    list.appendChild(div);
+  });
+}
+function toggleReviewSection() {
+  document.getElementById('review-section').style.display =
+    document.getElementById('show-review').checked ? 'block' : 'none';
+  renderBadge();
+}
+
+// ── COLOUR CONTROLS ──
+function syncColour(id) {
+  const val = document.getElementById(`colour-${id}`).value;
+  document.getElementById(`hex-${id}`).value = val;
+  document.getElementById(`swatch-${id}`).style.background = val;
+  renderBadge();
+}
+function syncHex(id) {
+  const val = document.getElementById(`hex-${id}`).value;
+  if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+    document.getElementById(`colour-${id}`).value = val;
+    document.getElementById(`swatch-${id}`).style.background = val;
+    renderBadge();
+  }
+}
+function applyPreset(name) {
+  const p = {
+    white:      { bg:'#ffffff', text:'#1a1a1a', stars:'#fbbf24', accent:'#4285F4' },
+    dark:       { bg:'#1a1a1a', text:'#ffffff', stars:'#fbbf24', accent:'#4285F4' },
+    google:     { bg:'#ffffff', text:'#3c4043', stars:'#fbbc05', accent:'#4285F4' },
+    stafferton: { bg:'#0e0f11', text:'#e8eaf0', stars:'#04adca', accent:'#04adca' }
+  }[name];
+  if (!p) return;
+  Object.entries(p).forEach(([id, val]) => {
+    document.getElementById(`colour-${id}`).value = val;
+    document.getElementById(`hex-${id}`).value = val;
+    document.getElementById(`swatch-${id}`).style.background = val;
+  });
+  renderBadge();
+}
+
+// ── BADGE RENDERER ──
+function getCfg() {
+  return {
+    layout:       document.getElementById('badge-layout').value,
+    scale:        parseFloat(document.getElementById('badge-scale').value),
+    radius:       parseInt(document.getElementById('badge-radius').value),
+    bgColor:      document.getElementById('colour-bg').value,
+    textColor:    document.getElementById('colour-text').value,
+    starColor:    document.getElementById('colour-stars').value,
+    accentColor:  document.getElementById('colour-accent').value,
+    showName:     document.getElementById('show-name').checked,
+    showCount:    document.getElementById('show-count').checked,
+    showGoogle:   document.getElementById('show-google').checked,
+    showReview:   document.getElementById('show-review').checked,
+    reviewMaxLen: parseInt(document.getElementById('review-length').value),
+  };
+}
+
+function renderBadge() {
+  const cfg = getCfg();
+  const c   = document.getElementById('badge-canvas');
+  drawBadge(c, cfg, placeData, selectedReview, cfg.scale);
+  drawBadge(document.getElementById('ctx-white'),  cfg, placeData, selectedReview, 0.5);
+  drawBadge(document.getElementById('ctx-dark'),   cfg, placeData, selectedReview, 0.5);
+  drawBadge(document.getElementById('ctx-colour'), cfg, placeData, selectedReview, 0.5);
+  document.getElementById('preview-label').textContent =
+    placeData ? placeData.name : 'Fetch a business to generate';
+  document.getElementById('preview-size').textContent =
+    `${c.width}×${c.height}px`;
+  updateEmbedCode();
+}
+
+function drawBadge(canvas, cfg, place, reviewIdx, scale) {
+  const dpr  = window.devicePixelRatio || 1;
+  const ctx  = canvas.getContext('2d');
+  const PAD  = Math.round(16 * scale);
+  const FS   = Math.round(14 * scale);  // base font size
+  const SS   = Math.round(18 * scale);  // star size
+  const LH   = Math.round(FS * 1.45);
+  const STAR_ROW = SS * 5 + 4 * Math.round(3*scale);
+
+  const name    = place?.name  || 'Your Business Name';
+  const rating  = place?.rating ?? 4.8;
+  const count   = place?.user_ratings_total ?? 124;
+  const reviews = place?.reviews || [];
+  const review  = reviews[reviewIdx];
+
+  const rStr = rating.toFixed(1);
+  const cStr = `(${count.toLocaleString()} reviews)`;
+
+  // measure text helpers
+  const tmp = document.createElement('canvas').getContext('2d');
+
+  let W, H;
+  if (cfg.layout === 'pill') {
+    tmp.font = `bold ${FS}px sans-serif`;
+    W = Math.round(PAD*2 + STAR_ROW + Math.round(8*scale) + tmp.measureText(rStr).width + PAD);
+    H = Math.round(PAD + SS + PAD);
+  } else if (cfg.layout === 'compact') {
+    tmp.font = `bold ${Math.round(FS*1.3)}px sans-serif`;
+    W = Math.round(PAD*2 + STAR_ROW + Math.round(8*scale) + tmp.measureText(rStr).width + PAD);
+    H = Math.round(PAD + Math.max(SS, Math.round(FS*1.3)) + PAD);
+  } else if (cfg.layout === 'horizontal') {
+    tmp.font = `bold ${Math.round(FS*1.7)}px sans-serif`;
+    const rW = tmp.measureText(rStr).width;
+    tmp.font = `${Math.round(FS*0.85)}px sans-serif`;
+    const cW = cfg.showCount ? tmp.measureText(cStr).width : 0;
+    W = Math.round(PAD + (cfg.showGoogle ? SS+Math.round(10*scale) : 0) + rW + Math.round(10*scale) + STAR_ROW + (cfg.showCount ? Math.round(8*scale)+cW : 0) + PAD);
+    H = Math.round(PAD*2 + Math.max(SS, Math.round(FS*1.7)) + (cfg.showName ? LH : 0));
+  } else { // card
+    tmp.font = `bold ${Math.round(FS*1.05)}px sans-serif`;
+    const nW = tmp.measureText(name).width;
+    tmp.font = `${Math.round(FS*0.85)}px sans-serif`;
+    const cW = tmp.measureText(cStr).width;
+    W = Math.round(Math.max(nW + PAD*2, STAR_ROW + PAD*2, cW + PAD*2) + 24*scale);
+    H = Math.round(PAD + (cfg.showName?LH:0) + SS + (cfg.showCount?LH:0) + (cfg.showGoogle?LH:0) + PAD);
+    if (cfg.showReview && review) H += Math.round(FS * 4.5);
+  }
+
+  canvas.width  = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0,0,W,H);
+
+  // background
+  roundRect(ctx, 0, 0, W, H, Math.min(cfg.radius * scale, H/2), cfg.bgColor);
+
+  let x = PAD, y = PAD;
+
+  if (cfg.layout === 'card') {
+    if (cfg.showName) {
+      ctx.font = `bold ${Math.round(FS*1.05)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor;
+      ctx.fillText(name, x, y + Math.round(FS*1.05));
+      y += LH;
+    }
+    drawStars(ctx, x, y, SS, rating, cfg.starColor);
+    y += SS + 5*scale;
+    if (cfg.showCount) {
+      ctx.font = `${Math.round(FS*0.82)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor + '88';
+      ctx.fillText(cStr, x, y + Math.round(FS*0.82));
+      y += LH;
+    }
+    if (cfg.showGoogle) {
+      ctx.font = `bold ${Math.round(FS*0.82)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.accentColor;
+      ctx.fillText('G', x, y + Math.round(FS*0.82));
+      ctx.font = `${Math.round(FS*0.78)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor + '77';
+      ctx.fillText(' Google Reviews', x + Math.round(FS*0.7), y + Math.round(FS*0.82));
+      y += LH;
+    }
+    if (cfg.showReview && review) {
+      let txt = '"' + review.text.substring(0, cfg.reviewMaxLen) + (review.text.length > cfg.reviewMaxLen ? '…"' : '"');
+      ctx.font = `italic ${Math.round(FS*0.85)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor + 'bb';
+      wrapText(ctx, txt, x, y + Math.round(FS*0.85), W-PAD*2, Math.round(FS*1.4));
+    }
+
+  } else if (cfg.layout === 'horizontal') {
+    if (cfg.showName) {
+      ctx.font = `${Math.round(FS*0.82)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor + '88';
+      ctx.fillText(name, x + (cfg.showGoogle ? SS+Math.round(10*scale) : 0), y + Math.round(FS*0.82));
+      y += LH;
+    }
+    const midY = y + Math.max(SS, Math.round(FS*1.7))/2;
+    if (cfg.showGoogle) {
+      ctx.font = `bold ${Math.round(SS*0.85)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.accentColor;
+      ctx.fillText('G', x, midY + Math.round(SS*0.35));
+      x += SS + Math.round(10*scale);
+    }
+    ctx.font = `bold ${Math.round(FS*1.7)}px -apple-system,sans-serif`;
+    ctx.fillStyle = cfg.textColor;
+    const rW = ctx.measureText(rStr).width;
+    ctx.fillText(rStr, x, midY + Math.round(FS*0.65));
+    x += rW + Math.round(10*scale);
+    drawStars(ctx, x, midY - SS/2, SS, rating, cfg.starColor);
+    if (cfg.showCount) {
+      x += STAR_ROW + Math.round(8*scale);
+      ctx.font = `${Math.round(FS*0.78)}px -apple-system,sans-serif`;
+      ctx.fillStyle = cfg.textColor + '66';
+      ctx.fillText(cStr, x, midY + Math.round(FS*0.3));
+    }
+
+  } else if (cfg.layout === 'compact') {
+    const midY = PAD + Math.max(SS, Math.round(FS*1.3))/2;
+    drawStars(ctx, x, midY - SS/2, SS, rating, cfg.starColor);
+    x += STAR_ROW + Math.round(8*scale);
+    ctx.font = `bold ${Math.round(FS*1.3)}px -apple-system,sans-serif`;
+    ctx.fillStyle = cfg.textColor;
+    ctx.fillText(rStr, x, midY + Math.round(FS*0.5));
+
+  } else { // pill
+    const midY = H/2;
+    drawStars(ctx, x, midY - SS/2, SS, rating, cfg.starColor);
+    x += STAR_ROW + Math.round(8*scale);
+    ctx.font = `bold ${FS}px -apple-system,sans-serif`;
+    ctx.fillStyle = cfg.textColor;
+    ctx.fillText(rStr, x, midY + Math.round(FS*0.38));
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r, fill) {
+  r = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+  ctx.fillStyle = fill; ctx.fill();
+}
+
+function drawStars(ctx, x, y, size, rating, color) {
+  for (let i=0; i<5; i++) {
+    const filled = i < Math.floor(rating);
+    const half   = !filled && i===Math.floor(rating) && (rating%1)>=0.5;
+    if (filled) {
+      drawStar(ctx, x+i*(size+3), y, size, color);
+    } else if (half) {
+      drawStar(ctx, x+i*(size+3), y, size, color+'33');
+      ctx.save();
+      ctx.beginPath(); ctx.rect(x+i*(size+3), y, size/2, size); ctx.clip();
+      drawStar(ctx, x+i*(size+3), y, size, color);
+      ctx.restore();
+    } else {
+      drawStar(ctx, x+i*(size+3), y, size, color+'33');
+    }
+  }
+}
+
+function drawStar(ctx, x, y, size, color) {
+  const cx=x+size/2, cy=y+size/2, out=size/2, inn=size/4.5;
+  ctx.beginPath();
+  for (let i=0;i<10;i++) {
+    const r=i%2===0?out:inn;
+    const a=(i*Math.PI/5)-Math.PI/2;
+    i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+  }
+  ctx.closePath(); ctx.fillStyle=color; ctx.fill();
+}
+
+function wrapText(ctx, text, x, y, maxW, lh) {
+  const words=text.split(' '); let line='', cy=y;
+  for (const w of words) {
+    const t=line+w+' ';
+    if (ctx.measureText(t).width>maxW && line) { ctx.fillText(line,x,cy); line=w+' '; cy+=lh; }
+    else line=t;
+  }
+  if (line) ctx.fillText(line,x,cy);
+}
+
+// ── EXPORT ──
+function downloadPNG() {
+  const c=document.getElementById('badge-canvas');
+  const a=document.createElement('a');
+  a.download=`review-badge-${Date.now()}.png`;
+  a.href=c.toDataURL('image/png'); a.click();
+}
+function downloadJPG() {
+  const c=document.getElementById('badge-canvas');
+  const off=document.createElement('canvas');
+  off.width=c.width; off.height=c.height;
+  const ctx2=off.getContext('2d');
+  ctx2.fillStyle=document.getElementById('colour-bg').value;
+  ctx2.fillRect(0,0,off.width,off.height);
+  ctx2.drawImage(c,0,0);
+  const a=document.createElement('a');
+  a.download=`review-badge-${Date.now()}.jpg`;
+  a.href=off.toDataURL('image/jpeg',0.95); a.click();
+}
+function updateEmbedCode() {
+  if (!placeData) return;
+  const url=placeData.url||`https://maps.google.com/?cid=${placeData.placeId}`;
+  document.getElementById('embed-code-text').textContent =
+    `<a href="${url}" target="_blank" rel="noopener"><img src="YOUR_IMAGE_URL" alt="${placeData.name} Google Reviews" style="max-width:300px"></a>`;
+  document.getElementById('embed-code-text').style.color='';
+}
+function copyEmbedCode() {
+  const t=document.getElementById('embed-code-text').textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const el=document.getElementById('embed-copied');
+    el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2000);
+  });
+}
+
+// ── SAVE / LOAD BADGES ──
+function saveBadge() {
+  const name = document.getElementById('badge-name').value.trim() || (placeData?.name+' Badge') || 'Untitled Badge';
+  const thumbnail = document.getElementById('badge-canvas').toDataURL('image/png');
+  const badges = loadBadgesFromStorage();
+  const entry = {
+    id:           editingId || Date.now().toString(),
+    name,
+    config:       getCfg(),
+    placeId:      placeData?.placeId || null,
+    placeName:    placeData?.name || null,
+    placeRating:  placeData?.rating || null,
+    placeCount:   placeData?.user_ratings_total || null,
+    selectedReview,
+    thumbnail,
+    savedAt:      new Date().toISOString()
+  };
+  if (editingId) {
+    const idx=badges.findIndex(b=>b.id===editingId);
+    if (idx>=0) badges[idx]=entry; else badges.push(entry);
+    editingId=null;
+    document.getElementById('save-btn').textContent='Save Badge';
+  } else {
+    badges.push(entry);
+  }
+  saveBadgesToStorage(badges);
+  updateBadgeCountPill();
+  showToast('Badge saved!');
+}
+
+function renderDashboard() {
+  const badges=loadBadgesFromStorage();
+  const grid=document.getElementById('badge-grid');
+  document.getElementById('dash-meta').textContent=
+    `${badges.length} badge${badges.length!==1?'s':''} saved in this browser`;
+  if (!badges.length) {
+    grid.innerHTML=`<div class="empty-state">
+      <div class="empty-state-icon">⭐</div>
+      <h3>No saved badges yet</h3>
+      <p>Generate your first badge and save it — it'll appear here for quick access.</p>
+    </div>`;
+    return;
+  }
+  grid.innerHTML='';
+  [...badges].reverse().forEach(b=>{
+    const card=document.createElement('div');
+    card.className='badge-card-saved';
+    const saved=new Date(b.savedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    card.innerHTML=`
+      <div class="badge-card-thumb">
+        <img src="${b.thumbnail}" alt="${b.name}">
+      </div>
+      <div class="badge-card-info">
+        <div class="badge-card-info-name">${b.name}</div>
+        <div class="badge-card-info-meta">${b.placeName||'—'}${b.placeRating?' · ★'+b.placeRating.toFixed(1):''} · Saved ${saved}</div>
+      </div>
+      <div class="badge-card-actions">
+        <button class="btn ghost sm" style="flex:1" onclick="editBadge('${b.id}')">Edit</button>
+        <button class="btn ghost sm" onclick="redownload('${b.id}')">↓ PNG</button>
+        <button class="btn danger sm" onclick="deleteBadge('${b.id}')">✕</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function editBadge(id) {
+  const badges=loadBadgesFromStorage();
+  const b=badges.find(x=>x.id===id);
+  if (!b) return;
+  editingId=id;
+  const cfg=b.config;
+  document.getElementById('badge-layout').value    = cfg.layout;
+  document.getElementById('badge-scale').value     = cfg.scale;
+  document.getElementById('badge-radius').value    = cfg.radius;
+  document.getElementById('show-name').checked     = cfg.showName;
+  document.getElementById('show-count').checked    = cfg.showCount;
+  document.getElementById('show-google').checked   = cfg.showGoogle;
+  document.getElementById('show-review').checked   = cfg.showReview;
+  document.getElementById('scale-val').textContent = cfg.scale.toFixed(2)+'×';
+  document.getElementById('radius-val').textContent= cfg.radius+'px';
+  [['bg','bgColor'],['text','textColor'],['stars','starColor'],['accent','accentColor']].forEach(([id2,key])=>{
+    const val=cfg[key]; if(!val)return;
+    document.getElementById(`colour-${id2}`).value=val;
+    document.getElementById(`hex-${id2}`).value=val;
+    document.getElementById(`swatch-${id2}`).style.background=val;
+  });
+  document.getElementById('badge-name').value=b.name;
+  if (b.placeId) {
+    document.getElementById('place-id-input').value=b.placeId;
+    placeData={ name:b.placeName, rating:b.placeRating, user_ratings_total:b.placeCount, placeId:b.placeId, reviews:[] };
+    document.getElementById('business-display').style.display='block';
+    document.getElementById('business-display').innerHTML=
+      `<div class="status-bar success">✓ ${b.placeName} · ★${(b.placeRating||0).toFixed(1)} · ${(b.placeCount||0).toLocaleString()} reviews</div>`;
+  }
+  selectedReview=b.selectedReview||0;
+  document.getElementById('save-btn').textContent='Update Badge';
+  toggleReviewSection();
+  renderBadge();
+  switchView('generator', document.querySelector('.nav-tab'));
+}
+
+function redownload(id) {
+  const badges=loadBadgesFromStorage();
+  const b=badges.find(x=>x.id===id);
+  if (!b) return;
+  const a=document.createElement('a');
+  a.download=`${b.name.replace(/[^a-z0-9]/gi,'-')}.png`;
+  a.href=b.thumbnail; a.click();
+}
+
+function deleteBadge(id) {
+  if (!confirm('Delete this badge?')) return;
+  const badges=loadBadgesFromStorage().filter(b=>b.id!==id);
+  saveBadgesToStorage(badges);
+  updateBadgeCountPill();
+  renderDashboard();
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ── INIT ──
+loadApiKey();
+updateBadgeCountPill();
+renderBadge();
+</script>
+</body>
+</html>
