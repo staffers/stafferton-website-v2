@@ -481,7 +481,7 @@ canvas#badge-canvas { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20p
             </div>
           </div>
           <div class="colour-field">
-            <label class="field-label">Accent</label>
+            <label class="field-label">Google colour</label>
             <div class="colour-swatch-row">
               <div class="colour-swatch" id="swatch-accent" style="background:#4285F4">
                 <input type="color" id="colour-accent" value="#4285F4" oninput="syncColour('accent')">
@@ -513,7 +513,7 @@ canvas#badge-canvas { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20p
           <label class="toggle"><input type="checkbox" id="show-count" checked onchange="renderBadge()"><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-row">
-          <span class="field-label">Show "Google Reviews" label</span>
+          <span class="field-label">Show "Google" branding above stars</span>
           <label class="toggle"><input type="checkbox" id="show-google" checked onchange="renderBadge()"><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-row">
@@ -624,6 +624,67 @@ let selectedReview = 0;
 let mapsLoaded     = false;
 let editingId      = null;
 const STORAGE_KEY  = 'stafferton_review_badges';
+
+// ── GOOGLE SVG WORDMARK ──
+// Cached rendered images keyed by colour so we don't reload on every frame
+const googleImgCache = {};
+
+const GOOGLE_SVG_PATHS = `<path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="COLOR"/><path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="COLOR"/><path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="COLOR"/><path d="M225 3v65h-9.5V3h9.5z" fill="COLOR"/><path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" fill="COLOR"/><path d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.10-11.65l-22.49.01z" fill="COLOR"/>`;
+
+// Returns a Promise<HTMLImageElement> for the Google wordmark at a given pixel height and colour
+function getGoogleImg(heightPx, color) {
+  const key = `${heightPx}_${color}`;
+  if (googleImgCache[key]) return Promise.resolve(googleImgCache[key]);
+  // SVG viewBox is 272×92 — scale to target height
+  const w = Math.round((272 / 92) * heightPx);
+  const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${heightPx}" viewBox="0 0 272 92">${GOOGLE_SVG_PATHS.replaceAll('COLOR', color)}</svg>`;
+  const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+  const url  = URL.createObjectURL(blob);
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      googleImgCache[key] = img;
+      resolve(img);
+    };
+    img.src = url;
+  });
+}
+
+// Async wrapper — renders badge then draws Google logo on top once loaded
+async function renderBadgeAsync() {
+  const cfg = getCfg();
+  const canvases = [
+    { el: document.getElementById('badge-canvas'),  scale: cfg.scale },
+    { el: document.getElementById('ctx-white'),     scale: 0.5 },
+    { el: document.getElementById('ctx-dark'),      scale: 0.5 },
+    { el: document.getElementById('ctx-colour'),    scale: 0.5 },
+  ];
+  // Draw base badge on all canvases synchronously first
+  canvases.forEach(({ el, scale }) => drawBadge(el, cfg, placeData, selectedReview, scale));
+  document.getElementById('preview-label').textContent = placeData ? placeData.name : 'Fetch a business to generate';
+  document.getElementById('preview-size').textContent  = `${document.getElementById('badge-canvas').width}×${document.getElementById('badge-canvas').height}px`;
+  updateEmbedCode();
+  // If Google branding is on, overlay the real wordmark
+  if (cfg.showGoogle) {
+    const logoH = Math.round(18 * cfg.scale);
+    const logoH2 = Math.round(18 * 0.5);
+    const [img1, img2] = await Promise.all([
+      getGoogleImg(logoH * (window.devicePixelRatio||1), cfg.accentColor),
+      getGoogleImg(logoH2 * (window.devicePixelRatio||1), cfg.accentColor),
+    ]);
+    canvases.forEach(({ el, scale }) => overlayGoogleLogo(el, cfg, scale, scale === cfg.scale ? img1 : img2, scale === cfg.scale ? logoH : logoH2));
+  }
+}
+
+function overlayGoogleLogo(canvas, cfg, scale, img, logoH) {
+  const dpr = window.devicePixelRatio || 1;
+  const ctx = canvas.getContext('2d');
+  const PAD = Math.round(16 * scale);
+  const logoW = Math.round((272/92) * logoH);
+  // Position: top-left of badge content area
+  ctx.drawImage(img, PAD * dpr, PAD * dpr, logoW * dpr, logoH * dpr);
+}
 
 // ── STORAGE HELPERS ──
 function loadBadgesFromStorage() {
@@ -798,19 +859,7 @@ function getCfg() {
   };
 }
 
-function renderBadge() {
-  const cfg = getCfg();
-  const c   = document.getElementById('badge-canvas');
-  drawBadge(c, cfg, placeData, selectedReview, cfg.scale);
-  drawBadge(document.getElementById('ctx-white'),  cfg, placeData, selectedReview, 0.5);
-  drawBadge(document.getElementById('ctx-dark'),   cfg, placeData, selectedReview, 0.5);
-  drawBadge(document.getElementById('ctx-colour'), cfg, placeData, selectedReview, 0.5);
-  document.getElementById('preview-label').textContent =
-    placeData ? placeData.name : 'Fetch a business to generate';
-  document.getElementById('preview-size').textContent =
-    `${c.width}×${c.height}px`;
-  updateEmbedCode();
-}
+function renderBadge() { renderBadgeAsync(); }
 
 function drawBadge(canvas, cfg, place, reviewIdx, scale) {
   const dpr  = window.devicePixelRatio || 1;
@@ -847,15 +896,19 @@ function drawBadge(canvas, cfg, place, reviewIdx, scale) {
     const rW = tmp.measureText(rStr).width;
     tmp.font = `${Math.round(FS*0.85)}px sans-serif`;
     const cW = cfg.showCount ? tmp.measureText(cStr).width : 0;
-    W = Math.round(PAD + (cfg.showGoogle ? SS+Math.round(10*scale) : 0) + rW + Math.round(10*scale) + STAR_ROW + (cfg.showCount ? Math.round(8*scale)+cW : 0) + PAD);
-    H = Math.round(PAD*2 + Math.max(SS, Math.round(FS*1.7)) + (cfg.showName ? LH : 0));
+    const logoGapH = cfg.showGoogle ? Math.round(18 * scale * 1.5) : 0;
+    W = Math.round(PAD + rW + Math.round(10*scale) + STAR_ROW + (cfg.showCount ? Math.round(8*scale)+cW : 0) + PAD);
+    H = Math.round(PAD*2 + Math.max(SS, Math.round(FS*1.7)) + logoGapH);
   } else { // card
-    tmp.font = `bold ${Math.round(FS*1.05)}px sans-serif`;
-    const nW = tmp.measureText(name).width;
+    const logoH = Math.round(18 * scale);
+    const logoW = cfg.showGoogle ? Math.round((272/92) * logoH) : 0;
+    const logoGap = cfg.showGoogle ? Math.round(logoH * 1.5) : 0;
+    tmp.font = `bold ${Math.round(FS*1.5)}px sans-serif`;
+    const rW2 = tmp.measureText(rStr).width;
     tmp.font = `${Math.round(FS*0.85)}px sans-serif`;
     const cW = tmp.measureText(cStr).width;
-    W = Math.round(Math.max(nW + PAD*2, STAR_ROW + PAD*2, cW + PAD*2) + 24*scale);
-    H = Math.round(PAD + (cfg.showName?LH:0) + SS + (cfg.showCount?LH:0) + (cfg.showGoogle?LH:0) + PAD);
+    W = Math.round(Math.max(logoW, rW2 + 8*scale + STAR_ROW + (cfg.showCount ? 8*scale+cW : 0)) + PAD*2 + 8*scale);
+    H = Math.round(PAD + logoGap + Math.max(SS, Math.round(FS*1.5)) + Math.round(6*scale) + PAD);
     if (cfg.showReview && review) H += Math.round(FS * 4.5);
   }
 
@@ -872,29 +925,24 @@ function drawBadge(canvas, cfg, place, reviewIdx, scale) {
   let x = PAD, y = PAD;
 
   if (cfg.layout === 'card') {
-    if (cfg.showName) {
-      ctx.font = `bold ${Math.round(FS*1.05)}px -apple-system,sans-serif`;
-      ctx.fillStyle = cfg.textColor;
-      ctx.fillText(name, x, y + Math.round(FS*1.05));
-      y += LH;
+    if (cfg.showGoogle) {
+      // Logo drawn async by overlayGoogleLogo — just advance y to reserve space
+      y += Math.round(18 * scale * 1.5);
     }
-    drawStars(ctx, x, y, SS, rating, cfg.starColor);
-    y += SS + 5*scale;
+    const ratingFS = Math.round(FS*1.5);
+    ctx.font = `bold ${ratingFS}px -apple-system,sans-serif`;
+    ctx.fillStyle = cfg.textColor;
+    const rW = ctx.measureText(rStr).width;
+    const rowMidY = y + Math.max(SS, ratingFS) / 2;
+    ctx.fillText(rStr, x, rowMidY + ratingFS*0.38);
+    const starsX = x + rW + Math.round(8*scale);
+    drawStars(ctx, starsX, rowMidY - SS/2, SS, rating, cfg.starColor);
     if (cfg.showCount) {
       ctx.font = `${Math.round(FS*0.82)}px -apple-system,sans-serif`;
       ctx.fillStyle = cfg.textColor + '88';
-      ctx.fillText(cStr, x, y + Math.round(FS*0.82));
-      y += LH;
+      ctx.fillText(cStr, starsX + STAR_ROW + Math.round(8*scale), rowMidY + Math.round(FS*0.32));
     }
-    if (cfg.showGoogle) {
-      ctx.font = `bold ${Math.round(FS*0.82)}px -apple-system,sans-serif`;
-      ctx.fillStyle = cfg.accentColor;
-      ctx.fillText('G', x, y + Math.round(FS*0.82));
-      ctx.font = `${Math.round(FS*0.78)}px -apple-system,sans-serif`;
-      ctx.fillStyle = cfg.textColor + '77';
-      ctx.fillText(' Google Reviews', x + Math.round(FS*0.7), y + Math.round(FS*0.82));
-      y += LH;
-    }
+    y += Math.max(SS, ratingFS) + Math.round(6*scale);
     if (cfg.showReview && review) {
       let txt = '"' + review.text.substring(0, cfg.reviewMaxLen) + (review.text.length > cfg.reviewMaxLen ? '…"' : '"');
       ctx.font = `italic ${Math.round(FS*0.85)}px -apple-system,sans-serif`;
@@ -903,19 +951,11 @@ function drawBadge(canvas, cfg, place, reviewIdx, scale) {
     }
 
   } else if (cfg.layout === 'horizontal') {
-    if (cfg.showName) {
-      ctx.font = `${Math.round(FS*0.82)}px -apple-system,sans-serif`;
-      ctx.fillStyle = cfg.textColor + '88';
-      ctx.fillText(name, x + (cfg.showGoogle ? SS+Math.round(10*scale) : 0), y + Math.round(FS*0.82));
-      y += LH;
+    if (cfg.showGoogle) {
+      // Logo drawn async by overlayGoogleLogo — reserve space
+      y += Math.round(18 * scale * 1.5);
     }
     const midY = y + Math.max(SS, Math.round(FS*1.7))/2;
-    if (cfg.showGoogle) {
-      ctx.font = `bold ${Math.round(SS*0.85)}px -apple-system,sans-serif`;
-      ctx.fillStyle = cfg.accentColor;
-      ctx.fillText('G', x, midY + Math.round(SS*0.35));
-      x += SS + Math.round(10*scale);
-    }
     ctx.font = `bold ${Math.round(FS*1.7)}px -apple-system,sans-serif`;
     ctx.fillStyle = cfg.textColor;
     const rW = ctx.measureText(rStr).width;
