@@ -1112,14 +1112,17 @@ function roundRect(ctx, x, y, w, h, r, fill) {
 
 function drawStars(ctx, x, y, size, rating, color) {
   for (let i=0; i<5; i++) {
-    const filled = i < Math.floor(rating);
-    const half   = !filled && i===Math.floor(rating) && (rating%1)>=0.5;
+    const filled   = i < Math.floor(rating);
+    const fraction = !filled && i===Math.floor(rating) ? (rating % 1) : 0;
     if (filled) {
       drawStar(ctx, x+i*(size+3), y, size, color);
-    } else if (half) {
+    } else if (fraction > 0) {
+      // Draw empty star underneath, then clip-fill proportionally to actual fraction
       drawStar(ctx, x+i*(size+3), y, size, color+'33');
       ctx.save();
-      ctx.beginPath(); ctx.rect(x+i*(size+3), y, size/2, size); ctx.clip();
+      ctx.beginPath();
+      ctx.rect(x+i*(size+3), y, size * fraction, size);
+      ctx.clip();
       drawStar(ctx, x+i*(size+3), y, size, color);
       ctx.restore();
     } else {
