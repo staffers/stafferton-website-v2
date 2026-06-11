@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 92" role="img" aria-label="Stafferton">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Sen';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');
+      }
+    </style>
+  </defs>
+  <circle cx="46" cy="46" r="44" fill="none" stroke="#00B8D4" stroke-width="3.5"/>
+  <text x="46" y="67" text-anchor="middle" fill="#00B8D4" font-size="60" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif">S</text>
+  <circle cx="98" cy="85" r="7" fill="#00B8D4"/>
+</svg>
