@@ -10,7 +10,7 @@
       }
     </style>
   </defs>
-  <text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5" fill="#00B8D4">STAFFERTON</text>
+  <text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text>
   <rect x="275" y="29" width="8" height="8" fill="#00B8D4"/>
   <rect x="288" y="21" width="8" height="16" fill="#00B8D4"/>
   <rect x="301" y="13" width="8" height="24" fill="#00B8D4"/>
