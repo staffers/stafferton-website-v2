@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Text Compare — Free Online Text Comparison Tool | Stafferton</title>
+<meta name="description" content="Compare two blocks of text side-by-side with precise difference highlighting, line numbers and synchronised scrolling. Free, private, runs entirely in your browser." />
+<meta name="keywords" content="text compare, text comparison, diff tool, text diff, compare text, difference checker, online diff tool, free text compare" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://stafferton.digital/tools/text-compare/" />
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Text Compare — Free Online Text Comparison Tool" />
+<meta property="og:description" content="Compare two blocks of text side-by-side with precise difference highlighting. Free, private, runs entirely in your browser." />
+<meta property="og:url" content="https://stafferton.digital/tools/text-compare/" />
+<meta property="og:site_name" content="Stafferton" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Text Compare — Free Online Text Comparison Tool" />
+<meta name="twitter:description" content="Compare two blocks of text side-by-side with precise difference highlighting. Free and private." />
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Text Compare",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any (web browser)",
+  "url": "https://stafferton.digital/tools/text-compare/",
+  "description": "Compare two blocks of text side-by-side with precise difference highlighting, line numbers and synchronised scrolling. Runs entirely in the browser with no data sent to a server.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+  "publisher": { "@type": "Organization", "name": "Stafferton", "url": "https://stafferton.digital/" }
+}
+</script>
+
+<style>
+  /* Self-hosted brand face — variable weight 200–800.
+     NB: confirm this src path matches the existing font location on stafferton.digital;
+     the file is already hosted site-wide, so point at it rather than re-uploading. */
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/fonts/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --fg: #16222b;
+    --muted-fg: #5b6b75;
+    --secondary: #f4f6f7;
+    --secondary-30: #f8fafb;
+    --border: #e4e8ea;
+    --accent: #009ab9;
+    --accent-fg: #ffffff;
+    --accent-soft: rgba(0,154,185,.10);
+    --accent-border: rgba(0,154,185,.22);
+    --add-bg: #e7f6ec;
+    --add-fg: #1a7f3c;
+    --del-bg: #fdecec;
+    --del-fg: #c0392b;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --line-height: 1.6;
+    --header-h: 60px;
+  }
+  html.dark {
+    --bg: #0e171d;
+    --fg: #eef3f5;
+    --muted-fg: #8aa0ab;
+    --secondary: #18242b;
+    --secondary-30: #131e24;
+    --border: #243640;
+    --accent: #1cb3d4;
+    --accent-fg: #06222c;
+    --accent-soft: rgba(28,179,212,.16);
+    --accent-border: rgba(28,179,212,.32);
+    --add-bg: rgba(46,160,87,.18);
+    --add-fg: #5fd483;
+    --del-bg: rgba(220,80,70,.18);
+    --del-fg: #ff8a80;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  button { font-family: inherit; cursor: pointer; }
+  ::selection { background: var(--accent-soft); }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    padding: 0 16px;
+    min-height: var(--header-h);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .brand-mark {
+    width: 22px; height: 22px; flex: none;
+    display: grid; place-items: center;
+  }
+  .brand-mark svg { width: 22px; height: 22px; }
+  .brand-text h1 {
+    font-size: 17px; font-weight: 650; letter-spacing: -0.01em;
+    margin: 0; line-height: 1.1;
+  }
+  .brand-text p { margin: 1px 0 0; font-size: 12px; color: var(--muted-fg); }
+
+  .nav-group { display: flex; align-items: center; gap: 6px; }
+  .badge {
+    font-size: 12px; font-weight: 550; padding: 4px 10px;
+    border: 1px solid var(--border); color: var(--muted-fg);
+    white-space: nowrap;
+  }
+  .badge.has-diff { color: var(--accent); background: var(--accent-soft); border-color: var(--accent-border); }
+  .counter { font-size: 12px; color: var(--muted-fg); font-variant-numeric: tabular-nums; min-width: 42px; text-align: center; }
+
+  .controls { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 32px; padding: 0 10px;
+    background: transparent; color: var(--fg);
+    border: 1px solid var(--border);
+    font-size: 12.5px; font-weight: 500;
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--secondary); }
+  .btn:disabled { opacity: .35; cursor: not-allowed; }
+  .btn.icon { width: 32px; padding: 0; justify-content: center; }
+  .btn.ghost { border-color: transparent; }
+  .btn.ghost:hover { border-color: var(--border); }
+  .btn.active { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+  .btn svg { width: 15px; height: 15px; flex: none; }
+
+  /* ---------- Options bar ---------- */
+  .options {
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    padding: 9px 16px;
+    background: var(--secondary-30);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .options label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--muted-fg); }
+  .options input { accent-color: var(--accent); width: 15px; height: 15px; }
+  .options .hint { margin-left: auto; font-size: 12px; color: var(--muted-fg); opacity: .8; }
+
+  /* ---------- Panes ---------- */
+  .panes {
+    flex: 1 1 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 0;
+  }
+  .pane { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-right: 1px solid var(--border); }
+  .pane:last-child { border-right: 0; }
+
+  .pane-head {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 40px; padding: 0 12px; flex: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .pane-label { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-fg); }
+  .pane-actions { display: flex; gap: 4px; }
+
+  .pane-body {
+    flex: 1 1 auto; min-height: 0; overflow: auto;
+    display: flex;
+    background: var(--bg);
+  }
+  .gutter {
+    flex: none; user-select: none;
+    background: var(--secondary-30);
+    border-right: 1px solid var(--border);
+    color: var(--muted-fg);
+    font-family: var(--mono); font-size: 12.5px; line-height: var(--line-height);
+    text-align: right;
+    padding: 14px 10px 40px;
+    white-space: pre;
+    min-width: 42px;
+  }
+  .content-wrap { flex: 1 1 auto; min-width: 0; display: flex; }
+  textarea.editor {
+    display: block; width: 100%; min-height: 100%;
+    border: 0; outline: 0; resize: none;
+    background: transparent; color: var(--fg);
+    font-family: var(--mono); font-size: 13px; line-height: var(--line-height);
+    padding: 14px 14px 40px;
+    overflow: hidden;
+  }
+  textarea.editor::placeholder { color: var(--muted-fg); opacity: .7; }
+  .diffview {
+    font-family: var(--mono); font-size: 13px; line-height: var(--line-height);
+    padding: 14px 14px 40px; width: 100%; min-height: 100%;
+    white-space: pre-wrap; word-break: break-word;
+    color: var(--fg);
+  }
+  .diff-added { background: var(--add-bg); color: var(--add-fg); padding: 0 1px; border-radius: 2px; }
+  .diff-removed { background: var(--del-bg); color: var(--del-fg); padding: 0 1px; border-radius: 2px; text-decoration: line-through; }
+  .diff-equal { color: var(--fg); }
+  [data-diff-index].is-current { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Overlay + floating button ---------- */
+  .overlay {
+    position: fixed; inset: 0; z-index: 40;
+    display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(3px);
+    color: var(--muted-fg); font-size: 13px;
+  }
+  .overlay.show { display: flex; }
+  .spinner { width: 28px; height: 28px; color: var(--accent); animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .compare-btn {
+    position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+    z-index: 45; display: none;
+    height: 46px; padding: 0 26px;
+    background: var(--accent); color: var(--accent-fg);
+    border: 0; font-size: 14px; font-weight: 600; letter-spacing: .01em;
+    box-shadow: 0 8px 24px -6px rgba(0,154,185,.45), 0 2px 6px rgba(0,0,0,.12);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .compare-btn.show { display: inline-flex; align-items: center; gap: 8px; }
+  .compare-btn:hover { box-shadow: 0 12px 30px -6px rgba(0,154,185,.55), 0 3px 8px rgba(0,0,0,.16); transform: translateX(-50%) translateY(-1px); }
+  .compare-btn:active { transform: translateX(-50%); }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    flex: none; text-align: center; padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px; color: var(--muted-fg);
+  }
+  .footer a { color: var(--muted-fg); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .footer a:hover { color: var(--accent); }
+
+  /* ---------- Toasts ---------- */
+  .toasts { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; gap: 8px; }
+  .toast {
+    background: var(--fg); color: var(--bg);
+    font-size: 13px; padding: 10px 14px;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    animation: toast-in .18s ease;
+  }
+  .toast.error { background: var(--del-fg); color: #fff; }
+  .toast svg { width: 15px; height: 15px; }
+  @keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  @media (max-width: 767px) {
+    .panes { grid-template-columns: 1fr; }
+    .pane { border-right: 0; border-bottom: 1px solid var(--border); }
+    .label-text { display: none; }
+    .brand-text p { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2"  y="13" width="4" height="9" rx="0" fill="var(--accent)"/>
+        <rect x="8"  y="9"  width="4" height="13" rx="0" fill="var(--accent)"/>
+        <rect x="14" y="5"  width="4" height="17" rx="0" fill="currentColor" opacity=".55"/>
+        <rect x="20" y="2"  width="2" height="20" rx="0" fill="currentColor" opacity=".35"/>
+      </svg>
+    </span>
+    <div class="brand-text">
+      <h1>Text Compare</h1>
+      <p>Precise difference highlighting</p>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <span id="diffBadge" class="badge" hidden></span>
+    <button id="prevBtn" class="btn icon" title="Previous difference" hidden aria-label="Previous difference">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <span id="counter" class="counter" hidden></span>
+    <button id="nextBtn" class="btn icon" title="Next difference" hidden aria-label="Next difference">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="controls">
+    <button id="themeBtn" class="btn icon" title="Toggle theme" aria-label="Toggle theme"></button>
+    <button id="syncBtn" class="btn active" title="Synchronised scrolling">
+      <span id="syncIcon"></span><span class="label-text" id="syncLabel">Sync on</span>
+    </button>
+    <button id="clearAllBtn" class="btn" title="Clear both panes" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <span class="label-text">Clear all</span>
+    </button>
+  </div>
+</header>
+
+<div id="optionsBar" class="options">
+  <label><input type="checkbox" id="optWhitespace"> Ignore whitespace</label>
+  <label><input type="checkbox" id="optCase"> Ignore case</label>
+  <label><input type="checkbox" id="optLineBreaks"> Ignore line breaks</label>
+  <span class="hint">Paste text into both panes, then compare.</span>
+</div>
+
+<main class="panes">
+  <section class="pane" id="leftPane">
+    <div class="pane-head">
+      <span class="pane-label">Original text</span>
+      <div class="pane-actions">
+        <button class="btn ghost icon copyBtn" data-side="left" title="Copy original text" hidden></button>
+        <button class="btn ghost icon clearBtn" data-side="left" title="Clear original text" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pane-body" id="leftBody">
+      <div class="gutter" id="leftGutter" hidden></div>
+      <div class="content-wrap">
+        <textarea class="editor" id="leftText" spellcheck="false" placeholder="Paste your original text here…"></textarea>
+        <div class="diffview" id="leftDiff" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane" id="rightPane">
+    <div class="pane-head">
+      <span class="pane-label">Modified text</span>
+      <div class="pane-actions">
+        <button class="btn ghost icon copyBtn" data-side="right" title="Copy modified text" hidden></button>
+        <button class="btn ghost icon clearBtn" data-side="right" title="Clear modified text" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pane-body" id="rightBody">
+      <div class="gutter" id="rightGutter" hidden></div>
+      <div class="content-wrap">
+        <textarea class="editor" id="rightText" spellcheck="false" placeholder="Paste your modified text here…"></textarea>
+        <div class="diffview" id="rightDiff" hidden></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  A free tool by <a href="https://stafferton.digital/" target="_blank" rel="noopener">Stafferton</a> · Runs entirely in your browser — nothing is uploaded.
+</footer>
+
+<button id="compareBtn" class="compare-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px"><path d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-18h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"/></svg>
+  Compare texts
+</button>
+
+<div id="overlay" class="overlay">
+  <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+  <span>Analysing differences…</span>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<!-- diff-match-patch (Apache-2.0, Google) — inlined for a fully self-contained file -->
+<script>var diff_match_patch=function(){this.Diff_Timeout=1,this.Diff_EditCost=4,this.Match_Threshold=.5,this.Match_Distance=1e3,this.Patch_DeleteThreshold=.5,this.Patch_Margin=4,this.Match_MaxBits=32},DIFF_DELETE=-1,DIFF_INSERT=1,DIFF_EQUAL=0;diff_match_patch.Diff=function(t,i){return[t,i]},diff_match_patch.prototype.diff_main=function(t,i,h,e){void 0===e&&(e=this.Diff_Timeout<=0?Number.MAX_VALUE:(new Date).getTime()+1e3*this.Diff_Timeout);var n=e;if(null==t||null==i)throw new Error("Null input. (diff_main)");if(t==i)return t?[new diff_match_patch.Diff(DIFF_EQUAL,t)]:[];void 0===h&&(h=!0);var f=h,a=this.diff_commonPrefix(t,i),r=t.substring(0,a);t=t.substring(a),i=i.substring(a),a=this.diff_commonSuffix(t,i);var s=t.substring(t.length-a);t=t.substring(0,t.length-a),i=i.substring(0,i.length-a);var c=this.diff_compute_(t,i,f,n);return r&&c.unshift(new diff_match_patch.Diff(DIFF_EQUAL,r)),s&&c.push(new diff_match_patch.Diff(DIFF_EQUAL,s)),this.diff_cleanupMerge(c),c},diff_match_patch.prototype.diff_compute_=function(t,i,h,e){var n;if(!t)return[new diff_match_patch.Diff(DIFF_INSERT,i)];if(!i)return[new diff_match_patch.Diff(DIFF_DELETE,t)];var f=t.length>i.length?t:i,a=t.length>i.length?i:t,r=f.indexOf(a);if(-1!=r)return n=[new diff_match_patch.Diff(DIFF_INSERT,f.substring(0,r)),new diff_match_patch.Diff(DIFF_EQUAL,a),new diff_match_patch.Diff(DIFF_INSERT,f.substring(r+a.length))],t.length>i.length&&(n[0][0]=n[2][0]=DIFF_DELETE),n;if(1==a.length)return[new diff_match_patch.Diff(DIFF_DELETE,t),new diff_match_patch.Diff(DIFF_INSERT,i)];var s=this.diff_halfMatch_(t,i);if(s){var c=s[0],_=s[1],l=s[2],g=s[3],o=s[4],p=this.diff_main(c,l,h,e),d=this.diff_main(_,g,h,e);return p.concat([new diff_match_patch.Diff(DIFF_EQUAL,o)],d)}return h&&t.length>100&&i.length>100?this.diff_lineMode_(t,i,e):this.diff_bisect_(t,i,e)},diff_match_patch.prototype.diff_lineMode_=function(t,i,h){var e=this.diff_linesToChars_(t,i);t=e.chars1,i=e.chars2;var n=e.lineArray,f=this.diff_main(t,i,!1,h);this.diff_charsToLines_(f,n),this.diff_cleanupSemantic(f),f.push(new diff_match_patch.Diff(DIFF_EQUAL,""));for(var a=0,r=0,s=0,c="",_="";a<f.length;){switch(f[a][0]){case DIFF_INSERT:s++,_+=f[a][1];break;case DIFF_DELETE:r++,c+=f[a][1];break;case DIFF_EQUAL:if(r>=1&&s>=1){f.splice(a-r-s,r+s),a=a-r-s;for(var l=this.diff_main(c,_,!1,h),g=l.length-1;g>=0;g--)f.splice(a,0,l[g]);a+=l.length}s=0,r=0,c="",_=""}a++}return f.pop(),f},diff_match_patch.prototype.diff_bisect_=function(t,i,h){for(var e=t.length,n=i.length,f=Math.ceil((e+n)/2),a=f,r=2*f,s=new Array(r),c=new Array(r),_=0;_<r;_++)s[_]=-1,c[_]=-1;s[a+1]=0,c[a+1]=0;for(var l=e-n,g=l%2!=0,o=0,p=0,d=0,u=0,m=0;m<f&&!((new Date).getTime()>h);m++){for(var F=-m+o;F<=m-p;F+=2){for(var D=a+F,E=(L=F==-m||F!=m&&s[D-1]<s[D+1]?s[D+1]:s[D-1]+1)-F;L<e&&E<n&&t.charAt(L)==i.charAt(E);)L++,E++;if(s[D]=L,L>e)p+=2;else if(E>n)o+=2;else if(g){if((v=a+l-F)>=0&&v<r&&-1!=c[v])if(L>=(b=e-c[v]))return this.diff_bisectSplit_(t,i,L,E,h)}}for(var I=-m+d;I<=m-u;I+=2){for(var b,v=a+I,w=(b=I==-m||I!=m&&c[v-1]<c[v+1]?c[v+1]:c[v-1]+1)-I;b<e&&w<n&&t.charAt(e-b-1)==i.charAt(n-w-1);)b++,w++;if(c[v]=b,b>e)u+=2;else if(w>n)d+=2;else if(!g){if((D=a+l-I)>=0&&D<r&&-1!=s[D]){var L;E=a+(L=s[D])-D;if(L>=(b=e-b))return this.diff_bisectSplit_(t,i,L,E,h)}}}}return[new diff_match_patch.Diff(DIFF_DELETE,t),new diff_match_patch.Diff(DIFF_INSERT,i)]},diff_match_patch.prototype.diff_bisectSplit_=function(t,i,h,e,n){var f=t.substring(0,h),a=i.substring(0,e),r=t.substring(h),s=i.substring(e),c=this.diff_main(f,a,!1,n),_=this.diff_main(r,s,!1,n);return c.concat(_)},diff_match_patch.prototype.diff_linesToChars_=function(t,i){var h=[],e={};function n(t){for(var i="",n=0,a=-1,r=h.length;a<t.length-1;){-1==(a=t.indexOf("\n",n))&&(a=t.length-1);var s=t.substring(n,a+1);(e.hasOwnProperty?e.hasOwnProperty(s):void 0!==e[s])?i+=String.fromCharCode(e[s]):(r==f&&(s=t.substring(n),a=t.length),i+=String.fromCharCode(r),e[s]=r,h[r++]=s),n=a+1}return i}h[0]="";var f=4e4,a=n(t);return f=65535,{chars1:a,chars2:n(i),lineArray:h}},diff_match_patch.prototype.diff_charsToLines_=function(t,i){for(var h=0;h<t.length;h++){for(var e=t[h][1],n=[],f=0;f<e.length;f++)n[f]=i[e.charCodeAt(f)];t[h][1]=n.join("")}},diff_match_patch.prototype.diff_commonPrefix=function(t,i){if(!t||!i||t.charAt(0)!=i.charAt(0))return 0;for(var h=0,e=Math.min(t.length,i.length),n=e,f=0;h<n;)t.substring(f,n)==i.substring(f,n)?f=h=n:e=n,n=Math.floor((e-h)/2+h);return n},diff_match_patch.prototype.diff_commonSuffix=function(t,i){if(!t||!i||t.charAt(t.length-1)!=i.charAt(i.length-1))return 0;for(var h=0,e=Math.min(t.length,i.length),n=e,f=0;h<n;)t.substring(t.length-n,t.length-f)==i.substring(i.length-n,i.length-f)?f=h=n:e=n,n=Math.floor((e-h)/2+h);return n},diff_match_patch.prototype.diff_commonOverlap_=function(t,i){var h=t.length,e=i.length;if(0==h||0==e)return 0;h>e?t=t.substring(h-e):h<e&&(i=i.substring(0,h));var n=Math.min(h,e);if(t==i)return n;for(var f=0,a=1;;){var r=t.substring(n-a),s=i.indexOf(r);if(-1==s)return f;a+=s,0!=s&&t.substring(n-a)!=i.substring(0,a)||(f=a,a++)}},diff_match_patch.prototype.diff_halfMatch_=function(t,i){if(this.Diff_Timeout<=0)return null;var h=t.length>i.length?t:i,e=t.length>i.length?i:t;if(h.length<4||2*e.length<h.length)return null;var n=this;function f(t,i,h){for(var e,f,a,r,s=t.substring(h,h+Math.floor(t.length/4)),c=-1,_="";-1!=(c=i.indexOf(s,c+1));){var l=n.diff_commonPrefix(t.substring(h),i.substring(c)),g=n.diff_commonSuffix(t.substring(0,h),i.substring(0,c));_.length<g+l&&(_=i.substring(c-g,c)+i.substring(c,c+l),e=t.substring(0,h-g),f=t.substring(h+l),a=i.substring(0,c-g),r=i.substring(c+l))}return 2*_.length>=t.length?[e,f,a,r,_]:null}var a,r,s,c,_,l=f(h,e,Math.ceil(h.length/4)),g=f(h,e,Math.ceil(h.length/2));return l||g?(a=g?l&&l[4].length>g[4].length?l:g:l,t.length>i.length?(r=a[0],s=a[1],c=a[2],_=a[3]):(c=a[0],_=a[1],r=a[2],s=a[3]),[r,s,c,_,a[4]]):null},diff_match_patch.prototype.diff_cleanupSemantic=function(t){for(var i=!1,h=[],e=0,n=null,f=0,a=0,r=0,s=0,c=0;f<t.length;)t[f][0]==DIFF_EQUAL?(h[e++]=f,a=s,r=c,s=0,c=0,n=t[f][1]):(t[f][0]==DIFF_INSERT?s+=t[f][1].length:c+=t[f][1].length,n&&n.length<=Math.max(a,r)&&n.length<=Math.max(s,c)&&(t.splice(h[e-1],0,new diff_match_patch.Diff(DIFF_DELETE,n)),t[h[e-1]+1][0]=DIFF_INSERT,e--,f=--e>0?h[e-1]:-1,a=0,r=0,s=0,c=0,n=null,i=!0)),f++;for(i&&this.diff_cleanupMerge(t),this.diff_cleanupSemanticLossless(t),f=1;f<t.length;){if(t[f-1][0]==DIFF_DELETE&&t[f][0]==DIFF_INSERT){var _=t[f-1][1],l=t[f][1],g=this.diff_commonOverlap_(_,l),o=this.diff_commonOverlap_(l,_);g>=o?(g>=_.length/2||g>=l.length/2)&&(t.splice(f,0,new diff_match_patch.Diff(DIFF_EQUAL,l.substring(0,g))),t[f-1][1]=_.substring(0,_.length-g),t[f+1][1]=l.substring(g),f++):(o>=_.length/2||o>=l.length/2)&&(t.splice(f,0,new diff_match_patch.Diff(DIFF_EQUAL,_.substring(0,o))),t[f-1][0]=DIFF_INSERT,t[f-1][1]=l.substring(0,l.length-o),t[f+1][0]=DIFF_DELETE,t[f+1][1]=_.substring(o),f++),f++}f++}},diff_match_patch.prototype.diff_cleanupSemanticLossless=function(t){function i(t,i){if(!t||!i)return 6;var h=t.charAt(t.length-1),e=i.charAt(0),n=h.match(diff_match_patch.nonAlphaNumericRegex_),f=e.match(diff_match_patch.nonAlphaNumericRegex_),a=n&&h.match(diff_match_patch.whitespaceRegex_),r=f&&e.match(diff_match_patch.whitespaceRegex_),s=a&&h.match(diff_match_patch.linebreakRegex_),c=r&&e.match(diff_match_patch.linebreakRegex_),_=s&&t.match(diff_match_patch.blanklineEndRegex_),l=c&&i.match(diff_match_patch.blanklineStartRegex_);return _||l?5:s||c?4:n&&!a&&r?3:a||r?2:n||f?1:0}for(var h=1;h<t.length-1;){if(t[h-1][0]==DIFF_EQUAL&&t[h+1][0]==DIFF_EQUAL){var e=t[h-1][1],n=t[h][1],f=t[h+1][1],a=this.diff_commonSuffix(e,n);if(a){var r=n.substring(n.length-a);e=e.substring(0,e.length-a),n=r+n.substring(0,n.length-a),f=r+f}for(var s=e,c=n,_=f,l=i(e,n)+i(n,f);n.charAt(0)===f.charAt(0);){e+=n.charAt(0),n=n.substring(1)+f.charAt(0),f=f.substring(1);var g=i(e,n)+i(n,f);g>=l&&(l=g,s=e,c=n,_=f)}t[h-1][1]!=s&&(s?t[h-1][1]=s:(t.splice(h-1,1),h--),t[h][1]=c,_?t[h+1][1]=_:(t.splice(h+1,1),h--))}h++}},diff_match_patch.nonAlphaNumericRegex_=/[^a-zA-Z0-9]/,diff_match_patch.whitespaceRegex_=/\s/,diff_match_patch.linebreakRegex_=/[\r\n]/,diff_match_patch.blanklineEndRegex_=/\n\r?\n$/,diff_match_patch.blanklineStartRegex_=/^\r?\n\r?\n/,diff_match_patch.prototype.diff_cleanupEfficiency=function(t){for(var i=!1,h=[],e=0,n=null,f=0,a=!1,r=!1,s=!1,c=!1;f<t.length;)t[f][0]==DIFF_EQUAL?(t[f][1].length<this.Diff_EditCost&&(s||c)?(h[e++]=f,a=s,r=c,n=t[f][1]):(e=0,n=null),s=c=!1):(t[f][0]==DIFF_DELETE?c=!0:s=!0,n&&(a&&r&&s&&c||n.length<this.Diff_EditCost/2&&a+r+s+c==3)&&(t.splice(h[e-1],0,new diff_match_patch.Diff(DIFF_DELETE,n)),t[h[e-1]+1][0]=DIFF_INSERT,e--,n=null,a&&r?(s=c=!0,e=0):(f=--e>0?h[e-1]:-1,s=c=!1),i=!0)),f++;i&&this.diff_cleanupMerge(t)},diff_match_patch.prototype.diff_cleanupMerge=function(t){t.push(new diff_match_patch.Diff(DIFF_EQUAL,""));for(var i,h=0,e=0,n=0,f="",a="";h<t.length;)switch(t[h][0]){case DIFF_INSERT:n++,a+=t[h][1],h++;break;case DIFF_DELETE:e++,f+=t[h][1],h++;break;case DIFF_EQUAL:e+n>1?(0!==e&&0!==n&&(0!==(i=this.diff_commonPrefix(a,f))&&(h-e-n>0&&t[h-e-n-1][0]==DIFF_EQUAL?t[h-e-n-1][1]+=a.substring(0,i):(t.splice(0,0,new diff_match_patch.Diff(DIFF_EQUAL,a.substring(0,i))),h++),a=a.substring(i),f=f.substring(i)),0!==(i=this.diff_commonSuffix(a,f))&&(t[h][1]=a.substring(a.length-i)+t[h][1],a=a.substring(0,a.length-i),f=f.substring(0,f.length-i))),h-=e+n,t.splice(h,e+n),f.length&&(t.splice(h,0,new diff_match_patch.Diff(DIFF_DELETE,f)),h++),a.length&&(t.splice(h,0,new diff_match_patch.Diff(DIFF_INSERT,a)),h++),h++):0!==h&&t[h-1][0]==DIFF_EQUAL?(t[h-1][1]+=t[h][1],t.splice(h,1)):h++,n=0,e=0,f="",a=""}""===t[t.length-1][1]&&t.pop();var r=!1;for(h=1;h<t.length-1;)t[h-1][0]==DIFF_EQUAL&&t[h+1][0]==DIFF_EQUAL&&(t[h][1].substring(t[h][1].length-t[h-1][1].length)==t[h-1][1]?(t[h][1]=t[h-1][1]+t[h][1].substring(0,t[h][1].length-t[h-1][1].length),t[h+1][1]=t[h-1][1]+t[h+1][1],t.splice(h-1,1),r=!0):t[h][1].substring(0,t[h+1][1].length)==t[h+1][1]&&(t[h-1][1]+=t[h+1][1],t[h][1]=t[h][1].substring(t[h+1][1].length)+t[h+1][1],t.splice(h+1,1),r=!0)),h++;r&&this.diff_cleanupMerge(t)},diff_match_patch.prototype.diff_xIndex=function(t,i){var h,e=0,n=0,f=0,a=0;for(h=0;h<t.length&&(t[h][0]!==DIFF_INSERT&&(e+=t[h][1].length),t[h][0]!==DIFF_DELETE&&(n+=t[h][1].length),!(e>i));h++)f=e,a=n;return t.length!=h&&t[h][0]===DIFF_DELETE?a:a+(i-f)},diff_match_patch.prototype.diff_prettyHtml=function(t){for(var i=[],h=/&/g,e=/</g,n=/>/g,f=/\n/g,a=0;a<t.length;a++){var r=t[a][0],s=t[a][1].replace(h,"&amp;").replace(e,"&lt;").replace(n,"&gt;").replace(f,"&para;<br>");switch(r){case DIFF_INSERT:i[a]='<ins style="background:#e6ffe6;">'+s+"</ins>";break;case DIFF_DELETE:i[a]='<del style="background:#ffe6e6;">'+s+"</del>";break;case DIFF_EQUAL:i[a]="<span>"+s+"</span>"}}return i.join("")},diff_match_patch.prototype.diff_text1=function(t){for(var i=[],h=0;h<t.length;h++)t[h][0]!==DIFF_INSERT&&(i[h]=t[h][1]);return i.join("")},diff_match_patch.prototype.diff_text2=function(t){for(var i=[],h=0;h<t.length;h++)t[h][0]!==DIFF_DELETE&&(i[h]=t[h][1]);return i.join("")},diff_match_patch.prototype.diff_levenshtein=function(t){for(var i=0,h=0,e=0,n=0;n<t.length;n++){var f=t[n][0],a=t[n][1];switch(f){case DIFF_INSERT:h+=a.length;break;case DIFF_DELETE:e+=a.length;break;case DIFF_EQUAL:i+=Math.max(h,e),h=0,e=0}}return i+=Math.max(h,e)},diff_match_patch.prototype.diff_toDelta=function(t){for(var i=[],h=0;h<t.length;h++)switch(t[h][0]){case DIFF_INSERT:i[h]="+"+encodeURI(t[h][1]);break;case DIFF_DELETE:i[h]="-"+t[h][1].length;break;case DIFF_EQUAL:i[h]="="+t[h][1].length}return i.join("\t").replace(/%20/g," ")},diff_match_patch.prototype.diff_fromDelta=function(t,i){for(var h=[],e=0,n=0,f=i.split(/\t/g),a=0;a<f.length;a++){var r=f[a].substring(1);switch(f[a].charAt(0)){case"+":try{h[e++]=new diff_match_patch.Diff(DIFF_INSERT,decodeURI(r))}catch(t){throw new Error("Illegal escape in diff_fromDelta: "+r)}break;case"-":case"=":var s=parseInt(r,10);if(isNaN(s)||s<0)throw new Error("Invalid number in diff_fromDelta: "+r);var c=t.substring(n,n+=s);"="==f[a].charAt(0)?h[e++]=new diff_match_patch.Diff(DIFF_EQUAL,c):h[e++]=new diff_match_patch.Diff(DIFF_DELETE,c);break;default:if(f[a])throw new Error("Invalid diff operation in diff_fromDelta: "+f[a])}}if(n!=t.length)throw new Error("Delta length ("+n+") does not equal source text length ("+t.length+").");return h},diff_match_patch.prototype.match_main=function(t,i,h){if(null==t||null==i||null==h)throw new Error("Null input. (match_main)");return h=Math.max(0,Math.min(h,t.length)),t==i?0:t.length?t.substring(h,h+i.length)==i?h:this.match_bitap_(t,i,h):-1},diff_match_patch.prototype.match_bitap_=function(t,i,h){if(i.length>this.Match_MaxBits)throw new Error("Pattern too long for this browser.");var e=this.match_alphabet_(i),n=this;function f(t,e){var f=t/i.length,a=Math.abs(h-e);return n.Match_Distance?f+a/n.Match_Distance:a?1:f}var a=this.Match_Threshold,r=t.indexOf(i,h);-1!=r&&(a=Math.min(f(0,r),a),-1!=(r=t.lastIndexOf(i,h+i.length))&&(a=Math.min(f(0,r),a)));var s,c,_=1<<i.length-1;r=-1;for(var l,g=i.length+t.length,o=0;o<i.length;o++){for(s=0,c=g;s<c;)f(o,h+c)<=a?s=c:g=c,c=Math.floor((g-s)/2+s);g=c;var p=Math.max(1,h-c+1),d=Math.min(h+c,t.length)+i.length,u=Array(d+2);u[d+1]=(1<<o)-1;for(var m=d;m>=p;m--){var F=e[t.charAt(m-1)];if(u[m]=0===o?(u[m+1]<<1|1)&F:(u[m+1]<<1|1)&F|(l[m+1]|l[m])<<1|1|l[m+1],u[m]&_){var D=f(o,m-1);if(D<=a){if(a=D,!((r=m-1)>h))break;p=Math.max(1,2*h-r)}}}if(f(o+1,h)>a)break;l=u}return r},diff_match_patch.prototype.match_alphabet_=function(t){for(var i={},h=0;h<t.length;h++)i[t.charAt(h)]=0;for(h=0;h<t.length;h++)i[t.charAt(h)]|=1<<t.length-h-1;return i},diff_match_patch.prototype.patch_addContext_=function(t,i){if(0!=i.length){if(null===t.start2)throw Error("patch not initialized");for(var h=i.substring(t.start2,t.start2+t.length1),e=0;i.indexOf(h)!=i.lastIndexOf(h)&&h.length<this.Match_MaxBits-this.Patch_Margin-this.Patch_Margin;)e+=this.Patch_Margin,h=i.substring(t.start2-e,t.start2+t.length1+e);e+=this.Patch_Margin;var n=i.substring(t.start2-e,t.start2);n&&t.diffs.unshift(new diff_match_patch.Diff(DIFF_EQUAL,n));var f=i.substring(t.start2+t.length1,t.start2+t.length1+e);f&&t.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,f)),t.start1-=n.length,t.start2-=n.length,t.length1+=n.length+f.length,t.length2+=n.length+f.length}},diff_match_patch.prototype.patch_make=function(t,i,h){var e,n;if("string"==typeof t&&"string"==typeof i&&void 0===h)e=t,(n=this.diff_main(e,i,!0)).length>2&&(this.diff_cleanupSemantic(n),this.diff_cleanupEfficiency(n));else if(t&&"object"==typeof t&&void 0===i&&void 0===h)n=t,e=this.diff_text1(n);else if("string"==typeof t&&i&&"object"==typeof i&&void 0===h)e=t,n=i;else{if("string"!=typeof t||"string"!=typeof i||!h||"object"!=typeof h)throw new Error("Unknown call format to patch_make.");e=t,n=h}if(0===n.length)return[];for(var f=[],a=new diff_match_patch.patch_obj,r=0,s=0,c=0,_=e,l=e,g=0;g<n.length;g++){var o=n[g][0],p=n[g][1];switch(r||o===DIFF_EQUAL||(a.start1=s,a.start2=c),o){case DIFF_INSERT:a.diffs[r++]=n[g],a.length2+=p.length,l=l.substring(0,c)+p+l.substring(c);break;case DIFF_DELETE:a.length1+=p.length,a.diffs[r++]=n[g],l=l.substring(0,c)+l.substring(c+p.length);break;case DIFF_EQUAL:p.length<=2*this.Patch_Margin&&r&&n.length!=g+1?(a.diffs[r++]=n[g],a.length1+=p.length,a.length2+=p.length):p.length>=2*this.Patch_Margin&&r&&(this.patch_addContext_(a,_),f.push(a),a=new diff_match_patch.patch_obj,r=0,_=l,s=c)}o!==DIFF_INSERT&&(s+=p.length),o!==DIFF_DELETE&&(c+=p.length)}return r&&(this.patch_addContext_(a,_),f.push(a)),f},diff_match_patch.prototype.patch_deepCopy=function(t){for(var i=[],h=0;h<t.length;h++){var e=t[h],n=new diff_match_patch.patch_obj;n.diffs=[];for(var f=0;f<e.diffs.length;f++)n.diffs[f]=new diff_match_patch.Diff(e.diffs[f][0],e.diffs[f][1]);n.start1=e.start1,n.start2=e.start2,n.length1=e.length1,n.length2=e.length2,i[h]=n}return i},diff_match_patch.prototype.patch_apply=function(t,i){if(0==t.length)return[i,[]];t=this.patch_deepCopy(t);var h=this.patch_addPadding(t);i=h+i+h,this.patch_splitMax(t);for(var e=0,n=[],f=0;f<t.length;f++){var a,r,s=t[f].start2+e,c=this.diff_text1(t[f].diffs),_=-1;if(c.length>this.Match_MaxBits?-1!=(a=this.match_main(i,c.substring(0,this.Match_MaxBits),s))&&(-1==(_=this.match_main(i,c.substring(c.length-this.Match_MaxBits),s+c.length-this.Match_MaxBits))||a>=_)&&(a=-1):a=this.match_main(i,c,s),-1==a)n[f]=!1,e-=t[f].length2-t[f].length1;else if(n[f]=!0,e=a-s,c==(r=-1==_?i.substring(a,a+c.length):i.substring(a,_+this.Match_MaxBits)))i=i.substring(0,a)+this.diff_text2(t[f].diffs)+i.substring(a+c.length);else{var l=this.diff_main(c,r,!1);if(c.length>this.Match_MaxBits&&this.diff_levenshtein(l)/c.length>this.Patch_DeleteThreshold)n[f]=!1;else{this.diff_cleanupSemanticLossless(l);for(var g,o=0,p=0;p<t[f].diffs.length;p++){var d=t[f].diffs[p];d[0]!==DIFF_EQUAL&&(g=this.diff_xIndex(l,o)),d[0]===DIFF_INSERT?i=i.substring(0,a+g)+d[1]+i.substring(a+g):d[0]===DIFF_DELETE&&(i=i.substring(0,a+g)+i.substring(a+this.diff_xIndex(l,o+d[1].length))),d[0]!==DIFF_DELETE&&(o+=d[1].length)}}}}return[i=i.substring(h.length,i.length-h.length),n]},diff_match_patch.prototype.patch_addPadding=function(t){for(var i=this.Patch_Margin,h="",e=1;e<=i;e++)h+=String.fromCharCode(e);for(e=0;e<t.length;e++)t[e].start1+=i,t[e].start2+=i;var n=t[0],f=n.diffs;if(0==f.length||f[0][0]!=DIFF_EQUAL)f.unshift(new diff_match_patch.Diff(DIFF_EQUAL,h)),n.start1-=i,n.start2-=i,n.length1+=i,n.length2+=i;else if(i>f[0][1].length){var a=i-f[0][1].length;f[0][1]=h.substring(f[0][1].length)+f[0][1],n.start1-=a,n.start2-=a,n.length1+=a,n.length2+=a}if(0==(f=(n=t[t.length-1]).diffs).length||f[f.length-1][0]!=DIFF_EQUAL)f.push(new diff_match_patch.Diff(DIFF_EQUAL,h)),n.length1+=i,n.length2+=i;else if(i>f[f.length-1][1].length){a=i-f[f.length-1][1].length;f[f.length-1][1]+=h.substring(0,a),n.length1+=a,n.length2+=a}return h},diff_match_patch.prototype.patch_splitMax=function(t){for(var i=this.Match_MaxBits,h=0;h<t.length;h++)if(!(t[h].length1<=i)){var e=t[h];t.splice(h--,1);for(var n=e.start1,f=e.start2,a="";0!==e.diffs.length;){var r=new diff_match_patch.patch_obj,s=!0;for(r.start1=n-a.length,r.start2=f-a.length,""!==a&&(r.length1=r.length2=a.length,r.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,a)));0!==e.diffs.length&&r.length1<i-this.Patch_Margin;){var c=e.diffs[0][0],_=e.diffs[0][1];c===DIFF_INSERT?(r.length2+=_.length,f+=_.length,r.diffs.push(e.diffs.shift()),s=!1):c===DIFF_DELETE&&1==r.diffs.length&&r.diffs[0][0]==DIFF_EQUAL&&_.length>2*i?(r.length1+=_.length,n+=_.length,s=!1,r.diffs.push(new diff_match_patch.Diff(c,_)),e.diffs.shift()):(_=_.substring(0,i-r.length1-this.Patch_Margin),r.length1+=_.length,n+=_.length,c===DIFF_EQUAL?(r.length2+=_.length,f+=_.length):s=!1,r.diffs.push(new diff_match_patch.Diff(c,_)),_==e.diffs[0][1]?e.diffs.shift():e.diffs[0][1]=e.diffs[0][1].substring(_.length))}a=(a=this.diff_text2(r.diffs)).substring(a.length-this.Patch_Margin);var l=this.diff_text1(e.diffs).substring(0,this.Patch_Margin);""!==l&&(r.length1+=l.length,r.length2+=l.length,0!==r.diffs.length&&r.diffs[r.diffs.length-1][0]===DIFF_EQUAL?r.diffs[r.diffs.length-1][1]+=l:r.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,l))),s||t.splice(++h,0,r)}}},diff_match_patch.prototype.patch_toText=function(t){for(var i=[],h=0;h<t.length;h++)i[h]=t[h];return i.join("")},diff_match_patch.prototype.patch_fromText=function(t){var i=[];if(!t)return i;for(var h=t.split("\n"),e=0,n=/^@@ -(\d+),?(\d*) \+(\d+),?(\d*) @@$/;e<h.length;){var f=h[e].match(n);if(!f)throw new Error("Invalid patch string: "+h[e]);var a=new diff_match_patch.patch_obj;for(i.push(a),a.start1=parseInt(f[1],10),""===f[2]?(a.start1--,a.length1=1):"0"==f[2]?a.length1=0:(a.start1--,a.length1=parseInt(f[2],10)),a.start2=parseInt(f[3],10),""===f[4]?(a.start2--,a.length2=1):"0"==f[4]?a.length2=0:(a.start2--,a.length2=parseInt(f[4],10)),e++;e<h.length;){var r=h[e].charAt(0);try{var s=decodeURI(h[e].substring(1))}catch(t){throw new Error("Illegal escape in patch_fromText: "+s)}if("-"==r)a.diffs.push(new diff_match_patch.Diff(DIFF_DELETE,s));else if("+"==r)a.diffs.push(new diff_match_patch.Diff(DIFF_INSERT,s));else if(" "==r)a.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,s));else{if("@"==r)break;if(""!==r)throw new Error('Invalid patch mode "'+r+'" in: '+s)}e++}}return i},diff_match_patch.patch_obj=function(){this.diffs=[],this.start1=null,this.start2=null,this.length1=0,this.length2=0},diff_match_patch.patch_obj.prototype.toString=function(){for(var t,i=["@@ -"+(0===this.length1?this.start1+",0":1==this.length1?this.start1+1:this.start1+1+","+this.length1)+" +"+(0===this.length2?this.start2+",0":1==this.length2?this.start2+1:this.start2+1+","+this.length2)+" @@\n"],h=0;h<this.diffs.length;h++){switch(this.diffs[h][0]){case DIFF_INSERT:t="+";break;case DIFF_DELETE:t="-";break;case DIFF_EQUAL:t=" "}i[h+1]=t+encodeURI(this.diffs[h][1])+"\n"}return i.join("").replace(/%20/g," ")}</script>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- Icon markup (lucide-style) ----
+  const ICONS = {
+    sun:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
+    moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+    unlink:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.84 12.25l1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71M5.17 11.75l-1.72 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71M8 2v3M2 8h3M16 22v-3M22 16h-3"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>'
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  // ---- State ----
+  const state = {
+    showDiff: false,
+    isComparing: false,
+    diffCount: 0,
+    syncScroll: true,
+    currentDiffIndex: 0,
+  };
+  let diffEls = [];
+  let isSyncing = false;
+
+  // ---- Elements ----
+  const leftText = $("leftText"), rightText = $("rightText");
+  const leftDiff = $("leftDiff"), rightDiff = $("rightDiff");
+  const leftGutter = $("leftGutter"), rightGutter = $("rightGutter");
+  const leftBody = $("leftBody"), rightBody = $("rightBody");
+  const optWhitespace = $("optWhitespace"), optCase = $("optCase"), optLineBreaks = $("optLineBreaks");
+  const optionsBar = $("optionsBar");
+  const compareBtn = $("compareBtn"), overlay = $("overlay");
+  const diffBadge = $("diffBadge"), counter = $("counter"), prevBtn = $("prevBtn"), nextBtn = $("nextBtn");
+  const clearAllBtn = $("clearAllBtn");
+  const themeBtn = $("themeBtn"), syncBtn = $("syncBtn"), syncIcon = $("syncIcon"), syncLabel = $("syncLabel");
+
+  // ---- Theme ----
+  function applyTheme(t) {
+    document.documentElement.classList.toggle("dark", t === "dark");
+    themeBtn.innerHTML = (t === "dark") ? ICONS.sun : ICONS.moon;
+  }
+  let theme = "light";
+  try { theme = localStorage.getItem("textcompare-theme") || "light"; } catch (e) {}
+  applyTheme(theme);
+  themeBtn.addEventListener("click", function () {
+    theme = (theme === "dark") ? "light" : "dark";
+    applyTheme(theme);
+    try { localStorage.setItem("textcompare-theme", theme); } catch (e) {}
+  });
+
+  // ---- Sync scroll toggle ----
+  function renderSync() {
+    syncBtn.classList.toggle("active", state.syncScroll);
+    syncIcon.innerHTML = state.syncScroll ? ICONS.link : ICONS.unlink;
+    syncLabel.textContent = state.syncScroll ? "Sync on" : "Sync off";
+  }
+  renderSync();
+  syncBtn.addEventListener("click", function () { state.syncScroll = !state.syncScroll; renderSync(); });
+
+  // ---- Helpers ----
+  function hasText() { return leftText.value.trim() !== "" || rightText.value.trim() !== ""; }
+
+  function preprocess(text) {
+    let t = text;
+    if (optCase.checked)        t = t.toLowerCase();
+    if (optLineBreaks.checked)  t = t.replace(/\r?\n/g, " ");
+    if (optWhitespace.checked)  t = t.replace(/\s+/g, " ").trim();
+    return t;
+  }
+
+  function autoGrow(ta) { ta.style.height = "auto"; ta.style.height = Math.max(ta.scrollHeight, 0) + "px"; }
+
+  function lineCount(text) { return text.length ? text.split("\n").length : 1; }
+  function renderGutter(gutter, text) {
+    const n = lineCount(text);
+    let s = "";
+    for (let i = 1; i <= n; i++) s += i + "\n";
+    gutter.textContent = s;
+  }
+
+  function updateChrome() {
+    const has = hasText();
+    // per-pane copy/clear
+    document.querySelectorAll('.copyBtn[data-side="left"], .clearBtn[data-side="left"]').forEach(b => b.hidden = leftText.value === "");
+    document.querySelectorAll('.copyBtn[data-side="right"], .clearBtn[data-side="right"]').forEach(b => b.hidden = rightText.value === "");
+    clearAllBtn.hidden = !has;
+    // gutters (edit mode)
+    if (!state.showDiff) {
+      leftGutter.hidden = leftText.value === "";
+      rightGutter.hidden = rightText.value === "";
+      if (!leftGutter.hidden) renderGutter(leftGutter, leftText.value);
+      if (!rightGutter.hidden) renderGutter(rightGutter, rightText.value);
+    }
+    // floating compare button
+    compareBtn.classList.toggle("show", has && !state.showDiff && !state.isComparing);
+  }
+
+  // ---- Input handlers (edit mode) ----
+  [leftText, rightText].forEach(function (ta) {
+    ta.addEventListener("input", function () {
+      autoGrow(ta);
+      updateChrome();
+    });
+  });
+
+  // ---- Copy ----
+  function setCopyIcon(btn, copied) {
+    btn.innerHTML = copied ? ICONS.check : ICONS.copy;
+  }
+  document.querySelectorAll(".copyBtn").forEach(function (btn) {
+    setCopyIcon(btn, false);
+    btn.addEventListener("click", function () {
+      const side = btn.dataset.side;
+      const text = side === "left" ? leftText.value : rightText.value;
+      const label = side === "left" ? "Original" : "Modified";
+      navigator.clipboard.writeText(text).then(function () {
+        setCopyIcon(btn, true);
+        toast(label + " text copied to clipboard", false);
+        setTimeout(function () { setCopyIcon(btn, false); }, 2000);
+      }).catch(function () { toast("Couldn’t copy — your browser blocked clipboard access", true); });
+    });
+  });
+
+  // ---- Clear ----
+  function resetDiffState() {
+    state.showDiff = false; state.isComparing = false;
+    state.diffCount = 0; state.currentDiffIndex = 0;
+    diffEls = [];
+    leftDiff.hidden = true; rightDiff.hidden = true;
+    leftText.style.display = ""; rightText.style.display = "";
+    optionsBar.style.display = "";
+    diffBadge.hidden = true; counter.hidden = true; prevBtn.hidden = true; nextBtn.hidden = true;
+  }
+  document.querySelectorAll(".clearBtn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const side = btn.dataset.side;
+      if (side === "left") { leftText.value = ""; autoGrow(leftText); }
+      else { rightText.value = ""; autoGrow(rightText); }
+      if (state.showDiff) resetDiffState();
+      updateChrome();
+    });
+  });
+  clearAllBtn.addEventListener("click", function () {
+    leftText.value = ""; rightText.value = "";
+    autoGrow(leftText); autoGrow(rightText);
+    resetDiffState();
+    leftGutter.hidden = true; rightGutter.hidden = true;
+    updateChrome();
+  });
+
+  // ---- Diff rendering ----
+  function span(cls, text, idx) {
+    const s = document.createElement("span");
+    s.className = cls;
+    s.textContent = text;
+    if (idx != null) s.setAttribute("data-diff-index", idx);
+    return s;
+  }
+
+  function runCompare() {
+    const dmp = new diff_match_patch();
+    const diffs = dmp.diff_main(preprocess(leftText.value), preprocess(rightText.value));
+    dmp.diff_cleanupSemantic(diffs);
+
+    const leftFrag = document.createDocumentFragment();
+    const rightFrag = document.createDocumentFragment();
+    let count = 0;
+
+    diffs.forEach(function (part) {
+      const op = part[0], text = part[1];
+      if (op === 0) {
+        leftFrag.appendChild(span("diff-equal", text));
+        rightFrag.appendChild(span("diff-equal", text));
+      } else if (op === -1) {
+        leftFrag.appendChild(span("diff-removed", text, count));
+        count++;
+      } else if (op === 1) {
+        rightFrag.appendChild(span("diff-added", text, count));
+        count++;
+      }
+    });
+
+    leftDiff.innerHTML = ""; rightDiff.innerHTML = "";
+    leftDiff.appendChild(leftFrag); rightDiff.appendChild(rightFrag);
+
+    state.diffCount = count;
+    state.currentDiffIndex = 0;
+
+    // collect + sort nav elements
+    diffEls = Array.prototype.slice.call(document.querySelectorAll("[data-diff-index]"));
+    diffEls.sort(function (a, b) {
+      return parseInt(a.getAttribute("data-diff-index"), 10) - parseInt(b.getAttribute("data-diff-index"), 10);
+    });
+
+    // gutters from rendered text
+    renderGutter(leftGutter, leftDiff.textContent);
+    renderGutter(rightGutter, rightDiff.textContent);
+    leftGutter.hidden = leftDiff.textContent === "";
+    rightGutter.hidden = rightDiff.textContent === "";
+
+    // swap views
+    leftText.style.display = "none"; rightText.style.display = "none";
+    leftDiff.hidden = false; rightDiff.hidden = false;
+    optionsBar.style.display = "none";
+
+    // header chrome
+    if (count > 0) {
+      diffBadge.textContent = count + (count === 1 ? " difference found" : " differences found");
+      diffBadge.classList.add("has-diff");
+      prevBtn.hidden = false; nextBtn.hidden = false; counter.hidden = false;
+      navigateToDiff(0);
+    } else {
+      diffBadge.textContent = "No differences found";
+      diffBadge.classList.remove("has-diff");
+      prevBtn.hidden = true; nextBtn.hidden = true; counter.hidden = true;
+    }
+    diffBadge.hidden = false;
+  }
+
+  compareBtn.addEventListener("click", function () {
+    if (!hasText()) return;
+    state.isComparing = true;
+    overlay.classList.add("show");
+    compareBtn.classList.remove("show");
+    setTimeout(function () {
+      state.showDiff = true;
+      state.isComparing = false;
+      overlay.classList.remove("show");
+      runCompare();
+      updateChrome();
+    }, 300);
+  });
+
+  // ---- Navigation ----
+  function navigateToDiff(index) {
+    if (!diffEls.length) return;
+    index = Math.max(0, Math.min(index, diffEls.length - 1));
+    diffEls.forEach(function (el) { el.classList.remove("is-current"); });
+    const el = diffEls[index];
+    el.classList.add("is-current");
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    state.currentDiffIndex = index;
+    counter.textContent = (index + 1) + " / " + state.diffCount;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === diffEls.length - 1;
+  }
+  prevBtn.addEventListener("click", function () { navigateToDiff(state.currentDiffIndex - 1); });
+  nextBtn.addEventListener("click", function () { navigateToDiff(state.currentDiffIndex + 1); });
+
+  // ---- Synchronised scrolling ----
+  function syncFrom(src, tgt) {
+    if (!state.syncScroll || isSyncing) return;
+    isSyncing = true;
+    const denom = src.scrollHeight - src.clientHeight;
+    const pct = denom > 0 ? src.scrollTop / denom : 0;
+    tgt.scrollTop = pct * (tgt.scrollHeight - tgt.clientHeight);
+    setTimeout(function () { isSyncing = false; }, 50);
+  }
+  leftBody.addEventListener("scroll", function () { syncFrom(leftBody, rightBody); });
+  rightBody.addEventListener("scroll", function () { syncFrom(rightBody, leftBody); });
+
+  // ---- Keyboard: Ctrl/Cmd+Enter to compare ----
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter" && hasText() && !state.showDiff) {
+      e.preventDefault();
+      compareBtn.click();
+    }
+  });
+
+  // ---- Toasts ----
+  function toast(msg, isError) {
+    const wrap = $("toasts");
+    const t = document.createElement("div");
+    t.className = "toast" + (isError ? " error" : "");
+    t.innerHTML = (isError ? "" : ICONS.check) + "<span></span>";
+    t.querySelector("span").textContent = msg;
+    wrap.appendChild(t);
+    setTimeout(function () {
+      t.style.transition = "opacity .2s, transform .2s";
+      t.style.opacity = "0"; t.style.transform = "translateY(8px)";
+      setTimeout(function () { t.remove(); }, 220);
+    }, 2200);
+  }
+
+  // ---- Init ----
+  setCopyIcon(document.querySelector('.copyBtn[data-side="left"]'), false);
+  setCopyIcon(document.querySelector('.copyBtn[data-side="right"]'), false);
+  autoGrow(leftText); autoGrow(rightText);
+  updateChrome();
+})();
+</script>
+</body>
+</html>
