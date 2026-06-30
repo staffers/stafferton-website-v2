@@ -1,0 +1,544 @@
+<style>
+  @font-face {
+    font-family: 'Sen';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-400-normal.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Sen';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');
+  }
+
+  :root {
+    --teal: #00B8D4;
+    --dark: #0F1419;
+    --bg: #FAFAFA;
+    --border: #E5E7EB;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --code-bg: #1A1F26;
+    --code-text: #E0E5EB;
+  }
+
+  * { box-sizing: border-box; }
+
+  .brand-page {
+    font-family: 'Sen', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    padding: 32px 24px;
+    max-width: 920px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .brand-page h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-page > header p {
+    color: var(--muted);
+    margin: 0 0 32px;
+    font-size: 15px;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    color: var(--muted);
+  }
+
+  .swatch-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  section.asset {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  section.asset h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+
+  section.asset .description {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .preview-tile {
+    border-radius: 10px;
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+  }
+
+  .preview-tile.dark {
+    background: var(--dark);
+    color: #C1C1C1;
+  }
+
+  .preview-tile.light {
+    background: white;
+    border: 1px solid var(--border);
+    color: #3E3E3E;
+  }
+
+  .preview-tile svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .preview-tile.primary svg {
+    width: 280px;
+  }
+
+  .stress-row {
+    border-radius: 10px;
+    padding: 24px 16px;
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .stress-row.dark { background: var(--dark); }
+  .stress-row.light { background: white; border: 1px solid var(--border); }
+
+  .stress-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .stress-cell .icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stress-cell svg { display: block; }
+
+  .stress-cell .label {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.55;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  }
+
+  .stress-row.dark .label { color: white; }
+  .stress-row.light .label { color: var(--dark); }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .btn {
+    background: var(--teal);
+    color: var(--dark);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.15s, transform 0.05s;
+  }
+
+  .btn:hover { opacity: 0.85; }
+  .btn:active { transform: translateY(1px); }
+  .btn.copied { background: #10B981; color: white; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+
+  details {
+    margin-top: 16px;
+  }
+
+  details summary {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    user-select: none;
+    padding: 8px 0;
+    list-style: none;
+  }
+
+  details summary::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.15s;
+    font-size: 11px;
+  }
+
+  details[open] summary::before { transform: rotate(90deg); }
+
+  .code-block {
+    position: relative;
+    background: var(--code-bg);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+
+  .code-block pre {
+    color: var(--code-text);
+    padding: 16px;
+    padding-right: 90px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 12px;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    line-height: 1.55;
+    margin: 0;
+    white-space: pre;
+  }
+
+  .code-block .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.08);
+    color: var(--code-text);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .code-block .copy-btn:hover { background: rgba(255,255,255,0.16); }
+  .code-block .copy-btn.copied { background: #10B981; border-color: #10B981; color: white; }
+
+  section.usage {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  section.usage h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+
+  section.usage p {
+    margin: 0 0 12px;
+    font-size: 14px;
+  }
+
+  section.usage code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    color: var(--text);
+  }
+
+  section.usage pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    overflow-x: auto;
+    margin: 8px 0 16px;
+  }
+
+  section.usage strong {
+    font-weight: 700;
+    color: var(--text);
+  }
+</style>
+
+<div class="brand-page">
+  <header>
+    <h1>Stafferton brand assets</h1>
+    <p>Production-ready SVG. Sen 700 typography, teal accent. Click to download.</p>
+  </header>
+
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-dot" style="background:#00B8D4"></div>#00B8D4 — teal</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#0F1419"></div>#0F1419 — dark</div>
+    <div class="swatch"><div class="swatch-dot" style="background:white;border:1px solid #E5E7EB"></div>#FFFFFF — light</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#C1C1C1"></div>#C1C1C1 — letters on dark</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#3E3E3E"></div>#3E3E3E — letters on light</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#0F1419;border:1px solid #E5E7EB;font-family:Sen;color:#00B8D4;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">A</div>Sen 700</div>
+  </div>
+
+  <section class="asset">
+    <h2>Primary logo</h2>
+    <p class="description">Wordmark with ascending bars. Use for website header, decks, email signatures, footer. Letters use <code style="background:#F3F4F6;padding:1px 5px;border-radius:3px;font-family:ui-monospace,monospace;font-size:12px">currentColor</code> so the same SVG works on dark and light backgrounds — set <code style="background:#F3F4F6;padding:1px 5px;border-radius:3px;font-family:ui-monospace,monospace;font-size:12px">#C1C1C1</code> on dark, <code style="background:#F3F4F6;padding:1px 5px;border-radius:3px;font-family:ui-monospace,monospace;font-size:12px">#3E3E3E</code> on light.</p>
+
+    <div class="preview-grid">
+      <div class="preview-tile dark primary" data-asset="primary"></div>
+      <div class="preview-tile light primary" data-asset="primary"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="downloadAsset('primary', {color:'#C1C1C1', suffix:'on-dark'})">↓ Download — on dark</button>
+      <button class="btn btn-secondary" onclick="downloadAsset('primary', {color:'#3E3E3E', suffix:'on-light'})">↓ Download — on light</button>
+    </div>
+
+    <details>
+      <summary>Show source</summary>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode('primary', this)">Copy</button>
+        <pre id="code-primary"></pre>
+      </div>
+    </details>
+  </section>
+
+  <section class="asset">
+    <h2>Icon mark — connected dot</h2>
+    <p class="description">S monogram with teal satellite dot. Best at 24px and above — use for social profile pictures, app icons, large favicons. The dot fades below 24px.</p>
+
+    <div class="stress-row dark">
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="64"></div><span class="label">64px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="32"></div><span class="label">32px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="24"></div><span class="label">24px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="16"></div><span class="label">16px</span></div>
+    </div>
+    <div class="stress-row light">
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="64"></div><span class="label">64px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="32"></div><span class="label">32px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="24"></div><span class="label">24px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="icon" data-width="16"></div><span class="label">16px</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="downloadAsset('icon')">↓ Download SVG</button>
+    </div>
+
+    <details>
+      <summary>Show source</summary>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode('icon', this)">Copy</button>
+        <pre id="code-icon"></pre>
+      </div>
+    </details>
+  </section>
+
+  <section class="asset">
+    <h2>Favicon variant — solid mark</h2>
+    <p class="description">Filled teal circle, S in negative space, no dot. The favicon-friendly version — survives at 16px. Use for browser tab favicon, very tight UI applications, and anywhere the connected dot won't read.</p>
+
+    <div class="stress-row dark">
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="64"></div><span class="label">64px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="32"></div><span class="label">32px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="24"></div><span class="label">24px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="16"></div><span class="label">16px</span></div>
+    </div>
+    <div class="stress-row light">
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="64"></div><span class="label">64px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="32"></div><span class="label">32px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="24"></div><span class="label">24px</span></div>
+      <div class="stress-cell"><div class="icon-wrap" data-asset="favicon" data-width="16"></div><span class="label">16px</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="downloadAsset('favicon')">↓ Download SVG</button>
+    </div>
+
+    <details>
+      <summary>Show source</summary>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode('favicon', this)">Copy</button>
+        <pre id="code-favicon"></pre>
+      </div>
+    </details>
+  </section>
+
+  <section class="usage">
+    <h2>Usage notes</h2>
+
+    <p><strong>Typography.</strong> All assets use Sen 700. Each SVG includes an <code>@font-face</code> rule loading Sen from jsdelivr's fontsource mirror — works when the SVG is inlined in HTML. For best reliability, also load Sen 700 in your site's CSS:</p>
+    <pre>@import url('https://fonts.googleapis.com/css2?family=Sen:wght@700&display=swap');</pre>
+
+    <p><strong>Backgrounds.</strong> The primary logo uses <code>currentColor</code> for the letters that aren't teal. Set CSS <code>color</code> on the parent — <code>#C1C1C1</code> on dark backgrounds, <code>#3E3E3E</code> on light — and the same SVG renders correctly in both. Slightly softening the non-accent letters lets the teal S, E, O carry more visual weight. Both icon variants use hardcoded fills and work on any background.</p>
+
+    <pre>/* Dark sections — header, dark mode, social cards */
+.logo-on-dark { color: #C1C1C1; }
+
+/* Light sections — body, decks, email signatures */
+.logo-on-light { color: #3E3E3E; }</pre>
+
+    <p><strong>Inlining vs img tag.</strong> Inline the SVG directly in your HTML for full control and font support. If using <code>&lt;img src="..."&gt;</code>, the <code>@font-face</code> inside the SVG may be blocked by the browser's CSS sandbox — load Sen on the parent page instead.</p>
+
+    <p><strong>Favicon export.</strong> For PNG favicons (16, 32, 48, 180px), use <strong>stafferton-favicon.svg</strong> and convert to PNG via your design tool of choice (Figma, Illustrator, or a CLI like <code>rsvg-convert</code>). Add the resulting PNGs to <code>/public</code> and reference them from your HTML head.</p>
+  </section>
+</div>
+
+<script>
+  const ASSETS = {
+    primary: {
+      filename: 'stafferton-primary-logo.svg',
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" role="img" aria-label="Stafferton">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Sen';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');
+      }
+    </style>
+  </defs>
+  <text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="currentColor">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="currentColor">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="currentColor">N</tspan></text>
+  <rect x="275" y="29" width="8" height="8" fill="#00B8D4"/>
+  <rect x="288" y="21" width="8" height="16" fill="#00B8D4"/>
+  <rect x="301" y="13" width="8" height="24" fill="#00B8D4"/>
+  <rect x="314" y="5" width="8" height="32" fill="#00B8D4"/>
+</svg>`
+    },
+    icon: {
+      filename: 'stafferton-icon-mark.svg',
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 92" role="img" aria-label="Stafferton">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Sen';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');
+      }
+    </style>
+  </defs>
+  <circle cx="46" cy="46" r="44" fill="none" stroke="#00B8D4" stroke-width="3.5"/>
+  <text x="46" y="67" text-anchor="middle" fill="#00B8D4" font-size="60" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif">S</text>
+  <circle cx="98" cy="85" r="7" fill="#00B8D4"/>
+</svg>`
+    },
+    favicon: {
+      filename: 'stafferton-favicon.svg',
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92" role="img" aria-label="Stafferton">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Sen';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');
+      }
+    </style>
+  </defs>
+  <circle cx="46" cy="46" r="44" fill="#00B8D4"/>
+  <text x="46" y="67" text-anchor="middle" fill="#0F1419" font-size="60" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif">S</text>
+</svg>`
+    }
+  };
+
+  function downloadAsset(key, opts) {
+    const asset = ASSETS[key];
+    let svg = asset.svg;
+    let filename = asset.filename;
+    if (opts && opts.color) {
+      svg = svg.replaceAll('currentColor', opts.color);
+      filename = asset.filename.replace(/\.svg$/, '-' + opts.suffix + '.svg');
+    }
+    const content = '<?xml version="1.0" encoding="UTF-8"?>\n' + svg;
+    const blob = new Blob([content], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function copyCode(key, btn) {
+    const content = '<?xml version="1.0" encoding="UTF-8"?>\n' + ASSETS[key].svg;
+    navigator.clipboard.writeText(content).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  }
+
+  function setSvgWidth(svgEl, width) {
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    svgEl.style.width = width + 'px';
+    svgEl.style.height = 'auto';
+  }
+
+  document.querySelectorAll('[data-asset]').forEach(el => {
+    const key = el.dataset.asset;
+    const width = el.dataset.width;
+    el.innerHTML = ASSETS[key].svg;
+    const svgEl = el.querySelector('svg');
+    if (width && svgEl) {
+      setSvgWidth(svgEl, parseInt(width, 10));
+    }
+  });
+
+  Object.keys(ASSETS).forEach(key => {
+    const pre = document.getElementById('code-' + key);
+    if (pre) pre.textContent = '<?xml version="1.0" encoding="UTF-8"?>\n' + ASSETS[key].svg;
+  });
+</script>
