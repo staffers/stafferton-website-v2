@@ -1216,15 +1216,8 @@ footer {
   color: rgba(255,255,255,0.7);
 }
 
-.footer-logo-img {
-  filter: grayscale(100%) brightness(0.7);
-  transition: filter 0.3s ease;
-}
-
-.footer-logo:hover .footer-logo-img {
-  filter: grayscale(0%) brightness(1);
-}
-
+.footer-logo { opacity: 0.7; transition: opacity 0.3s ease; }
+.footer-logo:hover { opacity: 1; }
 .footer-links {
   display: flex;
   gap: 24px;
@@ -1583,8 +1576,7 @@ footer {
 
 <nav>
   <a href="/" class="nav-logo"><picture>
-    <source srcset="/stafferton-logo.webp" type="image/webp">
-    <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" fetchpriority="high">
+    <img src="/brand/stafferton-primary-logo.svg" alt="Stafferton Digital" height="34" fetchpriority="high">
   </picture></a>
   <ul class="nav-links">
     <li><a href="/#services">Services</a></li>
@@ -1625,8 +1617,7 @@ footer {
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Back to top">
           <picture>
-            <source srcset="/stafferton-logo.webp" type="image/webp">
-            <img src="/stafferton-logo.png" alt="Stafferton Digital" width="160" height="34" class="footer-logo-img">
+            <img src="/brand/stafferton-primary-logo.svg" alt="Stafferton Digital" height="34" class="footer-logo-img">
           </picture>
         </a>
         <p>Boutique SEO &amp; analytics consultancy.<br>Big agency brains, boutique service.</p>

@@ -43,7 +43,7 @@
 <!-- ADMIN PANEL -->
 <div id="admin-panel" class="admin-page" style="display:none">
   <div class="admin-header">
-    <a href="index.html" class="nav-logo"><img src="stafferton-logo.png" alt="Stafferton Digital" style="height:40px" /> <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:var(--font-body);font-weight:400;margin-left:8px">CMS Admin</span></a>
+    <a href="index.html" class="nav-logo"><img src="/brand/stafferton-primary-logo.svg" alt="Stafferton Digital" style="height:40px" /> <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:var(--font-body);font-weight:400;margin-left:8px">CMS Admin</span></a>
     <div class="admin-nav">
       <button class="admin-nav-btn active" onclick="switchTab('posts', this)">📝 Blog Posts</button>
       <button class="admin-nav-btn" onclick="switchTab('cases', this)">📊 Case Studies</button>
@@ -447,11 +447,11 @@ function generatePostFile(id) {
   parts.push('<meta name="description" content="' + post.excerpt.replace(/"/g,'&quot;') + '">');
   parts.push('<style>' + css + '</style>');
   parts.push('</head><body>');
-  parts.push('<nav><a href="' + BASE + '/" class="nav-logo"><img src="' + BASE + '/stafferton-logo.png" alt="Stafferton Digital" /></a><ul class="nav-links"><li><a href="' + BASE + '/#services">Services</a></li><li><a href="' + BASE + '/#process">Process</a></li><li><a href="' + BASE + '/#pricing">Pricing</a></li><li><a href="' + BASE + '/blog/" style="color:var(--accent)">Blog</a></li><li><a href="' + BASE + '/contact.html">Contact</a></li><li><a href="' + BASE + '/contact.html" class="nav-cta">Book a Call</a></li></ul><button class="nav-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button></nav>');
+  parts.push('<nav><a href="' + BASE + '/" class="nav-logo"><img src="' + BASE + '/brand/stafferton-primary-logo.svg" alt="Stafferton Digital" /></a><ul class="nav-links"><li><a href="' + BASE + '/#services">Services</a></li><li><a href="' + BASE + '/#process">Process</a></li><li><a href="' + BASE + '/#pricing">Pricing</a></li><li><a href="' + BASE + '/blog/" style="color:var(--accent)">Blog</a></li><li><a href="' + BASE + '/contact.html">Contact</a></li><li><a href="' + BASE + '/contact.html" class="nav-cta">Book a Call</a></li></ul><button class="nav-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button></nav>');
   parts.push('<div class="post-hero"><a href="' + BASE + '/blog/" class="post-back">← Back to Blog</a><div class="post-category">' + post.category + '</div><h1 class="post-title">' + post.title + '</h1><div class="post-meta">' + post.date + ' · ' + post.readTime + '</div><div class="post-divider"></div></div>');
   parts.push('<div class="post-content">' + (post.content || '<p>' + post.excerpt + '</p>') + '</div>');
   parts.push('<section style="background:#0d0d0d;padding:80px 40px;text-align:center"><h2 class="section-title" style="font-size:36px">Ready to Automate?</h2><p style="color:rgba(255,255,255,0.5);margin-bottom:28px">Let us talk about what we can build for your business.</p><a href="' + BASE + '/contact.html" class="btn-primary">Book a Free Call</a></section>');
-  parts.push('<footer><div class="footer-inner"><a href="' + BASE + '/" class="footer-logo"><img src="' + BASE + '/stafferton-logo.png" alt="Stafferton Digital" /></a><div class="footer-links"><a href="' + BASE + '/#services">Services</a><a href="' + BASE + '/blog/">Blog</a><a href="' + BASE + '/contact.html">Contact</a></div><span class="footer-copy">© Stafferton Digital</span></div></footer>');
+  parts.push('<footer><div class="footer-inner"><a href="' + BASE + '/" class="footer-logo"><img src="' + BASE + '/brand/stafferton-primary-logo.svg" alt="Stafferton Digital" /></a><div class="footer-links"><a href="' + BASE + '/#services">Services</a><a href="' + BASE + '/blog/">Blog</a><a href="' + BASE + '/contact.html">Contact</a></div><span class="footer-copy">© Stafferton Digital</span></div></footer>');
   parts.push('<scr' + 'ipt>var nav=document.querySelector("nav");window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>40);});var tg=document.querySelector(".nav-mobile-toggle");var lk=document.querySelector(".nav-links");if(tg)tg.addEventListener("click",function(){lk.classList.toggle("open");});document.querySelectorAll(".nav-links a").forEach(function(a){a.addEventListener("click",function(){lk.classList.remove("open");});});<\/scr' + 'ipt>');
   parts.push('</body></html>');
   var html = parts.join('\n');
