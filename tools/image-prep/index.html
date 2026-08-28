@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Image Resizer and WebP Converter | Stafferton Digital</title>
+  <meta name="description" content="Resize, compress and convert website images to WebP, JPEG or PNG in your browser. Private, fast and free.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stafferton.digital/tools/image-prep/">
+  <link rel="icon" type="image/svg+xml" href="/brand/stafferton-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tools-app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Image Resizer and WebP Converter">
+  <meta property="og:description" content="Prepare lighter website images locally in your browser.">
+  <meta property="og:url" content="https://stafferton.digital/tools/image-prep/">
+  <meta property="og:site_name" content="Stafferton Digital">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Prep Tool",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any modern web browser",
+    "url": "https://stafferton.digital/tools/image-prep/",
+    "description": "Resize, compress and convert website images locally in the browser.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+    "publisher": {"@type": "Organization", "name": "Stafferton Digital", "url": "https://stafferton.digital/"}
+  }
+  </script>
+</head>
+<body class="tool-page">
+  <a class="tool-skip-link" href="#tool">Skip to tool</a>
+  <header class="tool-site-nav">
+    <a class="tool-site-logo" href="/" aria-label="Stafferton Digital home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" width="267" height="34" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+    </a>
+    <div class="tool-nav-actions">
+      <a class="tool-nav-link" href="/tools">All tools</a>
+      <a class="tool-nav-cta" href="/contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main class="tool-main" id="main">
+    <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/tools">Tools</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Image prep</span>
+    </nav>
+
+    <div class="tool-hero">
+      <div>
+        <p class="tool-kicker">Website performance</p>
+        <h1 class="tool-title">Image Prep Tool</h1>
+        <p class="tool-intro">Resize, compress and convert images before uploading them to a website. Keep dimensions sensible and page weight down.</p>
+      </div>
+      <div class="tool-privacy">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8"/></svg>
+        Images never leave your browser
+      </div>
+    </div>
+
+    <section class="tool-workspace" id="tool" aria-label="Image preparation tool">
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Source and settings</h2>
+          <span class="tool-step">01 / PREPARE</span>
+        </div>
+
+        <form class="tool-form" id="image-form">
+          <label class="tool-dropzone" id="dropzone" for="image-file">
+            <input id="image-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" aria-describedby="upload-help">
+            <span>
+              <span class="tool-dropzone-icon">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 16.5V19h16v-2.5M12 4v10m0-10L8 8m4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <strong>Choose an image or drop it here</strong>
+              <span id="upload-help">JPEG, PNG, WebP, AVIF or GIF - up to 25 MB</span>
+            </span>
+          </label>
+          <p class="tool-field-error" id="file-error" aria-live="polite"></p>
+
+          <div class="tool-file-stats" id="source-stats" hidden>
+            <div class="tool-file-stat">
+              <span class="tool-file-stat-label">Source</span>
+              <span class="tool-file-stat-value" id="source-name"></span>
+            </div>
+            <div class="tool-file-stat">
+              <span class="tool-file-stat-label">Dimensions</span>
+              <span class="tool-file-stat-value" id="source-dimensions"></span>
+            </div>
+            <div class="tool-file-stat">
+              <span class="tool-file-stat-label">File size</span>
+              <span class="tool-file-stat-value" id="source-size"></span>
+            </div>
+          </div>
+
+          <div class="tool-field-row">
+            <div class="tool-field">
+              <label for="width">Width in pixels</label>
+              <input class="tool-input" id="width" type="number" inputmode="numeric" min="1" max="12000" placeholder="1600">
+            </div>
+            <div class="tool-field">
+              <label for="height">Height in pixels</label>
+              <input class="tool-input" id="height" type="number" inputmode="numeric" min="1" max="12000" placeholder="900">
+            </div>
+          </div>
+
+          <label class="tool-check" for="lock-ratio">
+            <input id="lock-ratio" type="checkbox" checked>
+            <span>Keep the original aspect ratio</span>
+          </label>
+
+          <div class="tool-field-row">
+            <div class="tool-field">
+              <label for="format">Output format</label>
+              <select class="tool-select" id="format">
+                <option value="image/webp">WebP - recommended</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/png">PNG</option>
+              </select>
+            </div>
+            <div class="tool-field" id="quality-field">
+              <label for="quality">Quality</label>
+              <div class="tool-range-row">
+                <input class="tool-range" id="quality" type="range" min="40" max="100" value="82">
+                <output class="tool-range-value" id="quality-value" for="quality">82%</output>
+              </div>
+              <p class="tool-help">82% is a strong default for the web.</p>
+            </div>
+          </div>
+
+          <div class="tool-actions">
+            <button class="tool-button tool-button-primary" id="process-button" type="submit" disabled>Prepare image</button>
+            <button class="tool-button" id="reset-button" type="button">Clear</button>
+          </div>
+          <p class="tool-status" id="process-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Preview and download</h2>
+          <span class="tool-step">02 / OUTPUT</span>
+        </div>
+        <div class="tool-output">
+          <div class="tool-empty" id="empty-state">
+            <div>
+              <div class="tool-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="9" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="m5 17 4.5-4 3.5 3 2.5-2 3.5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h2>Your prepared image will appear here</h2>
+              <p>Choose a source image, set its dimensions and output format, then process it.</p>
+            </div>
+          </div>
+
+          <div id="result" hidden>
+            <div class="tool-preview">
+              <img id="preview-image" alt="Prepared image preview">
+            </div>
+            <div class="tool-file-stats" style="margin-top:12px">
+              <div class="tool-file-stat">
+                <span class="tool-file-stat-label">Output</span>
+                <span class="tool-file-stat-value" id="output-format"></span>
+              </div>
+              <div class="tool-file-stat">
+                <span class="tool-file-stat-label">Dimensions</span>
+                <span class="tool-file-stat-value" id="output-dimensions"></span>
+              </div>
+              <div class="tool-file-stat">
+                <span class="tool-file-stat-label">File size</span>
+                <span class="tool-file-stat-value" id="output-size"></span>
+              </div>
+            </div>
+            <div class="tool-actions" style="margin-top:12px">
+              <a class="tool-button tool-button-primary" id="download-button" href="#" download>Download image</a>
+            </div>
+            <div class="tool-callout" id="saving-note" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-content" aria-label="About image optimisation">
+      <div>
+        <h2>What this tool does</h2>
+        <ul>
+          <li>Resizes images to useful web dimensions.</li>
+          <li>Converts to WebP, JPEG or PNG using your browser.</li>
+          <li>Lets you balance visual quality against page weight.</li>
+          <li>Removes metadata because a fresh output file is created from image pixels.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Practical image guidance</h2>
+        <ul>
+          <li>Use WebP for most photographs and website graphics.</li>
+          <li>A 1600 px maximum width is usually enough for a full-width website image.</li>
+          <li>Keep PNG for transparency or graphics that need lossless output.</li>
+          <li>Animated images export as a single static frame.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tool-site-footer">
+    <div class="tool-site-footer-inner">
+      <span>© Stafferton Digital - practical SEO and analytics tools.</span>
+      <span><a href="/privacy-policy.html">Privacy</a> · <a href="/contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const MAX_BYTES = 25 * 1024 * 1024;
+    const fileInput = document.getElementById("image-file");
+    const dropzone = document.getElementById("dropzone");
+    const form = document.getElementById("image-form");
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    const lockRatio = document.getElementById("lock-ratio");
+    const formatInput = document.getElementById("format");
+    const qualityInput = document.getElementById("quality");
+    const qualityValue = document.getElementById("quality-value");
+    const qualityField = document.getElementById("quality-field");
+    const processButton = document.getElementById("process-button");
+    const status = document.getElementById("process-status");
+    const error = document.getElementById("file-error");
+    const empty = document.getElementById("empty-state");
+    const result = document.getElementById("result");
+    const preview = document.getElementById("preview-image");
+    const download = document.getElementById("download-button");
+    let image = null;
+    let sourceFile = null;
+    let sourceUrl = "";
+    let outputUrl = "";
+    let ratio = 1;
+    let changingSize = false;
+
+    function humanSize(bytes) {
+      if (!Number.isFinite(bytes)) return "Unknown";
+      if (bytes < 1024) return `${bytes} B`;
+      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+      return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+    }
+
+    function cleanName(name) {
+      return name.replace(/\.[^.]+$/, "").replace(/[^\w-]+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "image";
+    }
+
+    function extension(type) {
+      return type === "image/jpeg" ? "jpg" : type.split("/")[1];
+    }
+
+    function clearOutput() {
+      if (outputUrl) URL.revokeObjectURL(outputUrl);
+      outputUrl = "";
+      result.hidden = true;
+      empty.hidden = false;
+    }
+
+    function loadFile(file) {
+      error.textContent = "";
+      status.textContent = "";
+      if (!file || !file.type.startsWith("image/")) {
+        error.textContent = "Choose a supported image file.";
+        return;
+      }
+      if (file.size > MAX_BYTES) {
+        error.textContent = "Choose an image smaller than 25 MB.";
+        return;
+      }
+      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      clearOutput();
+      sourceFile = file;
+      sourceUrl = URL.createObjectURL(file);
+      const next = new Image();
+      next.onload = () => {
+        image = next;
+        ratio = next.naturalWidth / next.naturalHeight;
+        widthInput.value = next.naturalWidth;
+        heightInput.value = next.naturalHeight;
+        document.getElementById("source-name").textContent = file.name;
+        document.getElementById("source-dimensions").textContent = `${next.naturalWidth} × ${next.naturalHeight}`;
+        document.getElementById("source-size").textContent = humanSize(file.size);
+        document.getElementById("source-stats").hidden = false;
+        processButton.disabled = false;
+        status.textContent = "Image ready. Adjust settings or prepare it now.";
+        status.dataset.tone = "success";
+      };
+      next.onerror = () => {
+        sourceFile = null;
+        image = null;
+        processButton.disabled = true;
+        error.textContent = "This image could not be decoded by your browser.";
+      };
+      next.src = sourceUrl;
+    }
+
+    fileInput.addEventListener("change", () => loadFile(fileInput.files[0]));
+    ["dragenter", "dragover"].forEach(type => dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.dataset.dragging = "true";
+    }));
+    ["dragleave", "drop"].forEach(type => dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.dataset.dragging = "false";
+    }));
+    dropzone.addEventListener("drop", event => loadFile(event.dataTransfer.files[0]));
+
+    qualityInput.addEventListener("input", () => qualityValue.textContent = `${qualityInput.value}%`);
+    formatInput.addEventListener("change", () => {
+      qualityField.hidden = formatInput.value === "image/png";
+      clearOutput();
+    });
+
+    widthInput.addEventListener("input", () => {
+      if (changingSize || !lockRatio.checked || !ratio) return;
+      changingSize = true;
+      heightInput.value = Math.max(1, Math.round(Number(widthInput.value) / ratio)) || "";
+      changingSize = false;
+      clearOutput();
+    });
+    heightInput.addEventListener("input", () => {
+      if (changingSize || !lockRatio.checked || !ratio) return;
+      changingSize = true;
+      widthInput.value = Math.max(1, Math.round(Number(heightInput.value) * ratio)) || "";
+      changingSize = false;
+      clearOutput();
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      error.textContent = "";
+      if (!image || !sourceFile) return;
+      const width = Math.round(Number(widthInput.value));
+      const height = Math.round(Number(heightInput.value));
+      if (!width || !height || width < 1 || height < 1 || width > 12000 || height > 12000 || width * height > 40000000) {
+        error.textContent = "Use dimensions up to 12,000 px and 40 megapixels.";
+        return;
+      }
+      processButton.disabled = true;
+      status.textContent = "Preparing image…";
+      status.dataset.tone = "";
+      requestAnimationFrame(() => {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext("2d");
+        if (formatInput.value === "image/jpeg") {
+          context.fillStyle = "#FFFFFF";
+          context.fillRect(0, 0, width, height);
+        }
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = "high";
+        context.drawImage(image, 0, 0, width, height);
+        canvas.toBlob(blob => {
+          processButton.disabled = false;
+          if (!blob) {
+            error.textContent = "Your browser could not create that output format.";
+            status.textContent = "";
+            return;
+          }
+          clearOutput();
+          outputUrl = URL.createObjectURL(blob);
+          preview.src = outputUrl;
+          download.href = outputUrl;
+          download.download = `${cleanName(sourceFile.name)}-${width}x${height}.${extension(blob.type)}`;
+          document.getElementById("output-format").textContent = blob.type.replace("image/", "").toUpperCase();
+          document.getElementById("output-dimensions").textContent = `${width} × ${height}`;
+          document.getElementById("output-size").textContent = humanSize(blob.size);
+          const change = sourceFile.size ? Math.round((1 - blob.size / sourceFile.size) * 100) : 0;
+          document.getElementById("saving-note").textContent = change > 0
+            ? `This output is ${change}% smaller than the source file.`
+            : `This output is ${Math.abs(change)}% larger than the source. Try WebP, lower quality or smaller dimensions.`;
+          empty.hidden = true;
+          result.hidden = false;
+          status.textContent = "Image prepared and ready to download.";
+          status.dataset.tone = "success";
+        }, formatInput.value, Number(qualityInput.value) / 100);
+      });
+    });
+
+    document.getElementById("reset-button").addEventListener("click", () => {
+      form.reset();
+      qualityValue.textContent = "82%";
+      qualityField.hidden = false;
+      fileInput.value = "";
+      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      sourceUrl = "";
+      sourceFile = null;
+      image = null;
+      processButton.disabled = true;
+      document.getElementById("source-stats").hidden = true;
+      status.textContent = "";
+      error.textContent = "";
+      clearOutput();
+    });
+  })();
+  </script>
+</body>
+</html>
