@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free UTM Campaign URL Builder | Stafferton Digital</title>
+  <meta name="description" content="Build consistent campaign tracking URLs with UTM source, medium, campaign, term and content parameters. Free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stafferton.digital/tools/utm-builder/">
+  <link rel="icon" type="image/svg+xml" href="/brand/stafferton-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tools-app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free UTM Campaign URL Builder">
+  <meta property="og:description" content="Create consistent, ready-to-use UTM tracking links in your browser.">
+  <meta property="og:url" content="https://stafferton.digital/tools/utm-builder/">
+  <meta property="og:site_name" content="Stafferton Digital">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UTM Campaign URL Builder",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any web browser",
+    "url": "https://stafferton.digital/tools/utm-builder/",
+    "description": "Build campaign tracking URLs using standard UTM parameters.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+    "publisher": {"@type": "Organization", "name": "Stafferton Digital", "url": "https://stafferton.digital/"}
+  }
+  </script>
+</head>
+<body class="tool-page">
+  <a class="tool-skip-link" href="#tool">Skip to tool</a>
+  <header class="tool-site-nav">
+    <a class="tool-site-logo" href="/" aria-label="Stafferton Digital home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" width="267" height="34" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+    </a>
+    <div class="tool-nav-actions">
+      <a class="tool-nav-link" href="/tools">All tools</a>
+      <a class="tool-nav-cta" href="/contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main class="tool-main" id="main">
+    <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/tools">Tools</a><span aria-hidden="true">/</span>
+      <span aria-current="page">UTM builder</span>
+    </nav>
+
+    <div class="tool-hero">
+      <div>
+        <p class="tool-kicker">Campaign tracking</p>
+        <h1 class="tool-title">UTM Campaign Builder</h1>
+        <p class="tool-intro">Create clean, consistent campaign URLs for analytics. Your links are built entirely in your browser.</p>
+      </div>
+      <div class="tool-privacy">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8"/></svg>
+        No data leaves your browser
+      </div>
+    </div>
+
+    <section class="tool-workspace" id="tool" aria-label="UTM campaign builder">
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Campaign details</h2>
+          <span class="tool-step">01 / INPUT</span>
+        </div>
+        <form class="tool-form" id="utm-form" novalidate>
+          <div class="tool-field">
+            <label for="destination">Destination URL <span class="tool-required" aria-hidden="true">*</span></label>
+            <input class="tool-input" id="destination" name="destination" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com/landing-page" required aria-describedby="destination-help destination-error">
+            <p class="tool-help" id="destination-help">Existing query parameters will be preserved.</p>
+            <p class="tool-field-error" id="destination-error" aria-live="polite"></p>
+          </div>
+
+          <div class="tool-field">
+            <span class="tool-label">Quick presets</span>
+            <div class="tool-presets" aria-label="Campaign presets">
+              <button class="tool-chip" type="button" data-source="google" data-medium="cpc">Google Ads</button>
+              <button class="tool-chip" type="button" data-source="facebook" data-medium="paid_social">Meta Ads</button>
+              <button class="tool-chip" type="button" data-source="linkedin" data-medium="paid_social">LinkedIn Ads</button>
+              <button class="tool-chip" type="button" data-source="newsletter" data-medium="email">Email</button>
+            </div>
+          </div>
+
+          <div class="tool-field-row">
+            <div class="tool-field">
+              <label for="source">Campaign source <span class="tool-required" aria-hidden="true">*</span></label>
+              <input class="tool-input" id="source" name="utm_source" type="text" maxlength="120" placeholder="google" required aria-describedby="source-help">
+              <p class="tool-help" id="source-help">Platform, publisher or list.</p>
+            </div>
+            <div class="tool-field">
+              <label for="medium">Campaign medium <span class="tool-required" aria-hidden="true">*</span></label>
+              <input class="tool-input" id="medium" name="utm_medium" type="text" maxlength="120" placeholder="paid_social" required aria-describedby="medium-help">
+              <p class="tool-help" id="medium-help">Channel or marketing medium.</p>
+            </div>
+          </div>
+
+          <div class="tool-field">
+            <label for="campaign">Campaign name <span class="tool-required" aria-hidden="true">*</span></label>
+            <input class="tool-input" id="campaign" name="utm_campaign" type="text" maxlength="160" placeholder="autumn_open_day" required aria-describedby="campaign-help">
+            <p class="tool-help" id="campaign-help">Use a stable name your team will recognise.</p>
+          </div>
+
+          <div class="tool-field-row">
+            <div class="tool-field">
+              <label for="term">Campaign term</label>
+              <input class="tool-input" id="term" name="utm_term" type="text" maxlength="160" placeholder="student_accommodation">
+              <p class="tool-help">Optional keyword or audience.</p>
+            </div>
+            <div class="tool-field">
+              <label for="content">Campaign content</label>
+              <input class="tool-input" id="content" name="utm_content" type="text" maxlength="160" placeholder="hero_cta">
+              <p class="tool-help">Optional creative or link variant.</p>
+            </div>
+          </div>
+
+          <label class="tool-check" for="normalise">
+            <input id="normalise" type="checkbox" checked>
+            <span>Standardise UTM values to lowercase and replace spaces with underscores</span>
+          </label>
+
+          <div class="tool-actions">
+            <button class="tool-button tool-button-primary" type="submit">Build campaign URL</button>
+            <button class="tool-button" id="reset-button" type="reset">Clear</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Tracking URL</h2>
+          <span class="tool-step">02 / OUTPUT</span>
+        </div>
+        <div class="tool-output" id="output">
+          <div class="tool-empty" id="empty-state">
+            <div>
+              <div class="tool-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <h2>Your URL will appear here</h2>
+              <p>Add a destination and campaign details, then build the link.</p>
+            </div>
+          </div>
+
+          <div id="result" hidden>
+            <div class="tool-output-card">
+              <div class="tool-output-label">
+                <span>Campaign URL</span>
+                <span id="url-length">0 characters</span>
+              </div>
+              <p class="tool-output-value" id="built-url"></p>
+            </div>
+            <div class="tool-actions" style="margin-top:12px">
+              <button class="tool-button tool-button-primary" id="copy-url" type="button">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.8"/></svg>
+                Copy URL
+              </button>
+              <a class="tool-button" id="test-url" href="#" target="_blank" rel="noopener noreferrer">Open URL</a>
+            </div>
+            <p class="tool-status" id="copy-status" role="status" aria-live="polite"></p>
+
+            <div class="tool-section" style="margin-top:20px">
+              <h3 class="tool-section-title">Parameter breakdown</h3>
+              <dl class="tool-param-list" id="parameter-list"></dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-content" aria-label="About UTM campaign tracking">
+      <div>
+        <h2>How to use the UTM builder</h2>
+        <ol>
+          <li>Paste the page you want people to visit.</li>
+          <li>Add the source, medium and campaign name, or start with a preset.</li>
+          <li>Copy the finished URL into your ad, email or social post.</li>
+          <li>Use the same naming pattern across campaigns to keep analytics tidy.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>What the parameters mean</h2>
+        <ul>
+          <li><strong>Source</strong> identifies where traffic came from, such as Google or a newsletter.</li>
+          <li><strong>Medium</strong> identifies the channel, such as CPC, email or paid social.</li>
+          <li><strong>Campaign</strong> groups links into the same marketing initiative.</li>
+          <li><strong>Term and content</strong> optionally identify audiences, keywords and creative variants.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tool-site-footer">
+    <div class="tool-site-footer-inner">
+      <span>© Stafferton Digital - practical SEO and analytics tools.</span>
+      <span><a href="/privacy-policy.html">Privacy</a> · <a href="/contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const form = document.getElementById("utm-form");
+    const destination = document.getElementById("destination");
+    const destinationError = document.getElementById("destination-error");
+    const result = document.getElementById("result");
+    const emptyState = document.getElementById("empty-state");
+    const builtUrl = document.getElementById("built-url");
+    const testUrl = document.getElementById("test-url");
+    const urlLength = document.getElementById("url-length");
+    const parameterList = document.getElementById("parameter-list");
+    const copyStatus = document.getElementById("copy-status");
+    const fields = ["source", "medium", "campaign", "term", "content"].map(id => document.getElementById(id));
+    const required = fields.slice(0, 3);
+    let outputUrl = "";
+
+    function parseDestination(value) {
+      let input = value.trim();
+      if (!input) throw new Error("Enter a destination URL.");
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(input)) input = "https://" + input;
+      const url = new URL(input);
+      if (!["http:", "https:"].includes(url.protocol)) throw new Error("Use an HTTP or HTTPS URL.");
+      if (!url.hostname) throw new Error("Enter a complete destination URL.");
+      return url;
+    }
+
+    function normalise(value) {
+      return value.trim().toLowerCase().replace(/\s+/g, "_");
+    }
+
+    function setValid(input, valid) {
+      input.setAttribute("aria-invalid", valid ? "false" : "true");
+    }
+
+    function build(showErrors = false) {
+      destinationError.textContent = "";
+      let url;
+      try {
+        url = parseDestination(destination.value);
+        setValid(destination, true);
+      } catch (error) {
+        setValid(destination, false);
+        if (showErrors || destination.value) destinationError.textContent = error.message;
+        return null;
+      }
+
+      let valid = true;
+      required.forEach(input => {
+        const ok = Boolean(input.value.trim());
+        setValid(input, ok);
+        valid = valid && ok;
+      });
+      if (!valid) return null;
+
+      const shouldNormalise = document.getElementById("normalise").checked;
+      const params = {};
+      fields.forEach(input => {
+        let value = input.value.trim();
+        if (shouldNormalise) value = normalise(value);
+        if (value) {
+          params[input.name] = value;
+          url.searchParams.set(input.name, value);
+        }
+      });
+      return { url: url.toString(), params };
+    }
+
+    function render(data) {
+      outputUrl = data.url;
+      builtUrl.textContent = data.url;
+      testUrl.href = data.url;
+      urlLength.textContent = data.url.length + (data.url.length === 1 ? " character" : " characters");
+      parameterList.replaceChildren();
+      Object.entries(data.params).forEach(([key, value]) => {
+        const row = document.createElement("div");
+        row.className = "tool-param";
+        const term = document.createElement("dt");
+        term.textContent = key;
+        const description = document.createElement("dd");
+        description.textContent = value;
+        row.append(term, description);
+        parameterList.append(row);
+      });
+      emptyState.hidden = true;
+      result.hidden = false;
+      copyStatus.textContent = "";
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const data = build(true);
+      if (data) {
+        render(data);
+        builtUrl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        form.querySelector('[aria-invalid="true"]')?.focus();
+      }
+    });
+
+    form.addEventListener("input", event => {
+      if (event.target.matches("input")) event.target.setAttribute("aria-invalid", "false");
+      if (!result.hidden) {
+        const data = build(false);
+        if (data) render(data);
+      }
+    });
+
+    document.querySelectorAll(".tool-chip").forEach(button => {
+      button.addEventListener("click", () => {
+        document.getElementById("source").value = button.dataset.source;
+        document.getElementById("medium").value = button.dataset.medium;
+        document.querySelectorAll(".tool-chip").forEach(chip => chip.setAttribute("aria-pressed", chip === button ? "true" : "false"));
+        if (!result.hidden) {
+          const data = build(false);
+          if (data) render(data);
+        }
+        document.getElementById("campaign").focus();
+      });
+    });
+
+    document.getElementById("reset-button").addEventListener("click", () => {
+      requestAnimationFrame(() => {
+        fields.concat(destination).forEach(input => input.setAttribute("aria-invalid", "false"));
+        destinationError.textContent = "";
+        copyStatus.textContent = "";
+        outputUrl = "";
+        result.hidden = true;
+        emptyState.hidden = false;
+        document.querySelectorAll(".tool-chip").forEach(chip => chip.setAttribute("aria-pressed", "false"));
+      });
+    });
+
+    document.getElementById("copy-url").addEventListener("click", async () => {
+      if (!outputUrl) return;
+      try {
+        await navigator.clipboard.writeText(outputUrl);
+        copyStatus.textContent = "Copied to clipboard.";
+        copyStatus.dataset.tone = "success";
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(builtUrl);
+        getSelection().removeAllRanges();
+        getSelection().addRange(range);
+        copyStatus.textContent = "The URL is selected. Press Ctrl+C or Cmd+C to copy.";
+        copyStatus.dataset.tone = "";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

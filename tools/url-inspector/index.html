@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free URL Inspection &amp; Redirect Checker | Stafferton Digital</title>
+  <meta name="description" content="Inspect any public URL for status codes, redirect chains, response headers, metadata, canonicals, robots directives and on-page SEO signals.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stafferton.digital/tools/url-inspector/">
+  <link rel="icon" type="image/svg+xml" href="/brand/stafferton-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tools-app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free URL Inspection &amp; Redirect Checker">
+  <meta property="og:description" content="Check status codes, redirects, HTTP headers and key on-page SEO signals in one place.">
+  <meta property="og:url" content="https://stafferton.digital/tools/url-inspector/">
+  <meta property="og:site_name" content="Stafferton Digital">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "URL Inspection Tool",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any web browser",
+    "url": "https://stafferton.digital/tools/url-inspector/",
+    "description": "Inspect public web URLs for redirect chains, HTTP headers and on-page SEO signals.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+    "publisher": {"@type": "Organization", "name": "Stafferton Digital", "url": "https://stafferton.digital/"}
+  }
+  </script>
+</head>
+<body class="tool-page">
+  <a class="tool-skip-link" href="#tool">Skip to tool</a>
+  <header class="tool-site-nav">
+    <a class="tool-site-logo" href="/" aria-label="Stafferton Digital home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" width="267" height="34" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+    </a>
+    <div class="tool-nav-actions">
+      <a class="tool-nav-link" href="/tools">All tools</a>
+      <a class="tool-nav-cta" href="/contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main class="tool-main" id="main">
+    <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/tools">Tools</a><span aria-hidden="true">/</span>
+      <span aria-current="page">URL inspector</span>
+    </nav>
+
+    <div class="tool-hero">
+      <div>
+        <p class="tool-kicker">Technical SEO</p>
+        <h1 class="tool-title">URL Inspection Tool</h1>
+        <p class="tool-intro">Check a public URL's status, redirect chain, HTTP headers and core on-page SEO signals in one pass.</p>
+      </div>
+      <div class="tool-privacy">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M7 4v6m10-6v6M5 13h4m2 0h8M5 17h8m2 0h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Live server-side check
+      </div>
+    </div>
+
+    <section class="tool-workspace" id="tool" aria-label="URL inspection tool">
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Inspect a URL</h2>
+          <span class="tool-step">LIVE REQUEST</span>
+        </div>
+        <form class="tool-form" id="inspection-form" novalidate>
+          <div class="tool-field">
+            <label for="inspection-url">Public web address <span class="tool-required" aria-hidden="true">*</span></label>
+            <input class="tool-input" id="inspection-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com/page" required aria-describedby="url-help url-error">
+            <p class="tool-help" id="url-help">HTTP and HTTPS only. Private networks are blocked.</p>
+            <p class="tool-field-error" id="url-error" aria-live="polite"></p>
+          </div>
+          <div class="tool-presets" aria-label="Example URLs">
+            <button class="tool-chip" type="button" data-url="https://stafferton.digital/">Try Stafferton</button>
+            <button class="tool-chip" type="button" data-url="http://example.com/">Try a redirect</button>
+          </div>
+          <div class="tool-actions">
+            <button class="tool-button tool-button-primary" id="inspect-button" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              Inspect URL
+            </button>
+            <button class="tool-button" id="clear-button" type="reset">Clear</button>
+          </div>
+          <p class="tool-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="tool-callout">
+          The checker requests the page without running JavaScript. Results may differ from a rendered browser or Googlebot crawl.
+        </div>
+      </div>
+
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Inspection summary</h2>
+          <span class="tool-step">UP TO 8 REDIRECTS</span>
+        </div>
+        <div class="tool-output" id="summary-output">
+          <div class="tool-empty" id="empty-state">
+            <div>
+              <div class="tool-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4z" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <h2>Ready to inspect</h2>
+              <p>Enter a public URL to reveal its HTTP response and key SEO signals.</p>
+            </div>
+          </div>
+          <div class="tool-loading" id="loading-state" hidden>
+            <div>
+              <div class="tool-spinner" aria-hidden="true"></div>
+              <strong>Inspecting the page</strong>
+              <p class="tool-help">Following redirects and reading SEO signals...</p>
+            </div>
+          </div>
+          <div id="summary-result" hidden>
+            <div class="tool-stats">
+              <div class="tool-stat">
+                <div class="tool-stat-label">Status</div>
+                <span class="tool-stat-value" id="summary-status"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Redirects</div>
+                <span class="tool-stat-value" id="summary-redirects"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Indexability</div>
+                <span class="tool-stat-value" id="summary-indexability"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Response time</div>
+                <span class="tool-stat-value" id="summary-time"></span>
+              </div>
+            </div>
+            <div class="tool-section" style="margin-top:20px">
+              <h3 class="tool-section-title">Final destination</h3>
+              <p class="tool-output-value" id="summary-url"></p>
+            </div>
+            <div class="tool-section" style="margin-top:20px">
+              <h3 class="tool-section-title">Priority checks</h3>
+              <div class="tool-check-list" id="summary-checks"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="detailed-results" style="margin-top:24px" hidden aria-label="Detailed inspection results">
+      <div class="tool-tabs" role="tablist" aria-label="Inspection result views">
+        <button class="tool-tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview">Overview</button>
+        <button class="tool-tab" id="tab-redirects" role="tab" aria-selected="false" aria-controls="panel-redirects">Redirect chain</button>
+        <button class="tool-tab" id="tab-headers" role="tab" aria-selected="false" aria-controls="panel-headers">HTTP headers</button>
+        <button class="tool-tab" id="tab-data" role="tab" aria-selected="false" aria-controls="panel-data">Copy result</button>
+      </div>
+
+      <div class="tool-tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" style="margin-top:12px">
+        <div class="tool-section">
+          <h2 class="tool-section-title">On-page signals</h2>
+          <dl id="seo-fields"></dl>
+        </div>
+        <p class="tool-callout" id="result-note" style="margin:12px 0 0"></p>
+      </div>
+
+      <div class="tool-tab-panel" id="panel-redirects" role="tabpanel" aria-labelledby="tab-redirects" style="margin-top:12px" hidden>
+        <div class="tool-section">
+          <h2 class="tool-section-title">Request path</h2>
+          <ol class="tool-chain" id="redirect-chain"></ol>
+        </div>
+      </div>
+
+      <div class="tool-tab-panel" id="panel-headers" role="tabpanel" aria-labelledby="tab-headers" style="margin-top:12px" hidden>
+        <div class="tool-section">
+          <h2 class="tool-section-title">Final response headers</h2>
+          <table class="tool-header-table"><tbody id="header-rows"></tbody></table>
+        </div>
+      </div>
+
+      <div class="tool-tab-panel" id="panel-data" role="tabpanel" aria-labelledby="tab-data" style="margin-top:12px" hidden>
+        <div class="tool-section">
+          <div class="tool-output-label">
+            <span>Plain-text report</span>
+            <button class="tool-chip" id="copy-report" type="button">Copy report</button>
+          </div>
+          <pre class="tool-output-value" id="plain-report"></pre>
+        </div>
+        <p class="tool-status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="tool-content" aria-label="About the URL inspection tool">
+      <div>
+        <h2>What this URL checker tests</h2>
+        <ul>
+          <li>The full redirect chain and the final HTTP status.</li>
+          <li>Response headers including robots and caching directives.</li>
+          <li>Title, meta description, canonical, robots directives, H1 and document language.</li>
+          <li>Basic indexability based on the response and on-page directives.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>What it does not test</h2>
+        <p>This is a fast diagnostic, not a replacement for a full crawl. It does not run client-side JavaScript, read robots.txt, test page speed, confirm Google indexing or evaluate every technical SEO signal.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tool-site-footer">
+    <div class="tool-site-footer-inner">
+      <span>© Stafferton Digital - practical SEO and analytics tools.</span>
+      <span><a href="/privacy-policy.html">Privacy</a> · <a href="/contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const form = document.getElementById("inspection-form");
+    const input = document.getElementById("inspection-url");
+    const error = document.getElementById("url-error");
+    const status = document.getElementById("form-status");
+    const inspectButton = document.getElementById("inspect-button");
+    const emptyState = document.getElementById("empty-state");
+    const loadingState = document.getElementById("loading-state");
+    const summaryResult = document.getElementById("summary-result");
+    const detailedResults = document.getElementById("detailed-results");
+    let report = "";
+
+    function text(elementId, value) {
+      document.getElementById(elementId).textContent = value || "Not found";
+    }
+
+    function setLoading(loading) {
+      inspectButton.disabled = loading;
+      input.disabled = loading;
+      loadingState.hidden = !loading;
+      if (loading) {
+        emptyState.hidden = true;
+        summaryResult.hidden = true;
+        detailedResults.hidden = true;
+        status.textContent = "Requesting the page...";
+        status.dataset.tone = "";
+      }
+    }
+
+    function safeUrl(value) {
+      let url = value.trim();
+      if (!url) throw new Error("Enter a URL to inspect.");
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(url)) url = "https://" + url;
+      const parsed = new URL(url);
+      if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Use an HTTP or HTTPS URL.");
+      return parsed.href;
+    }
+
+    function renderSignal(check) {
+      const row = document.createElement("div");
+      row.className = "tool-signal";
+      row.dataset.tone = check.type;
+      const mark = document.createElement("span");
+      mark.className = "tool-signal-mark";
+      mark.setAttribute("aria-hidden", "true");
+      const name = document.createElement("strong");
+      name.textContent = check.label;
+      const detail = document.createElement("span");
+      detail.textContent = check.detail;
+      row.append(mark, name, detail);
+      return row;
+    }
+
+    function addSeoField(label, value) {
+      const row = document.createElement("div");
+      row.className = "tool-seo-field";
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = value || "Not found";
+      row.append(term, description);
+      document.getElementById("seo-fields").append(row);
+    }
+
+    function reportText(data) {
+      const checks = data.seo.checks.map(check => `${check.type.toUpperCase()}: ${check.label} - ${check.detail}`).join("\n");
+      const redirects = data.redirects.length
+        ? data.redirects.map(hop => `${hop.status} ${hop.url} -> ${hop.location}`).join("\n")
+        : "None";
+      return [
+        "STAFFERTON URL INSPECTION",
+        `Requested: ${data.requestedUrl}`,
+        `Final URL: ${data.finalUrl}`,
+        `Status: ${data.status} ${data.statusText}`,
+        `Redirects: ${data.redirects.length}`,
+        `Response time: ${data.durationMs} ms`,
+        `Content type: ${data.contentType}`,
+        `Indexability: ${data.seo.indexabilityLabel}`,
+        "",
+        `Title: ${data.seo.title || "Not found"}`,
+        `Meta description: ${data.seo.description || "Not found"}`,
+        `Canonical: ${data.seo.canonical || "Not found"}`,
+        `Robots: ${data.seo.robots || "No on-page directive found"}`,
+        `H1: ${data.seo.h1 || "Not found"}`,
+        `H1 count: ${data.seo.h1Count}`,
+        `Language: ${data.seo.lang || "Not found"}`,
+        "",
+        "CHECKS",
+        checks,
+        "",
+        "REDIRECT CHAIN",
+        redirects,
+        "",
+        data.note
+      ].join("\n");
+    }
+
+    function render(data) {
+      text("summary-status", `${data.status} ${data.statusText}`);
+      document.getElementById("summary-status").dataset.tone = data.status === 200 ? "success" : "error";
+      text("summary-redirects", String(data.redirects.length));
+      text("summary-indexability", data.seo.indexabilityLabel);
+      document.getElementById("summary-indexability").dataset.tone = data.seo.indexability === "indexable" ? "success" : data.seo.indexability === "blocked" ? "error" : "warning";
+      text("summary-time", `${data.durationMs} ms`);
+      text("summary-url", data.finalUrl);
+
+      const checks = document.getElementById("summary-checks");
+      checks.replaceChildren(...data.seo.checks.map(renderSignal));
+
+      const fields = document.getElementById("seo-fields");
+      fields.replaceChildren();
+      addSeoField("Title", data.seo.title);
+      addSeoField("Meta description", data.seo.description);
+      addSeoField("Canonical", data.seo.canonical);
+      addSeoField("Robots", data.seo.robots || "No on-page directive found");
+      addSeoField("H1", data.seo.h1);
+      addSeoField("H1 count", String(data.seo.h1Count));
+      addSeoField("HTML language", data.seo.lang);
+      addSeoField("Content type", data.contentType);
+      document.getElementById("result-note").textContent = data.note + (data.truncated ? " Only the first 1 MB of the response was read." : "");
+
+      const chain = document.getElementById("redirect-chain");
+      chain.replaceChildren();
+      data.redirects.forEach(hop => {
+        const item = document.createElement("li");
+        const code = document.createElement("span");
+        code.className = "tool-chain-status";
+        code.textContent = String(hop.status);
+        const route = document.createElement("span");
+        route.className = "tool-chain-url";
+        route.textContent = `${hop.url} → ${hop.location}`;
+        item.append(code, route);
+        chain.append(item);
+      });
+      const finalItem = document.createElement("li");
+      const finalCode = document.createElement("span");
+      finalCode.className = "tool-chain-status";
+      finalCode.style.color = data.status === 200 ? "var(--tool-pass)" : "var(--tool-error)";
+      finalCode.textContent = String(data.status);
+      const finalUrl = document.createElement("span");
+      finalUrl.className = "tool-chain-url";
+      finalUrl.textContent = data.finalUrl;
+      finalItem.append(finalCode, finalUrl);
+      chain.append(finalItem);
+
+      const headerRows = document.getElementById("header-rows");
+      headerRows.replaceChildren();
+      Object.entries(data.headers).sort(([a], [b]) => a.localeCompare(b)).forEach(([name, value]) => {
+        const row = document.createElement("tr");
+        const heading = document.createElement("th");
+        heading.scope = "row";
+        heading.textContent = name;
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.append(heading, cell);
+        headerRows.append(row);
+      });
+
+      report = reportText(data);
+      document.getElementById("plain-report").textContent = report;
+      summaryResult.hidden = false;
+      detailedResults.hidden = false;
+      emptyState.hidden = true;
+      status.textContent = "Inspection complete.";
+      status.dataset.tone = "success";
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      error.textContent = "";
+      status.textContent = "";
+      input.setAttribute("aria-invalid", "false");
+      let url;
+      try {
+        url = safeUrl(input.value);
+      } catch (validationError) {
+        error.textContent = validationError.message;
+        input.setAttribute("aria-invalid", "true");
+        input.focus();
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const response = await fetch("/api/url-inspection", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "The URL could not be inspected.");
+        render(data);
+      } catch (requestError) {
+        loadingState.hidden = true;
+        emptyState.hidden = false;
+        error.textContent = requestError.message;
+        status.textContent = "Inspection failed.";
+        status.dataset.tone = "error";
+        input.setAttribute("aria-invalid", "true");
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    form.addEventListener("reset", () => {
+      requestAnimationFrame(() => {
+        error.textContent = "";
+        status.textContent = "";
+        status.dataset.tone = "";
+        input.setAttribute("aria-invalid", "false");
+        summaryResult.hidden = true;
+        loadingState.hidden = true;
+        detailedResults.hidden = true;
+        emptyState.hidden = false;
+        report = "";
+      });
+    });
+
+    input.addEventListener("input", () => {
+      error.textContent = "";
+      input.setAttribute("aria-invalid", "false");
+    });
+
+    document.querySelectorAll("[data-url]").forEach(button => {
+      button.addEventListener("click", () => {
+        input.value = button.dataset.url;
+        input.focus();
+      });
+    });
+
+    const tabs = [...document.querySelectorAll(".tool-tab")];
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(item => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+        });
+      });
+      tab.addEventListener("keydown", event => {
+        if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        tabs[(index + direction + tabs.length) % tabs.length].focus();
+      });
+    });
+
+    document.getElementById("copy-report").addEventListener("click", async () => {
+      if (!report) return;
+      const message = document.getElementById("copy-status");
+      try {
+        await navigator.clipboard.writeText(report);
+        message.textContent = "Report copied to clipboard.";
+        message.dataset.tone = "success";
+      } catch {
+        message.textContent = "Select the report and press Ctrl+C or Cmd+C.";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
