@@ -15,6 +15,12 @@
 /css/*
   Cache-Control: public, max-age=31536000, immutable
 
+# URL inspection API - user-specific live checks must never be cached
+/api/url-inspection
+  Cache-Control: no-store
+  Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
 # Images - long cache
 /*.png
   Cache-Control: public, max-age=31536000, immutable
