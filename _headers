@@ -21,6 +21,12 @@
   Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Robots.txt and sitemap API - user-specific live checks must never be cached
+/api/site-files/validate
+  Cache-Control: no-store
+  Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
 # Images - long cache
 /*.png
   Cache-Control: public, max-age=31536000, immutable

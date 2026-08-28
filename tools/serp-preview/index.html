@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free SERP Preview and Metadata Builder | Stafferton Digital</title>
+  <meta name="description" content="Preview a page title and meta description in a Google-style search result, check lengths and copy the finished HTML tags.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stafferton.digital/tools/serp-preview/">
+  <link rel="icon" type="image/svg+xml" href="/brand/stafferton-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tools-app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free SERP Preview and Metadata Builder">
+  <meta property="og:description" content="Write, preview and copy page metadata without sending it anywhere.">
+  <meta property="og:url" content="https://stafferton.digital/tools/serp-preview/">
+  <meta property="og:site_name" content="Stafferton Digital">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SERP Preview and Metadata Builder",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any web browser",
+    "url": "https://stafferton.digital/tools/serp-preview/",
+    "description": "Preview and build title, description and canonical metadata.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+    "publisher": {"@type": "Organization", "name": "Stafferton Digital", "url": "https://stafferton.digital/"}
+  }
+  </script>
+</head>
+<body class="tool-page">
+  <a class="tool-skip-link" href="#tool">Skip to tool</a>
+  <header class="tool-site-nav">
+    <a class="tool-site-logo" href="/" aria-label="Stafferton Digital home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" width="267" height="34" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+    </a>
+    <div class="tool-nav-actions">
+      <a class="tool-nav-link" href="/tools">All tools</a>
+      <a class="tool-nav-cta" href="/contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main class="tool-main" id="main">
+    <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/tools">Tools</a><span aria-hidden="true">/</span>
+      <span aria-current="page">SERP preview</span>
+    </nav>
+
+    <div class="tool-hero">
+      <div>
+        <p class="tool-kicker">On-page SEO</p>
+        <h1 class="tool-title">SERP Preview</h1>
+        <p class="tool-intro">Write stronger titles and descriptions, preview the result and copy production-ready metadata.</p>
+      </div>
+      <div class="tool-privacy">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8"/></svg>
+        No data leaves your browser
+      </div>
+    </div>
+
+    <section class="tool-workspace" id="tool" aria-label="SERP preview and metadata builder">
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Page metadata</h2>
+          <span class="tool-step">01 / WRITE</span>
+        </div>
+        <form class="tool-form" id="metadata-form">
+          <div class="tool-field">
+            <label for="page-url">Page URL</label>
+            <input class="tool-input" id="page-url" type="url" inputmode="url" placeholder="https://example.com/student-accommodation">
+            <p class="tool-help">Used for the display URL and canonical tag.</p>
+            <p class="tool-field-error" id="url-error" aria-live="polite"></p>
+          </div>
+
+          <div class="tool-field">
+            <label for="site-name">Site name</label>
+            <input class="tool-input" id="site-name" type="text" maxlength="80" placeholder="Example">
+          </div>
+
+          <div class="tool-field">
+            <div class="tool-output-label" style="padding:0;border:0">
+              <label for="page-title">Page title</label>
+              <span id="title-count">0 characters</span>
+            </div>
+            <input class="tool-input" id="page-title" type="text" maxlength="140" placeholder="Student Accommodation in Manchester | Example">
+            <div class="tool-meter" aria-hidden="true"><span id="title-meter"></span></div>
+            <p class="tool-help" id="title-guidance">Aim for a clear, useful title. Google truncation is based on pixels, not a fixed character limit.</p>
+          </div>
+
+          <div class="tool-field">
+            <div class="tool-output-label" style="padding:0;border:0">
+              <label for="page-description">Meta description</label>
+              <span id="description-count">0 characters</span>
+            </div>
+            <textarea class="tool-textarea" id="page-description" maxlength="300" placeholder="Explore student accommodation in Manchester, compare locations and book your ideal room."></textarea>
+            <div class="tool-meter" aria-hidden="true"><span id="description-meter"></span></div>
+            <p class="tool-help" id="description-guidance">Use a specific summary that gives searchers a reason to click.</p>
+          </div>
+
+          <div class="tool-actions">
+            <button class="tool-button" id="example-button" type="button">Load example</button>
+            <button class="tool-button" id="reset-button" type="reset">Clear</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Search result preview</h2>
+          <span class="tool-step">02 / PREVIEW</span>
+        </div>
+        <div class="tool-output">
+          <div class="tool-serp-shell">
+            <div class="tool-serp-bar" aria-hidden="true">
+              <span class="tool-serp-dot"></span><span class="tool-serp-dot"></span><span class="tool-serp-dot"></span>
+            </div>
+            <div class="tool-serp">
+              <div class="tool-serp-site">
+                <span class="tool-serp-favicon" id="preview-initial">W</span>
+                <span>
+                  <span id="preview-site">Website name</span>
+                  <span class="tool-serp-url" id="preview-url">https://example.com/page</span>
+                </span>
+              </div>
+              <span class="tool-serp-title" id="preview-title">Your page title will appear here</span>
+              <p class="tool-serp-description" id="preview-description">Write a useful meta description to preview how the page might appear in search results.</p>
+            </div>
+          </div>
+
+          <div class="tool-section">
+            <h3 class="tool-section-title">Metadata HTML</h3>
+            <pre class="tool-code" id="metadata-code"></pre>
+            <div class="tool-actions" style="margin-top:10px">
+              <button class="tool-button tool-button-primary" id="copy-button" type="button">Copy HTML</button>
+            </div>
+            <p class="tool-status" id="copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-content" aria-label="About SERP previews">
+      <div>
+        <h2>What the preview tells you</h2>
+        <p>It gives you a realistic desktop-style layout for drafting metadata. The colour, hierarchy and spacing help you judge whether the copy is clear and compelling.</p>
+      </div>
+      <div>
+        <h2>Important limitation</h2>
+        <p>Google can rewrite titles and descriptions and displays results differently by device and query. Character guidance is useful, but relevance and clarity matter more than hitting an exact count.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tool-site-footer">
+    <div class="tool-site-footer-inner">
+      <span>© Stafferton Digital - practical SEO and analytics tools.</span>
+      <span><a href="/privacy-policy.html">Privacy</a> · <a href="/contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const form = document.getElementById("metadata-form");
+    const urlInput = document.getElementById("page-url");
+    const siteInput = document.getElementById("site-name");
+    const titleInput = document.getElementById("page-title");
+    const descriptionInput = document.getElementById("page-description");
+    const code = document.getElementById("metadata-code");
+    const status = document.getElementById("copy-status");
+
+    function escapeHtml(value) {
+      return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function parsedUrl() {
+      let value = urlInput.value.trim();
+      if (!value) return null;
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(value)) value = `https://${value}`;
+      try {
+        const url = new URL(value);
+        if (!["http:", "https:"].includes(url.protocol)) throw new Error();
+        document.getElementById("url-error").textContent = "";
+        urlInput.setAttribute("aria-invalid", "false");
+        return url;
+      } catch {
+        document.getElementById("url-error").textContent = "Enter a valid HTTP or HTTPS URL.";
+        urlInput.setAttribute("aria-invalid", "true");
+        return null;
+      }
+    }
+
+    function setMeter(id, length, target, hard) {
+      const meter = document.getElementById(id);
+      meter.style.width = `${Math.min(100, length / hard * 100)}%`;
+      meter.dataset.tone = length > hard ? "error" : length > target ? "warning" : "";
+    }
+
+    function render() {
+      const url = parsedUrl();
+      const title = titleInput.value.trim();
+      const description = descriptionInput.value.trim();
+      const site = siteInput.value.trim() || url?.hostname.replace(/^www\./, "") || "Website name";
+      const displayUrl = url ? `${url.origin}${url.pathname}`.replace(/\/$/, "") : "https://example.com/page";
+      document.getElementById("preview-site").textContent = site;
+      document.getElementById("preview-initial").textContent = site.charAt(0).toUpperCase() || "W";
+      document.getElementById("preview-url").textContent = displayUrl;
+      document.getElementById("preview-title").textContent = title || "Your page title will appear here";
+      document.getElementById("preview-description").textContent = description || "Write a useful meta description to preview how the page might appear in search results.";
+      document.getElementById("title-count").textContent = `${title.length} characters`;
+      document.getElementById("description-count").textContent = `${description.length} characters`;
+      setMeter("title-meter", title.length, 60, 70);
+      setMeter("description-meter", description.length, 160, 180);
+
+      const lines = [];
+      if (title) lines.push(`<title>${escapeHtml(title)}</title>`);
+      if (description) lines.push(`<meta name="description" content="${escapeHtml(description)}">`);
+      if (url) lines.push(`<link rel="canonical" href="${escapeHtml(url.href)}">`);
+      lines.push(`<meta property="og:title" content="${escapeHtml(title || "Page title")}">`);
+      lines.push(`<meta property="og:description" content="${escapeHtml(description || "Page description")}">`);
+      if (url) lines.push(`<meta property="og:url" content="${escapeHtml(url.href)}">`);
+      code.textContent = lines.join("\n");
+      status.textContent = "";
+    }
+
+    form.addEventListener("input", render);
+    form.addEventListener("reset", () => requestAnimationFrame(render));
+    document.getElementById("example-button").addEventListener("click", () => {
+      urlInput.value = "https://example.com/student-accommodation/manchester/";
+      siteInput.value = "Example Living";
+      titleInput.value = "Student Accommodation in Manchester | Example Living";
+      descriptionInput.value = "Explore student accommodation in Manchester, compare locations and facilities, and book the room that suits you.";
+      render();
+    });
+    document.getElementById("copy-button").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = "Metadata HTML copied.";
+        status.dataset.tone = "success";
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        getSelection().removeAllRanges();
+        getSelection().addRange(range);
+        status.textContent = "The HTML is selected. Press Ctrl+C or Cmd+C to copy.";
+      }
+    });
+    render();
+  })();
+  </script>
+</body>
+</html>

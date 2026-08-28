@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Robots.txt and Sitemap Validator | Stafferton Digital</title>
+  <meta name="description" content="Check robots.txt and XML sitemaps together. Find status, discovery and basic syntax issues with a free website validator.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stafferton.digital/tools/site-files-validator/">
+  <link rel="icon" type="image/svg+xml" href="/brand/stafferton-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tools-app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Robots.txt and Sitemap Validator">
+  <meta property="og:description" content="Check crawl directives and XML sitemap basics in one pass.">
+  <meta property="og:url" content="https://stafferton.digital/tools/site-files-validator/">
+  <meta property="og:site_name" content="Stafferton Digital">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Robots.txt and Sitemap Validator",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any web browser",
+    "url": "https://stafferton.digital/tools/site-files-validator/",
+    "description": "Validate robots.txt and XML sitemap discoverability and basic syntax.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+    "publisher": {"@type": "Organization", "name": "Stafferton Digital", "url": "https://stafferton.digital/"}
+  }
+  </script>
+</head>
+<body class="tool-page">
+  <a class="tool-skip-link" href="#tool">Skip to tool</a>
+  <header class="tool-site-nav">
+    <a class="tool-site-logo" href="/" aria-label="Stafferton Digital home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 42" width="267" height="34" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="#C1C1C1">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="#C1C1C1">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="#C1C1C1">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+    </a>
+    <div class="tool-nav-actions">
+      <a class="tool-nav-link" href="/tools">All tools</a>
+      <a class="tool-nav-cta" href="/contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main class="tool-main" id="main">
+    <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/tools">Tools</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Robots and sitemap validator</span>
+    </nav>
+
+    <div class="tool-hero">
+      <div>
+        <p class="tool-kicker">Technical SEO</p>
+        <h1 class="tool-title">Robots.txt &amp; Sitemap Validator</h1>
+        <p class="tool-intro">Check whether search engines can discover your XML sitemap and spot common crawl-control or sitemap syntax problems.</p>
+      </div>
+      <div class="tool-privacy">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Live public-file check
+      </div>
+    </div>
+
+    <section class="tool-workspace" id="tool" aria-label="Robots.txt and sitemap validator">
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Website to check</h2>
+          <span class="tool-step">01 / INPUT</span>
+        </div>
+        <form class="tool-form" id="validator-form" novalidate>
+          <div class="tool-field">
+            <label for="site-url">Website URL <span class="tool-required" aria-hidden="true">*</span></label>
+            <input class="tool-input" id="site-url" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com" required aria-describedby="site-help site-error">
+            <p class="tool-help" id="site-help">We will check the root robots.txt file and sitemap discovery.</p>
+            <p class="tool-field-error" id="site-error" aria-live="polite"></p>
+          </div>
+
+          <div class="tool-field">
+            <label for="sitemap-url">Specific sitemap URL</label>
+            <input class="tool-input" id="sitemap-url" type="url" inputmode="url" placeholder="https://example.com/sitemap_index.xml" aria-describedby="sitemap-help">
+            <p class="tool-help" id="sitemap-help">Optional. Leave blank to use Sitemap directives in robots.txt, then /sitemap.xml as a fallback.</p>
+          </div>
+
+          <div class="tool-callout">The check fetches public text and XML files only. Private and local network addresses are blocked.</div>
+
+          <div class="tool-actions">
+            <button class="tool-button tool-button-primary" id="check-button" type="submit">Validate files</button>
+            <button class="tool-button" id="reset-button" type="reset">Clear</button>
+          </div>
+          <p class="tool-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="tool-pane">
+        <div class="tool-pane-header">
+          <h2 class="tool-pane-title">Validation report</h2>
+          <span class="tool-step">02 / RESULTS</span>
+        </div>
+        <div class="tool-output">
+          <div class="tool-empty" id="empty-state">
+            <div>
+              <div class="tool-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4zM7 9h10M7 13h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <h2>Your report will appear here</h2>
+              <p>Enter a website and run the validator to check its crawl-control files.</p>
+            </div>
+          </div>
+
+          <div class="tool-loading" id="loading-state" hidden>
+            <div>
+              <div class="tool-spinner" aria-hidden="true"></div>
+              <h2 class="tool-pane-title">Checking public files…</h2>
+              <p class="tool-help" style="margin-top:8px">Following redirects and reading robots.txt and XML sitemap data.</p>
+            </div>
+          </div>
+
+          <div id="result" hidden>
+            <div class="tool-stats">
+              <div class="tool-stat">
+                <div class="tool-stat-label">Robots.txt</div>
+                <span class="tool-stat-value" id="robots-summary"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Sitemaps</div>
+                <span class="tool-stat-value" id="sitemap-count"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Locations</div>
+                <span class="tool-stat-value" id="location-count"></span>
+              </div>
+              <div class="tool-stat">
+                <div class="tool-stat-label">Issues</div>
+                <span class="tool-stat-value" id="issue-count"></span>
+              </div>
+            </div>
+
+            <div class="tool-result-list" id="result-list" style="margin-top:18px"></div>
+            <div class="tool-actions" style="margin-top:12px">
+              <button class="tool-button tool-button-primary" id="copy-report" type="button">Copy report</button>
+            </div>
+            <p class="tool-status" id="copy-status" role="status" aria-live="polite"></p>
+            <div class="tool-callout" id="report-note" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-content" aria-label="About robots.txt and sitemap validation">
+      <div>
+        <h2>What is checked</h2>
+        <ul>
+          <li>HTTP status and redirects for robots.txt and sitemap files.</li>
+          <li>User-agent groups, Sitemap directives and site-wide blocking.</li>
+          <li>XML sitemap root type, namespace, location count and duplicates.</li>
+          <li>Invalid locations and URLs pointing to another host.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>What is not checked</h2>
+        <p>The validator does not crawl every sitemap URL, render pages, assess URL quality or confirm whether Google has indexed a page. Large sitemap files are checked up to the first 1 MB.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tool-site-footer">
+    <div class="tool-site-footer-inner">
+      <span>© Stafferton Digital - practical SEO and analytics tools.</span>
+      <span><a href="/privacy-policy.html">Privacy</a> · <a href="/contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const form = document.getElementById("validator-form");
+    const siteInput = document.getElementById("site-url");
+    const sitemapInput = document.getElementById("sitemap-url");
+    const siteError = document.getElementById("site-error");
+    const formStatus = document.getElementById("form-status");
+    const button = document.getElementById("check-button");
+    const empty = document.getElementById("empty-state");
+    const loading = document.getElementById("loading-state");
+    const result = document.getElementById("result");
+    const resultList = document.getElementById("result-list");
+    const copyStatus = document.getElementById("copy-status");
+    let latestReport = "";
+
+    function validUrl(value, optional = false) {
+      let input = value.trim();
+      if (!input && optional) return "";
+      if (!input) throw new Error("Enter a website URL.");
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(input)) input = `https://${input}`;
+      const url = new URL(input);
+      if (!["http:", "https:"].includes(url.protocol)) throw new Error("Use an HTTP or HTTPS URL.");
+      return url.href;
+    }
+
+    function toneLabel(tone) {
+      return tone === "success" ? "Passed" : tone === "warning" ? "Review" : "Problem";
+    }
+
+    function badge(tone, text) {
+      const item = document.createElement("span");
+      item.className = "tool-badge";
+      item.dataset.tone = tone;
+      item.textContent = text;
+      return item;
+    }
+
+    function row(key, value) {
+      const item = document.createElement("div");
+      item.className = "tool-result-row";
+      const label = document.createElement("span");
+      label.className = "tool-result-key";
+      label.textContent = key;
+      const detail = document.createElement("span");
+      detail.className = "tool-result-value";
+      detail.textContent = value;
+      item.append(label, detail);
+      return item;
+    }
+
+    function group(title, tone, rows, issues) {
+      const box = document.createElement("section");
+      box.className = "tool-result-group";
+      const header = document.createElement("div");
+      header.className = "tool-result-group-header";
+      const heading = document.createElement("h3");
+      heading.textContent = title;
+      header.append(heading, badge(tone, toneLabel(tone)));
+      const body = document.createElement("div");
+      body.className = "tool-result-body";
+      rows.forEach(([key, value]) => body.append(row(key, value)));
+      if (issues.length) {
+        const issueRow = document.createElement("div");
+        issueRow.className = "tool-result-row";
+        const label = document.createElement("span");
+        label.className = "tool-result-key";
+        label.textContent = "Findings";
+        const list = document.createElement("ul");
+        list.className = "tool-issues";
+        issues.forEach(issue => {
+          const item = document.createElement("li");
+          item.className = "tool-issue";
+          item.dataset.tone = issue.tone;
+          item.textContent = issue.detail;
+          list.append(item);
+        });
+        issueRow.append(label, list);
+        body.append(issueRow);
+      }
+      box.append(header, body);
+      return box;
+    }
+
+    function buildReport(data) {
+      const lines = [
+        "ROBOTS.TXT AND SITEMAP VALIDATION",
+        `Site: ${data.siteUrl}`,
+        `Checked: ${new Date(data.checkedAt).toLocaleString("en-GB")}`,
+        "",
+        `ROBOTS.TXT - ${toneLabel(data.robots.tone).toUpperCase()}`,
+        `URL: ${data.robots.finalUrl}`,
+        `HTTP status: ${data.robots.status}`,
+        `User-agent groups: ${data.robots.groups}`,
+        `Sitemap directives: ${data.robots.sitemapUrls.length}`
+      ];
+      data.robots.issues.forEach(issue => lines.push(`- ${issue.detail}`));
+      data.sitemaps.forEach((sitemap, index) => {
+        lines.push("", `SITEMAP ${index + 1} - ${toneLabel(sitemap.tone).toUpperCase()}`);
+        lines.push(`URL: ${sitemap.finalUrl}`, `HTTP status: ${sitemap.status || "Not reached"}`, `Type: ${sitemap.type}`, `Locations: ${sitemap.locations}`);
+        sitemap.issues.forEach(issue => lines.push(`- ${issue.detail}`));
+      });
+      lines.push("", data.note);
+      return lines.join("\n");
+    }
+
+    function render(data) {
+      resultList.replaceChildren();
+      const allIssues = [...data.robots.issues, ...data.sitemaps.flatMap(sitemap => sitemap.issues)];
+      const errors = allIssues.filter(issue => issue.tone === "error").length;
+      const warnings = allIssues.filter(issue => issue.tone === "warning").length;
+      const locations = data.sitemaps.reduce((sum, sitemap) => sum + sitemap.locations, 0);
+      document.getElementById("robots-summary").textContent = `${data.robots.status} ${toneLabel(data.robots.tone)}`;
+      document.getElementById("robots-summary").dataset.tone = data.robots.tone;
+      document.getElementById("sitemap-count").textContent = String(data.sitemaps.length);
+      document.getElementById("location-count").textContent = locations.toLocaleString("en-GB");
+      document.getElementById("issue-count").textContent = errors ? `${errors} problem${errors === 1 ? "" : "s"}` : warnings ? `${warnings} to review` : "None";
+      document.getElementById("issue-count").dataset.tone = errors ? "error" : warnings ? "warning" : "success";
+
+      resultList.append(group(
+        "robots.txt",
+        data.robots.tone,
+        [
+          ["URL", data.robots.finalUrl],
+          ["HTTP status", String(data.robots.status)],
+          ["User-agent groups", String(data.robots.groups)],
+          ["Directives", String(data.robots.directives)],
+          ["Sitemaps declared", String(data.robots.sitemapUrls.length)]
+        ],
+        data.robots.issues
+      ));
+      data.sitemaps.forEach((sitemap, index) => resultList.append(group(
+        `Sitemap ${index + 1}`,
+        sitemap.tone,
+        [
+          ["URL", sitemap.finalUrl],
+          ["HTTP status", sitemap.status ? String(sitemap.status) : "Not reached"],
+          ["Type", sitemap.type],
+          ["Locations", sitemap.locations.toLocaleString("en-GB")],
+          ["Duplicates", sitemap.duplicateCount.toLocaleString("en-GB")],
+          ["Other hosts", sitemap.otherHostCount.toLocaleString("en-GB")]
+        ],
+        sitemap.issues
+      )));
+      latestReport = buildReport(data);
+      document.getElementById("report-note").textContent = data.note;
+      empty.hidden = true;
+      loading.hidden = true;
+      result.hidden = false;
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      siteError.textContent = "";
+      formStatus.textContent = "";
+      copyStatus.textContent = "";
+      let siteUrl;
+      let sitemapUrl;
+      try {
+        siteUrl = validUrl(siteInput.value);
+        sitemapUrl = validUrl(sitemapInput.value, true);
+        siteInput.setAttribute("aria-invalid", "false");
+      } catch (error) {
+        siteInput.setAttribute("aria-invalid", "true");
+        siteError.textContent = error.message;
+        siteInput.focus();
+        return;
+      }
+      empty.hidden = true;
+      result.hidden = true;
+      loading.hidden = false;
+      button.disabled = true;
+      try {
+        const response = await fetch("/api/site-files/validate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ siteUrl, sitemapUrl })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "The files could not be checked.");
+        render(data);
+      } catch (error) {
+        loading.hidden = true;
+        empty.hidden = false;
+        formStatus.textContent = error.message;
+        formStatus.dataset.tone = "error";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    form.addEventListener("reset", () => requestAnimationFrame(() => {
+      siteError.textContent = "";
+      formStatus.textContent = "";
+      copyStatus.textContent = "";
+      latestReport = "";
+      result.hidden = true;
+      loading.hidden = true;
+      empty.hidden = false;
+      siteInput.setAttribute("aria-invalid", "false");
+    }));
+
+    document.getElementById("copy-report").addEventListener("click", async () => {
+      if (!latestReport) return;
+      try {
+        await navigator.clipboard.writeText(latestReport);
+        copyStatus.textContent = "Report copied.";
+        copyStatus.dataset.tone = "success";
+      } catch {
+        copyStatus.textContent = "Clipboard access was blocked. Select the report text manually.";
+        copyStatus.dataset.tone = "error";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
