@@ -44,3 +44,8 @@
 
 /sitemap.xml
   Cache-Control: public, max-age=3600
+
+# Client reports - shareable by link, not indexed
+/client-reports/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
