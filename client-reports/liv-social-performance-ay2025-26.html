@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liv Student — Social Media Performance Review AY 2025/26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Sen:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#063955; --navy-deep:#042738; --teal:#009AB9;
+    --chartreuse:#BFCF0A; --lizard:#4AAF74; --tangerine:#FF9828;
+    --paper:#F6F8F9; --white:#FFFFFF; --line:#DDE5E9;
+    --ink:#123044; --muted:#5E7686;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:16px;line-height:1.6;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px;}
+
+  .masthead{background:var(--navy);color:var(--white);padding:48px 0 44px;
+    border-bottom:6px solid var(--chartreuse);}
+  .masthead .wrap{padding-bottom:0;}
+  .brandline{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+  .vmark{width:34px;height:34px;flex:none;}
+  .brandname{font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:.22em;
+    text-transform:uppercase;font-size:13px;color:var(--chartreuse);}
+  h1{font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:clamp(30px,5vw,52px);line-height:1.05;margin:0 0 14px;letter-spacing:.01em;}
+  .standfirst{font-size:17px;color:#BBD2DD;max-width:64ch;margin:0 0 26px;font-weight:300;}
+  .docmeta{font-family:'Oswald',sans-serif;font-weight:400;text-transform:uppercase;
+    letter-spacing:.16em;font-size:11px;color:#7FA6B8;}
+
+  .figures{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    background:var(--navy-deep);margin-top:36px;}
+  .fig{padding:26px 24px 24px;background:var(--navy-deep);}
+  .fig .lbl{font-family:'Oswald',sans-serif;text-transform:uppercase;
+    letter-spacing:.14em;font-size:10.5px;color:#7FA6B8;margin-bottom:10px;}
+  .fig .val{font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:clamp(25px,3.2vw,34px);line-height:1;color:var(--white);}
+  .fig .delta{margin-top:8px;font-size:13.5px;color:var(--chartreuse);font-weight:700;}
+  .fig .note{margin-top:4px;font-size:12.5px;color:#8FB2C2;font-weight:300;}
+
+  section{margin-top:56px;}
+  .eyebrow{font-family:'Oswald',sans-serif;text-transform:uppercase;
+    letter-spacing:.2em;font-size:11px;color:var(--teal);margin-bottom:8px;font-weight:500;}
+  h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(22px,3vw,30px);
+    line-height:1.15;margin:0 0 18px;color:var(--navy);}
+  h3{font-family:'Oswald',sans-serif;font-weight:500;font-size:18px;margin:0 0 8px;color:var(--navy);}
+  p{margin:0 0 14px;}
+  .lede{font-size:17px;color:var(--muted);max-width:76ch;}
+
+  /* Honesty panel */
+  .honesty{background:var(--white);border:1px solid var(--line);
+    border-left:5px solid var(--teal);border-radius:4px;padding:28px 30px;}
+  .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:22px;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .step{padding:20px 22px;border-right:1px solid var(--line);background:#FAFCFC;}
+  .step:last-child{border-right:none;background:#F2F8F3;}
+  .step .k{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.12em;
+    font-size:10px;color:var(--muted);margin-bottom:8px;}
+  .step .v{font-family:'Oswald',sans-serif;font-weight:600;font-size:28px;color:var(--navy);line-height:1;}
+  .step .d{font-size:13px;color:var(--muted);margin-top:8px;}
+  .step:last-child .v{color:var(--lizard);}
+
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{width:100%;border-collapse:collapse;background:var(--white);font-size:14.5px;min-width:660px;}
+  caption{text-align:left;font-family:'Oswald',sans-serif;font-weight:500;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 0 10px;}
+  thead th{background:var(--navy);color:var(--white);font-family:'Oswald',sans-serif;
+    font-weight:500;text-transform:uppercase;letter-spacing:.09em;font-size:10.5px;
+    padding:13px 14px;text-align:right;white-space:nowrap;vertical-align:bottom;}
+  thead th:first-child{text-align:left;}
+  thead th span{display:block;font-size:9px;letter-spacing:.06em;color:#8FB2C2;font-weight:400;margin-top:3px;}
+  thead th.hi{background:#0A4A6B;color:var(--chartreuse);}
+  tbody td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--line);
+    font-variant-numeric:tabular-nums;}
+  tbody td:first-child{text-align:left;}
+  tbody td.hi{background:#F4F8F5;font-weight:700;color:var(--navy);}
+  tbody tr.cut td{color:#94A8B3;}
+  tbody tr.cut td:first-child{text-decoration:line-through;text-decoration-color:#B9C7CF;}
+  tfoot td{padding:15px 14px;text-align:right;background:var(--navy);color:var(--white);
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;letter-spacing:.03em;}
+  tfoot td:first-child{text-align:left;letter-spacing:.12em;text-transform:uppercase;font-size:12.5px;}
+  tfoot td.hi{background:#0A4A6B;color:var(--chartreuse);}
+  .down{color:var(--lizard);font-weight:700;}
+  .upc{color:var(--tangerine);font-weight:700;}
+  .flat{color:#A8B8C2;}
+  .tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:9.5px;
+    letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;
+    margin-left:8px;vertical-align:1px;font-weight:600;}
+  .tag.new{background:var(--chartreuse);color:var(--navy);}
+  .tag.ren{background:#DDF0F5;color:#04607A;}
+  .tag.dub{background:#EDF2F4;color:var(--muted);}
+
+  /* Q&A */
+  .qa{background:var(--white);border:1px solid var(--line);border-radius:3px;}
+  .q{display:grid;grid-template-columns:38px 1fr 130px;gap:20px;padding:24px 28px;
+    border-bottom:1px solid var(--line);align-items:start;}
+  .q:last-child{border-bottom:none;}
+  .q .n{font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;color:var(--teal);line-height:1.2;}
+  .q .ask{font-family:'Oswald',sans-serif;font-weight:500;font-size:17px;color:var(--navy);
+    margin-bottom:8px;}
+  .q p{font-size:14.5px;color:var(--muted);margin:0 0 8px;}
+  .q p:last-child{margin-bottom:0;}
+  .q .verdict{text-align:right;font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:19px;line-height:1.2;}
+  .q .verdict small{display:block;font-family:'Lato',sans-serif;font-weight:400;
+    font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+  .v-cut{color:var(--lizard);} .v-hold{color:var(--navy);} .v-add{color:var(--tangerine);}
+
+  /* Allocation */
+  .alloc{background:var(--navy);color:var(--white);border-radius:4px;padding:32px 34px;}
+  .alloc h2{color:var(--white);}
+  .alloc .lede{color:#BBD2DD;}
+  .allocgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 8px;}
+  .ac{background:rgba(255,255,255,.06);border-radius:3px;padding:20px 22px;border-top:3px solid;}
+  .ac .k{font-family:'Oswald',sans-serif;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:#8FB2C2;margin-bottom:10px;min-height:2.4em;}
+  .ac .v{font-family:'Oswald',sans-serif;font-size:30px;font-weight:600;line-height:1;}
+  .ac .d{font-size:13px;margin-top:8px;color:#BBD2DD;}
+
+  .scopebox{background:#F2F8F3;border:1px solid #C9E4D3;border-left:5px solid var(--lizard);
+    border-radius:3px;padding:26px 28px;}
+  .scopebox h3{color:#1F6B41;}
+  .scoperow{display:flex;justify-content:space-between;gap:20px;padding:11px 0;
+    border-bottom:1px solid #D7EADE;font-size:14.5px;}
+  .scoperow:last-of-type{border-bottom:none;}
+  .scoperow b{font-family:'Oswald',sans-serif;font-weight:600;color:#1F6B41;white-space:nowrap;}
+  .scoperow span{color:#3F6B52;}
+
+  .assume{background:#FFF6EC;border:1px solid #FFD9AE;border-left:5px solid var(--tangerine);
+    border-radius:3px;padding:24px 28px;}
+  .assume h3{color:#8A4B00;}
+  .assume ul{margin:0;padding-left:20px;}
+  .assume li{margin-bottom:9px;font-size:14.5px;color:#6B4416;}
+  .assume li:last-child{margin-bottom:0;}
+  .assume li strong{color:#5A3200;}
+
+  footer{border-top:1px solid var(--line);margin-top:64px;padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+    font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.16em;
+    font-size:10.5px;color:var(--muted);}
+  .footmark{font-weight:600;color:var(--navy);letter-spacing:.28em;}
+
+  @media (max-width:820px){
+    .figures,.steps,.allocgrid{grid-template-columns:1fr;}
+    .step{border-right:none;border-bottom:1px solid var(--line);}
+    .q{grid-template-columns:28px 1fr;}
+    .q .verdict{grid-column:2;text-align:left;}
+    footer{flex-direction:column;align-items:flex-start;}
+  }
+  @media print{body{background:var(--white);} section{break-inside:avoid;}}
+
+  /* ---------- Brand marks ---------- */
+  .brandline{display:flex;justify-content:space-between;align-items:flex-end;
+    gap:28px;margin-bottom:34px;}
+  .livmark{height:82px;width:auto;display:block;flex:none;}
+  .byline{text-align:right;flex:none;}
+  .bylabel{display:block;font-family:'Oswald',sans-serif;font-weight:400;
+    text-transform:uppercase;letter-spacing:.2em;font-size:9.5px;
+    color:#7FA6B8;margin-bottom:9px;}
+  .staffmark{width:186px;height:auto;color:#C1C1C1;display:block;margin-left:auto;}
+  footer .staffmark{width:150px;color:#3E3E3E;}
+  @media (max-width:640px){
+    .brandline{flex-direction:column;align-items:flex-start;gap:22px;}
+    .byline{text-align:left;}
+    .staffmark{margin-left:0;width:160px;}
+  }
+
+  /* ---------- Pack navigator ---------- */
+  .packnav{margin-top:40px;}
+  .packlabel{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.2em;
+    font-size:10.5px;color:var(--muted);margin-bottom:12px;}
+  .packlinks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .packlinks a{display:block;background:var(--white);border:1px solid var(--line);
+    border-radius:4px;padding:16px 18px;text-decoration:none;
+    transition:border-color .15s ease, box-shadow .15s ease;}
+  .packlinks a:hover{border-color:var(--teal);box-shadow:0 2px 10px rgba(6,57,85,.09);}
+  .packlinks .num{display:block;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:.16em;color:var(--teal);margin-bottom:7px;}
+  .packlinks .t{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:15px;
+    line-height:1.2;color:var(--navy);margin-bottom:4px;}
+  .packlinks .d{display:block;font-size:12.5px;color:var(--muted);line-height:1.35;}
+  .packlinks a.current{background:var(--navy);border-color:var(--navy);cursor:default;}
+  .packlinks a.current .num{color:var(--chartreuse);}
+  .packlinks a.current .t{color:#FFFFFF;}
+  .packlinks a.current .d{color:#8FB2C2;}
+  @media (max-width:760px){.packlinks{grid-template-columns:1fr;}}
+  @media print{.packnav{display:none;}}
+
+  .figures.four{grid-template-columns:repeat(4,1fr);}
+  .fig .delta.neg{color:var(--tangerine);}
+  tbody tr.neg td{background:#FFF6EC;}
+  tbody tr.neg td.hi{background:#FFEBD3;color:#8A4B00;}
+  .chartbox{background:var(--white);border:1px solid var(--line);border-radius:3px;padding:22px 20px 14px;}
+  .chart{width:100%;height:auto;display:block;}
+  .chart .ax{font:11px 'Lato',sans-serif;fill:#5E7686;}
+  .chart .ax0{font:11px 'Lato',sans-serif;fill:#B9C7CF;}
+  .chart .axb{font:600 10.5px 'Oswald',sans-serif;letter-spacing:.12em;fill:#063955;text-transform:uppercase;}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px;color:var(--muted);margin:0 0 12px 4px;}
+  .legend i{display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px;border-radius:1px;}
+  .figcap{font-size:13px;color:var(--muted);margin-top:10px;max-width:90ch;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:3px;padding:24px 26px;}
+  .agerow{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;margin-bottom:10px;}
+  .agel{font-family:'Oswald',sans-serif;font-weight:500;color:var(--navy);font-size:14px;}
+  .agebars .bar{height:15px;margin:2px 0;border-radius:1px;position:relative;min-width:2px;}
+  .agebars .bar span{position:absolute;left:calc(100% + 6px);top:-1px;font-size:11.5px;color:var(--muted);white-space:nowrap;}
+  .agebars .prev{background:#8FC9D8;}
+  .agebars .cur{background:var(--navy);}
+  .kpi3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;}
+  .kpi3 .k{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:var(--muted);}
+  .kpi3 .v{font-family:'Oswald',sans-serif;font-weight:600;font-size:26px;color:var(--navy);line-height:1.1;margin-top:6px;}
+  .kpi3 .d{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .src{font-size:12px;color:var(--muted);}
+  @media (max-width:820px){.figures.four,.two,.kpi3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">
+      <img class="livmark" alt="Liv Student" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcwAAALeCAYAAAAnLSGLAACDwUlEQVR4nO3dd4BsRZk28Oet0z0z3TcQzDnrJgNrzmLEhArmBJgQRQyI7uq6uurufuaAqyIKKFGQnHMUVKIiigpKEEXJ3DudTz3fH3XOdJie3N2nw/P7vrMXJ3TXnA5PV52qtwARERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERkTWzrBsgAcn16X9m2pDhZABoZrNZN0R6j+QGAD7rdgwZAxADmEJ47t+dcXsECsyhcfblhQNIvASGzSCirNszVAwxiXXw/NALnlQ5POvmSO+ceVnhC2bYBcBdet63MDRArAdwtyN3ed4TKxdl3SQBclk3QBKep8S+slMUTYH6sN3GGCGOq8jlZj4MQIE5Jkg+8JzLi++PfXmdWf5eGlwJHCLU4ypyUeGW2Piu5z9BYTks1MMcEiRnzr6ieBlY/0dYvg7CZd2mYWIGkD4i7bkveGLlvKzbI2t35mUzn4p95bM5V6hCH95BgAbEDV+ejmzm4uf/a/n1ZnZd1u2Spol/kg4LM6ucefnM/t43vhhFeZiZhqdaEKzHvhrlXOE9ABSYI47k+tMvK+5kmEKsD4cAQBgYx+XpyGaOev6/lt9hZndl3Shppx7mECH5wLMvL14J+C0B581MbyQJkh5GB1hp2yeUHmtmf8y6TbJ6p14ys5Nn/QBzUxVgsq9dGuFhcN5X8hZNf227f618JOs2SXd6Qx4iZvZnAEfEvgoY4qzbM0zChwerx3G5eNYVxZ2ybo+sTQzblYjgCdLDT+hBTzQ8kfMeeePMhxWWw01DskPGiO/louK7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FJgiGTOzWZYrB9UacR4wJtcvCVjR1ePflj/xweOzbqOIKDBFhkJ5r/cfMhXjFlg0DToCka/VfY6z1QPNbFPW7RMRBabIUDCzG1CpntTwfhpmMQzTU97/vfzx92kpiciQUGCKDAneedc+uZgxzKEW+2mWa0eZ2U1Zt0tEAsu6ASLSVPjGD87muuLzrN6olN771meZ2aVZt0lEAvUwRYbJpuq3K+UKWItPUViKDBcFpsgQKX1yt9MKMf+OcunHWbdFRERkqE3/2xe3I7ll1u0QERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERkulnUDxg3JhwN4MIA62s8vATgANQCXmVk9g+ZJj5F8FID7A2hg/uMdAbjLzH6ZRdvGEcktADwB88830HyNNczsogE3bWBIzgB4MsLf2/VHEM7NL8ysNrCGiawUya8yuJtkqeWYJVkjeT3Je2XdTukNkvskj/emjsd7c/L1C7Ju4zgheX+Sf05eS7Md5zx9ndVJviTrtvYLyd2S59bmLn9/+ry7lGQh67aOm1zWDRhDJQBVAHcAyLd83QOYAnAXFv5kKKNnFsAmAHei/fUUI4wmbM6gTWPLzP5Ccj8AHwFwO+a/hzUAbAVgFwCnDrh5fUdyGsAbEZ5vmxFGMVo1kn+/ZWblATZtIrisGzCGHMKTuPPItfy3jI/08W59fFv/t15jvXcIwoeUGcx/nU0jfGjdluQ/Z9bC/nk+gH8FUEH4AN76tzsA6wBcB+DYjNo31vRiFpGRYmZXAzgDIRziLj8SA9gI4G2DbNeA7IxwfbLbKJVHOCc/MbPbB9moSaHAFJFR9COEYOw2cdEh9DJfNU7zBUg+HqGHOYv5I1VEGNW4FcDBA27axFBgisgoOgfAJQCKCD2rVoYwj+Ch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5EPyYeg+a5AArs2qFB/JAsIaxachXLd8MMLw5T3QLCF3G8IHjRsQ1sVeBOAX/QyhRc7XQgwh7P8OoGJmmVzTI1lEWJ86qCUV6czhv5jZrcv6BXI9wmultY3ptna3mtlNPWtcWPLVOQKXtvmvvV5+lDyfH475r7EIwCYz+1Mv709WR4E5BJJi4NPJ4RDebDN78xxFyTmcQrg2mS5/qAKom1l1sd8VERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERGZD/D9bhaJCgaIovAAAAAElFTkSuQmCC">
+      <div class="byline">
+        <span class="bylabel">Prepared by</span>
+        <svg class="staffmark" viewBox="0 0 330 42" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="currentColor">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="currentColor">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="currentColor">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+      </div>
+    </div>
+    <h1>Social Media Performance<br>Academic Year 2025/26</h1>
+    <p class="standfirst">Paid social across Facebook, Instagram and the Meta network for Liv Student, compared with the previous academic year and with industry benchmarks, with recommendations and targets for AY 2026/27.</p>
+    <div class="docmeta">Stafferton Digital · Valeo Management Europe · October 2026 · Confidential</div>
+
+    <div class="figures four">
+      <div class="fig">
+        <div class="lbl">Site clicks from social</div>
+        <div class="val">51,810</div>
+        <div class="delta">3.4× AY 2024/25 (15,208)</div>
+        <div class="note">On £5,440 of spend, +59%</div>
+      </div>
+      <div class="fig">
+        <div class="lbl">Cost per site click</div>
+        <div class="val">£0.10</div>
+        <div class="delta">−53% vs £0.22</div>
+        <div class="note">Real estate benchmark ≈ £0.41</div>
+      </div>
+      <div class="fig">
+        <div class="lbl">Landing page views</div>
+        <div class="val">21,884</div>
+        <div class="delta">+256% vs 6,147</div>
+        <div class="note">£0.25 each, down from £0.56</div>
+      </div>
+      <div class="fig">
+        <div class="lbl">Link click-through rate</div>
+        <div class="val">3.67%</div>
+        <div class="delta">vs 1.64% in AY 2024/25</div>
+        <div class="note">Real estate benchmark 2.37%</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="eyebrow">Read this first</div>
+    <h2>Far more traffic for the money - next, more of the right traffic</h2>
+    <div class="honesty">
+      <p style="font-size:16.5px;">On every efficiency measure Meta reports, AY 2025/26 was a big step up. Site clicks more than trebled on 59% more spend, cost per click more than halved, and click-through rate is well ahead of the real estate and all-industry benchmarks.</p>
+      <p style="font-size:16.5px;margin-bottom:0;">The focus for AY 2026/27 is turning that volume into bookings. Meta can now see booking, viewing and contact actions on the site, so campaigns can optimise for enquiries rather than clicks. Alongside that, fresher student-led creative and a bigger Instagram share will help the ads reach more prospective residents as well as the parents who already engage well.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="k">AY 2024/25 · cost per landing page view</div>
+          <div class="v">£0.56</div>
+          <div class="d">6,147 views, with a mix of creative and placements.</div>
+        </div>
+        <div class="step">
+          <div class="k">AY 2025/26 · cost per landing page view</div>
+          <div class="v">£0.25</div>
+          <div class="d">21,884 views. One video carried most of the year, mainly on Facebook.</div>
+        </div>
+        <div class="step">
+          <div class="k">AY 2026/27 · target</div>
+          <div class="v">≤ £0.45</div>
+          <div class="d">Fewer, better-quality views, with Belfast live and campaigns optimising for enquiries.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 01</div>
+    <h2>Year on year</h2>
+    <p class="lede">Academic years run 1 September to 31 August. All activity is from the Liv Student Meta ad account and all of it promoted Sheffield; Belfast had no paid social in either year.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Metric</th><th>AY 2024/25<span>Sep 24 – Aug 25</span></th><th class="hi">AY 2025/26<span>Sep 25 – Aug 26</span></th><th>Change</th></tr></thead>
+        <tbody><tr class=""><td>Spend</td><td>£3,421</td><td class="hi">£5,440</td><td><span class="flat">+59%</span></td></tr><tr class=""><td>Impressions</td><td>929,737</td><td class="hi">1,412,786</td><td><span class="down">+52%</span></td></tr><tr class=""><td>Reach (unique people)</td><td>467,719</td><td class="hi">598,583</td><td><span class="down">+28%</span></td></tr><tr class=""><td>Frequency</td><td>1.99</td><td class="hi">2.36</td><td><span class="flat">+0.37</span></td></tr><tr class="hi"><td>Site clicks (link clicks)</td><td>15,208</td><td class="hi">51,810</td><td><span class="down">+241%</span></td></tr><tr class=""><td>Link click-through rate</td><td>1.64%</td><td class="hi">3.67%</td><td><span class="down">+2.0 pts</span></td></tr><tr class=""><td>Cost per site click</td><td>£0.225</td><td class="hi">£0.105</td><td><span class="down">−53%</span></td></tr><tr class=""><td>Cost per 1,000 impressions</td><td>£3.68</td><td class="hi">£3.85</td><td><span class="upc">+5%</span></td></tr><tr class="hi"><td>Landing page views</td><td>6,147</td><td class="hi">21,884</td><td><span class="down">+256%</span></td></tr><tr class=""><td>Clicks that reached the page</td><td>40%</td><td class="hi">42%</td><td><span class="down">+1.8 pts</span></td></tr><tr class=""><td>Cost per landing page view</td><td>£0.56</td><td class="hi">£0.25</td><td><span class="down">−55%</span></td></tr><tr class=""><td>Video plays (3s+)</td><td>50,549</td><td class="hi">432,517</td><td><span class="down">+756%</span></td></tr><tr class=""><td>Video ThruPlays (15s or complete)</td><td>21,227</td><td class="hi">130,926</td><td><span class="down">+517%</span></td></tr><tr class=""><td>Post reactions</td><td>482</td><td class="hi">2,019</td><td><span class="down">+319%</span></td></tr><tr class=""><td>Post saves</td><td>9</td><td class="hi">430</td><td><span class="down">+4,678%</span></td></tr><tr class=""><td>Comments</td><td>13</td><td class="hi">108</td><td><span class="down">+731%</span></td></tr></tbody>
+      </table>
+    </div>
+    <p class="figcap">Site clicks are Meta link clicks to livstudent.com. Landing page views are clicks where the Meta pixel confirmed the page loaded. AY 2024/25 had no activity from November 2024 to April 2025, so the like-for-like view below is the fairer comparison.</p>
+
+    <h3 style="margin-top:34px;">Like for like: May to August, the peak selling months</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Metric</th><th>May – Aug 2025</th><th class="hi">May – Aug 2026</th><th>Change</th></tr></thead>
+        <tbody><tr><td>Spend</td><td>£2,118</td><td class="hi">£1,844</td><td><span class="flat">−13%</span></td></tr><tr><td>Site clicks</td><td>10,261</td><td class="hi">17,665</td><td><span class="down">+72%</span></td></tr><tr><td>Link click-through rate</td><td>1.37%</td><td class="hi">3.63%</td><td><span class="down">+2.3 pts</span></td></tr><tr><td>Cost per site click</td><td>£0.206</td><td class="hi">£0.104</td><td><span class="down">−49%</span></td></tr><tr><td>Landing page views</td><td>4,449</td><td class="hi">7,324</td><td><span class="down">+65%</span></td></tr><tr><td>Cost per landing page view</td><td>£0.48</td><td class="hi">£0.25</td><td><span class="down">−47%</span></td></tr></tbody>
+      </table>
+    </div>
+    <p class="figcap">With spend 13% lower, peak-season site clicks rose 72% and landing page views 65%. The gains hold on a like-for-like basis, so they are not a quirk of the uneven prior year.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 02</div>
+    <h2>Month by month</h2>
+    <div class="chartbox">
+      <div class="legend"><span><i style="background:#8FC9D8"></i>Site clicks, AY 2024/25</span><span><i style="background:#009AB9"></i>Site clicks, AY 2025/26</span><span><i style="background:#BFCF0A"></i>Site clicks, AY 2026/27 to date</span><span><i style="background:#063955"></i>Landing page views (inner bar)</span></div>
+      <svg viewBox="0 0 1000 300" class="chart" role="img" aria-label="Monthly site clicks and landing page views, September 2024 to October 2026"><line x1="46" x2="990" y1="254.0" y2="254.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="258.0" text-anchor="end" class="ax">0</text><line x1="46" x2="990" y1="220.0" y2="220.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="224.0" text-anchor="end" class="ax">1k</text><line x1="46" x2="990" y1="186.0" y2="186.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="190.0" text-anchor="end" class="ax">2k</text><line x1="46" x2="990" y1="152.0" y2="152.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="156.0" text-anchor="end" class="ax">3k</text><line x1="46" x2="990" y1="118.0" y2="118.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="122.0" text-anchor="end" class="ax">4k</text><line x1="46" x2="990" y1="84.0" y2="84.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="88.0" text-anchor="end" class="ax">5k</text><line x1="46" x2="990" y1="50.0" y2="50.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="54.0" text-anchor="end" class="ax">6k</text><line x1="46" x2="990" y1="16.0" y2="16.0" stroke="#DDE5E9" stroke-width="1"/><text x="38" y="20.0" text-anchor="end" class="ax">7k</text><rect x="51.1" y="126.8" width="26.1" height="127.2" fill="#8FC9D8"><title>2024-09: 3,742 site clicks, 1,183 landing page views</title></rect><rect x="56.8" y="213.8" width="14.6" height="40.2" fill="#063955"/><text x="64.2" y="270" text-anchor="middle" class="ax">S</text><rect x="87.4" y="213.0" width="26.1" height="41.0" fill="#8FC9D8"><title>2024-10: 1,205 site clicks, 515 landing page views</title></rect><rect x="93.1" y="236.5" width="14.6" height="17.5" fill="#063955"/><text x="100.5" y="270" text-anchor="middle" class="ax">O</text><rect x="123.7" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2024-11: 0 site clicks, 0 landing page views</title></rect><rect x="129.4" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="136.8" y="249" text-anchor="middle" class="ax0">–</text><text x="136.8" y="270" text-anchor="middle" class="ax">N</text><rect x="160.0" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2024-12: 0 site clicks, 0 landing page views</title></rect><rect x="165.8" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="173.1" y="249" text-anchor="middle" class="ax0">–</text><text x="173.1" y="270" text-anchor="middle" class="ax">D</text><rect x="196.3" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2025-01: 0 site clicks, 0 landing page views</title></rect><rect x="202.1" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="209.4" y="249" text-anchor="middle" class="ax0">–</text><text x="209.4" y="270" text-anchor="middle" class="ax">J</text><rect x="232.6" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2025-02: 0 site clicks, 0 landing page views</title></rect><rect x="238.4" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="245.7" y="249" text-anchor="middle" class="ax0">–</text><text x="245.7" y="270" text-anchor="middle" class="ax">F</text><rect x="268.9" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2025-03: 0 site clicks, 0 landing page views</title></rect><rect x="274.7" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="282.0" y="249" text-anchor="middle" class="ax0">–</text><text x="282.0" y="270" text-anchor="middle" class="ax">M</text><rect x="305.2" y="254.0" width="26.1" height="0.0" fill="#8FC9D8"><title>2025-04: 0 site clicks, 0 landing page views</title></rect><rect x="311.0" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="318.3" y="249" text-anchor="middle" class="ax0">–</text><text x="318.3" y="270" text-anchor="middle" class="ax">A</text><rect x="341.5" y="218.4" width="26.1" height="35.6" fill="#8FC9D8"><title>2025-05: 1,046 site clicks, 933 landing page views</title></rect><rect x="347.3" y="222.3" width="14.6" height="31.7" fill="#063955"/><text x="354.6" y="270" text-anchor="middle" class="ax">M</text><rect x="377.9" y="203.5" width="26.1" height="50.5" fill="#8FC9D8"><title>2025-06: 1,486 site clicks, 1,331 landing page views</title></rect><rect x="383.6" y="208.7" width="14.6" height="45.3" fill="#063955"/><text x="390.9" y="270" text-anchor="middle" class="ax">J</text><rect x="414.2" y="181.7" width="26.1" height="72.3" fill="#8FC9D8"><title>2025-07: 2,126 site clicks, 1,722 landing page views</title></rect><rect x="419.9" y="195.5" width="14.6" height="58.5" fill="#063955"/><text x="427.2" y="270" text-anchor="middle" class="ax">J</text><rect x="450.5" y="63.5" width="26.1" height="190.5" fill="#8FC9D8"><title>2025-08: 5,603 site clicks, 463 landing page views</title></rect><rect x="456.2" y="238.3" width="14.6" height="15.7" fill="#063955"/><text x="463.5" y="270" text-anchor="middle" class="ax">A</text><rect x="486.8" y="68.7" width="26.1" height="185.3" fill="#009AB9"><title>2025-09: 5,449 site clicks, 1,147 landing page views</title></rect><rect x="492.5" y="215.0" width="14.6" height="39.0" fill="#063955"/><text x="499.8" y="270" text-anchor="middle" class="ax">S</text><rect x="523.1" y="166.3" width="26.1" height="87.7" fill="#009AB9"><title>2025-10: 2,579 site clicks, 866 landing page views</title></rect><rect x="528.8" y="224.6" width="14.6" height="29.4" fill="#063955"/><text x="536.2" y="270" text-anchor="middle" class="ax">O</text><rect x="559.4" y="254.0" width="26.1" height="0.0" fill="#009AB9"><title>2025-11: 0 site clicks, 0 landing page views</title></rect><rect x="565.1" y="254.0" width="14.6" height="0.0" fill="#063955"/><text x="572.5" y="249" text-anchor="middle" class="ax0">–</text><text x="572.5" y="270" text-anchor="middle" class="ax">N</text><rect x="595.7" y="82.9" width="26.1" height="171.1" fill="#009AB9"><title>2025-12: 5,031 site clicks, 1,803 landing page views</title></rect><rect x="601.4" y="192.7" width="14.6" height="61.3" fill="#063955"/><text x="608.8" y="270" text-anchor="middle" class="ax">D</text><rect x="632.0" y="41.7" width="26.1" height="212.3" fill="#009AB9"><title>2026-01: 6,243 site clicks, 2,366 landing page views</title></rect><rect x="637.8" y="173.6" width="14.6" height="80.4" fill="#063955"/><text x="645.1" y="270" text-anchor="middle" class="ax">J</text><rect x="668.3" y="74.9" width="26.1" height="179.1" fill="#009AB9"><title>2026-02: 5,268 site clicks, 3,212 landing page views</title></rect><rect x="674.1" y="144.8" width="14.6" height="109.2" fill="#063955"/><text x="681.4" y="270" text-anchor="middle" class="ax">F</text><rect x="704.6" y="89.2" width="26.1" height="164.8" fill="#009AB9"><title>2026-03: 4,847 site clicks, 2,989 landing page views</title></rect><rect x="710.4" y="152.4" width="14.6" height="101.6" fill="#063955"/><text x="717.7" y="270" text-anchor="middle" class="ax">M</text><rect x="740.9" y="93.2" width="26.1" height="160.8" fill="#009AB9"><title>2026-04: 4,728 site clicks, 2,177 landing page views</title></rect><rect x="746.7" y="180.0" width="14.6" height="74.0" fill="#063955"/><text x="754.0" y="270" text-anchor="middle" class="ax">A</text><rect x="777.2" y="96.1" width="26.1" height="157.9" fill="#009AB9"><title>2026-05: 4,643 site clicks, 1,538 landing page views</title></rect><rect x="783.0" y="201.7" width="14.6" height="52.3" fill="#063955"/><text x="790.3" y="270" text-anchor="middle" class="ax">M</text><rect x="813.5" y="134.1" width="26.1" height="119.9" fill="#009AB9"><title>2026-06: 3,527 site clicks, 1,385 landing page views</title></rect><rect x="819.3" y="206.9" width="14.6" height="47.1" fill="#063955"/><text x="826.6" y="270" text-anchor="middle" class="ax">J</text><rect x="849.9" y="96.6" width="26.1" height="157.4" fill="#009AB9"><title>2026-07: 4,628 site clicks, 2,327 landing page views</title></rect><rect x="855.6" y="174.9" width="14.6" height="79.1" fill="#063955"/><text x="862.9" y="270" text-anchor="middle" class="ax">J</text><rect x="886.2" y="88.5" width="26.1" height="165.5" fill="#009AB9"><title>2026-08: 4,867 site clicks, 2,074 landing page views</title></rect><rect x="891.9" y="183.5" width="14.6" height="70.5" fill="#063955"/><text x="899.2" y="270" text-anchor="middle" class="ax">A</text><rect x="922.5" y="92.5" width="26.1" height="161.5" fill="#BFCF0A"><title>2026-09: 4,750 site clicks, 2,394 landing page views</title></rect><rect x="928.2" y="172.6" width="14.6" height="81.4" fill="#063955"/><text x="935.5" y="270" text-anchor="middle" class="ax">S</text><rect x="958.8" y="201.8" width="26.1" height="52.2" fill="#BFCF0A"><title>2026-10: 1,535 site clicks, 796 landing page views</title></rect><rect x="964.5" y="226.9" width="14.6" height="27.1" fill="#063955"/><text x="971.8" y="270" text-anchor="middle" class="ax">O</text><line x1="49.0" x2="478.7" y1="286" y2="286" stroke="#5E7686" stroke-width="1"/><text x="263.8" y="298" text-anchor="middle" class="axb">AY 2024/25</text><line x1="484.7" x2="914.4" y1="286" y2="286" stroke="#5E7686" stroke-width="1"/><text x="699.5" y="298" text-anchor="middle" class="axb">AY 2025/26</text><line x1="920.4" x2="987.0" y1="286" y2="286" stroke="#5E7686" stroke-width="1"/><text x="953.7" y="298" text-anchor="middle" class="axb">26/27</text></svg>
+    </div>
+    <p class="figcap">Monthly site clicks and landing page views, September 2024 to 11 October 2026. Gaps show months with no paid social. Since December 2025 the account has run at a steady £350 to £470 per month, delivering 3,500 to 6,200 site clicks a month. August 2025 shows a low landing page view count (463 from 5,603 clicks), which points to a tracking or page-load gap that month rather than a real drop.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 03</div>
+    <h2>Against the industry</h2>
+    <p class="lede">Benchmarks are for Meta traffic campaigns, the same objective Liv uses. They are US medians in dollars, converted at roughly $1 = £0.75, so read them as a guide to scale rather than an exact target.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Metric</th><th class="hi">Liv AY 2025/26</th><th>Real estate</th><th>All industries</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Link click-through rate</td><td class="hi">3.67%</td><td>2.37%</td><td>1.93%</td><td><span class="down">1.5× real estate</span></td></tr>
+          <tr><td>Cost per site click</td><td class="hi">£0.10</td><td>≈ £0.41 ($0.55)</td><td>≈ £0.45 ($0.60)</td><td><span class="down">About a quarter of the cost</span></td></tr>
+          <tr><td>Cost per 1,000 impressions</td><td class="hi">£3.85</td><td>–</td><td>≈ £5.45 ($7.26)</td><td><span class="down">About 30% cheaper</span></td></tr>
+          <tr><td>Clicks that reached the page</td><td class="hi">42%</td><td>–</td><td>50%+ is healthy</td><td><span class="upc">Below par</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Sources: WordStream by LocaliQ, Facebook Ads Benchmarks 2026 (traffic campaigns, Apr 2025 – Jun 2026, published Sep 2026); Databox Facebook Ads benchmarks (median CPM, all industries, Aug 2026); landing page view guidance from practitioner benchmarks (Tribeup, 2026). Liv figures from Meta Ads Manager.</p>
+    <p class="figcap">Liv beats the benchmarks comfortably, helped by low-cost Facebook Reels delivery. The landing page view rate is the measure to improve: fewer than half of clicks became a confirmed page view, against a healthy level of 50% or more. Accidental taps on Reels and slow mobile page loads are the usual causes.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 04</div>
+    <h2>Who the ads reached</h2>
+    <div class="two">
+      <div class="card">
+        <h3>Share of spend by age</h3>
+        <div class="legend" style="margin-left:0"><span><i style="background:#8FC9D8"></i>AY 2024/25</span><span><i style="background:#063955"></i>AY 2025/26</span></div>
+        <div class="agerow"><div class="agel">18-24</div><div class="agebars">
+      <div class="bar prev" style="width:13.6%"><span>7%</span></div>
+      <div class="bar cur" style="width:3.8%"><span>2%</span></div></div></div><div class="agerow"><div class="agel">25-34</div><div class="agebars">
+      <div class="bar prev" style="width:42.8%"><span>21%</span></div>
+      <div class="bar cur" style="width:10.8%"><span>5%</span></div></div></div><div class="agerow"><div class="agel">35-44</div><div class="agebars">
+      <div class="bar prev" style="width:29.0%"><span>14%</span></div>
+      <div class="bar cur" style="width:15.2%"><span>8%</span></div></div></div><div class="agerow"><div class="agel">45-54</div><div class="agebars">
+      <div class="bar prev" style="width:30.2%"><span>15%</span></div>
+      <div class="bar cur" style="width:29.4%"><span>15%</span></div></div></div><div class="agerow"><div class="agel">55-64</div><div class="agebars">
+      <div class="bar prev" style="width:29.8%"><span>15%</span></div>
+      <div class="bar cur" style="width:51.6%"><span>26%</span></div></div></div><div class="agerow"><div class="agel">65+</div><div class="agebars">
+      <div class="bar prev" style="width:54.6%"><span>27%</span></div>
+      <div class="bar cur" style="width:89.0%"><span>44%</span></div></div></div>
+        <p class="figcap">Delivery leaned towards older Facebook users, which includes parents, an important secondary audience. Growing the student share is a focus for AY 2026/27.</p>
+      </div>
+      <div class="card">
+        <h3>Where the ads ran</h3>
+        <div class="kpi3">
+          <div><div class="k">Facebook</div><div class="v">92%</div><div class="d">of spend (91% last year)</div></div>
+          <div><div class="k">Instagram</div><div class="v">5%</div><div class="d">of spend (7% last year)</div></div>
+          <div><div class="k">Audience Network</div><div class="v">3%</div><div class="d">rising to 18% since September</div></div>
+        </div>
+        <p class="figcap" style="margin-top:18px;">Facebook Reels and Feed took 87% of spend. Instagram, where students spend their time, has had less than 5%. Audience Network shows ads in third-party apps, where click quality is usually weakest, and its share has grown in AY 2026/27.</p>
+        <p class="figcap">Women received 63% of spend (54% last year).</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px;">The creative sets the audience</h3>
+    <p class="lede" style="font-size:15.5px;">Because age targeting is not allowed on housing ads, the creative and the placement decide who sees the ad. The data backs this up: content that looks and feels like Instagram reached students, while the property video tour reached an older audience.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Ad</th><th>Ran</th><th>Spend</th><th class="hi">Spend on 18–34s</th><th>Placements</th></tr></thead>
+        <tbody><tr><td>Instagram post boost (“Looking for your own space”)</td><td>AY 24/25</td><td>£70</td><td class="hi">72%</td><td>Instagram only</td></tr><tr><td>Ongoing website promotion</td><td>AY 24/25</td><td>£584</td><td class="hi">58%</td><td>Facebook</td></tr><tr><td>Starter En-Suite static</td><td>AY 24/25 – 25/26</td><td>£1,434</td><td class="hi">30%</td><td>Facebook + Instagram</td></tr><tr><td>Eve UGC (vertical)</td><td>Aug – Oct 2026</td><td>£415</td><td class="hi">17%</td><td>Facebook + Instagram</td></tr><tr><td>Liv Summer</td><td>May – Jul 2025</td><td>£1,097</td><td class="hi">19%</td><td>Facebook</td></tr><tr><td>Video Tour 01 (AY 26/27 Traffic)</td><td>Dec 2025 – now</td><td>£4,109</td><td class="hi">3%</td><td>Facebook</td></tr></tbody>
+      </table>
+    </div>
+    <p class="figcap">Spend Sep 2024 to 11 Oct 2026. Video Tour 01 has been the only ad in the main campaign since December 2025 and accounts for three quarters of AY 2025/26 spend. It is very efficient at getting clicks, and its audience skews older, so a fresher creative mix is the next step.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 05</div>
+    <h2>Site clicks and what happens next</h2>
+    <div class="steps" style="margin-top:0;">
+      <div class="step"><div class="k">Site clicks</div><div class="v">51,810</div><div class="d">Taps on the ad link to livstudent.com</div></div>
+      <div class="step"><div class="k">Landing page views</div><div class="v">21,884</div><div class="d">42% of clicks, where the pixel confirmed the page loaded</div></div>
+      <div class="step"><div class="k">Bookings &amp; viewings from social</div><div class="v" style="color:var(--tangerine)">Live 12 Oct</div><div class="d">Booking, viewing and contact events now sent to Meta</div></div>
+    </div>
+    <p style="margin-top:20px;">Through AY 2025/26 the campaigns were set to get as many clicks as possible. The Meta pixel recorded a general Lead event, but it could not tell a booking from an email click, so Meta had no clear booking signal to work towards. On 12 October 2026 we added separate Meta events for submitted bookings, viewing requests and contacts (form, phone and chat), and tightened the Lead event to genuine enquiries only. Once around a week of data has built up, the main campaign can move from clicks to optimising for leads, which is the single most valuable change for AY 2026/27.</p>
+    <p class="figcap">On-site engagement and bookings by social source in Google Analytics will be added in the next edition.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 06</div>
+    <h2>Organic accounts</h2>
+    <div class="two">
+      <div class="card"><h3>@livstudentsheffield</h3><div class="kpi3" style="grid-template-columns:1fr 1fr;"><div><div class="k">Followers</div><div class="v">1,738</div></div><div><div class="k">Posts</div><div class="v">598</div></div></div></div>
+      <div class="card"><h3>@livstudentbelfast</h3><div class="kpi3" style="grid-template-columns:1fr 1fr;"><div><div class="k">Followers</div><div class="v">1,940</div></div><div><div class="k">Posts</div><div class="v">445</div></div></div></div>
+    </div>
+    <p class="figcap">Instagram account snapshot at 12 October 2026. Organic posting has had no agency support since the Social Bee service ended, so this edition gives a snapshot rather than a trend. The organic accounts still matter for paid social: students check them before they book, and they are a source of student-voice content that can be boosted cheaply.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Section 07</div>
+    <h2>Recommendations for AY 2026/27</h2>
+    <div class="qa">
+      <div class="q"><div class="n">1</div><div><div class="ask">Optimise for enquiries now that Meta can see them</div><p>Booking, viewing and contact events have been passing to Meta since 12 October. Move the main campaign from link clicks to Leads optimisation once about a week of data has built up, then optimise for bookings when volumes reach around 50 a month.</p></div><div class="verdict v-add">From late Oct<small>Highest impact</small></div></div>
+      <div class="q"><div class="n">2</div><div><div class="ask">Use creative to reach students, since targeting can't</div><p>Retire Video Tour 01 as the only ad. Build a rotation of student-voice, Instagram-native content: UGC in the style of the Eve videos, resident tours filmed on a phone, and boosts of the best organic posts. Format and tone are what bring the 18–24 audience back, as the AY 2024/25 Instagram boost showed (72% of spend reached 18–34s).</p></div><div class="verdict v-add">From Nov<small>New creative every 8 weeks</small></div></div>
+      <div class="q"><div class="n">3</div><div><div class="ask">Give Instagram its own budget and remove Audience Network</div><p>Run an Instagram Reels and Stories ad set with at least 30% of spend, and exclude Audience Network. This gives up some cheap clicks to get better ones, and should also lift the share of clicks that reach the page.</p></div><div class="verdict v-add">Nov<small>Placement split</small></div></div>
+      <div class="q"><div class="n">4</div><div><div class="ask">Launch Belfast</div><p>Belfast has never had paid social. Reuse the Sheffield campaign structure with Belfast creative on the £1,500 proposed in the AY 2026/27 media plan, with heavier spend in January to March and results week.</p></div><div class="verdict v-add">Dec<small>£1,500 for the year</small></div></div>
+      <div class="q"><div class="n">5</div><div><div class="ask">Retarget people who already know Liv</div><p>This year's 131,000 video ThruPlays and 22,000 landing page views make a large warm audience. Build video-viewer and site-visitor audiences and use them for booking-focused ads with prices and offers, especially around Clearing.</p></div><div class="verdict v-hold">Jan<small>Once audiences fill</small></div></div>
+      <div class="q"><div class="n">6</div><div><div class="ask">Plan spend around the UCAS calendar</div><p>Line up social bursts with the UCAS Media programme (pre-results in May, results week in August) rather than spreading spend evenly at ~£450 a month. Keep a lower always-on level for the rest of the year.</p></div><div class="verdict v-hold">May &amp; Aug<small>Flighted</small></div></div>
+      <div class="q"><div class="n">7</div><div><div class="ask">Check mobile landing page speed</div><p>With fewer than half of clicks becoming a page view, check the Sheffield and Belfast landing pages on mobile. Use a lighter, faster page for social traffic if needed.</p></div><div class="verdict v-hold">Nov<small>Quick check</small></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="alloc">
+      <div class="eyebrow" style="color:var(--chartreuse)">Section 08</div>
+      <h2>Targets for AY 2026/27</h2>
+      <p class="lede">Based on the £5,000 Meta budget in the AY 2026/27 media plan (Sheffield £3,500, Belfast £1,500). These targets deliberately accept fewer, more expensive clicks in exchange for the right audience, so landing page views are set below this year's level.</p>
+      <div class="allocgrid">
+        <div class="ac" style="border-color:var(--chartreuse)"><div class="k">Instagram share of spend</div><div class="v">≥ 30%</div><div class="d">From 5%, with Audience Network excluded</div></div>
+        <div class="ac" style="border-color:var(--teal)"><div class="k">Landing page views</div><div class="v">11,000</div><div class="d">Sheffield 8,000 · Belfast 3,000, at ≤ £0.45 each</div></div>
+        <div class="ac" style="border-color:var(--tangerine)"><div class="k">Booking actions in Meta</div><div class="v">Live since 12 Oct</div><div class="d">A cost-per-lead target set from the Nov – Jan baseline</div></div>
+      </div>
+    </div>
+    <div class="tablewrap" style="margin-top:22px;">
+      <table>
+        <thead><tr><th>Measure</th><th>AY 2025/26 actual</th><th class="hi">AY 2026/27 target</th><th style="text-align:left">Why</th></tr></thead>
+        <tbody>
+          <tr><td>Meta spend</td><td>£5,440</td><td class="hi">£5,000</td><td style="text-align:left">Media plan envelope</td></tr>
+          <tr><td>Landing page views</td><td>21,884</td><td class="hi">11,000</td><td style="text-align:left">Younger audiences cost more per visit</td></tr>
+          <tr><td>Cost per landing page view</td><td>£0.25</td><td class="hi">≤ £0.45</td><td style="text-align:left">Still below AY 2024/25's £0.56</td></tr>
+          <tr><td>Link click-through rate</td><td>3.67%</td><td class="hi">≥ 2.5%</td><td style="text-align:left">Above the 2.37% real estate benchmark</td></tr>
+          <tr><td>Clicks that reach the page</td><td>42%</td><td class="hi">≥ 55%</td><td style="text-align:left">Fewer accidental Reels taps, faster page</td></tr>
+          <tr><td>Spend reaching under-35s</td><td>7%</td><td class="hi">≥ 20%</td><td style="text-align:left">Guided by creative and placements</td></tr>
+          <tr><td>Instagram share of spend</td><td>5%</td><td class="hi">≥ 30%</td><td style="text-align:left">Where the student audience is</td></tr>
+          <tr><td>Belfast landing page views</td><td>0</td><td class="hi">3,000</td><td style="text-align:left">£1,500 at ~£0.50</td></tr>
+          <tr><td>Live ads in rotation</td><td>1 main ad since Dec 2025</td><td class="hi">3–4 at any time</td><td style="text-align:left">Refreshed every 8 weeks</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figcap">AY 2026/27 so far (1 Sep – 11 Oct 2026): £613 spend, 6,285 site clicks, 3,190 landing page views at £0.19, 51% of clicks reaching the page. The year starts from the same position, so the changes above are what will move the numbers.</p>
+  </section>
+
+  <section>
+    <div class="assume">
+      <h3>Notes on the data</h3>
+      <ul>
+        <li><strong>Source.</strong> Meta Ads Manager, Liv Student ad account, pulled 12 October 2026. Figures cover all campaigns in the account, which in both years promoted Sheffield only.</li>
+        <li><strong>Periods.</strong> Academic years run 1 September to 31 August. AY 2024/25 had no activity from November 2024 to April 2025, so the May to August comparison is the fairer like-for-like view.</li>
+        <li><strong>Site clicks</strong> are Meta link clicks. <strong>Landing page views</strong> require the Meta pixel to fire on livstudent.com, so they understate visits where cookies are declined.</li>
+        <li><strong>Housing ads.</strong> All campaigns run under Meta's Housing special ad category, which blocks targeting by age, gender and postcode. The age split shows who Meta chose to deliver to, not who was targeted.</li>
+        <li><strong>Benchmarks</strong> are US medians in dollars, converted at about $1 = £0.75, and come from the sources listed in Section 03.</li>
+        <li><strong>Not included in this edition:</strong> organic post-level insights and Google Analytics on-site behaviour by social source.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div>Stafferton Digital · Valeo Management Europe · October 2026 · Confidential</div>
+    <svg class="staffmark" viewBox="0 0 330 42" role="img" aria-label="Stafferton Digital"><defs><style>@font-face{font-family:'Sen';font-weight:700;font-style:normal;src:url('https://cdn.jsdelivr.net/npm/@fontsource/sen@5.0.5/files/sen-latin-700-normal.woff2') format('woff2');}</style></defs><text x="10" y="37" font-size="36" font-weight="700" font-family="Sen, system-ui, -apple-system, 'Segoe UI', sans-serif" letter-spacing="1.5"><tspan fill="#00B8D4">S</tspan><tspan fill="currentColor">TAFF</tspan><tspan fill="#00B8D4">E</tspan><tspan fill="currentColor">RT</tspan><tspan fill="#00B8D4">O</tspan><tspan fill="currentColor">N</tspan></text><rect x="275" y="29" width="8" height="8" fill="#00B8D4"/><rect x="288" y="21" width="8" height="16" fill="#00B8D4"/><rect x="301" y="13" width="8" height="24" fill="#00B8D4"/><rect x="314" y="5" width="8" height="32" fill="#00B8D4"/></svg>
+  </footer>
+
+</div>
+</body>
+</html>
