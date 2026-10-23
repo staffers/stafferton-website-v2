@@ -49,3 +49,7 @@
 /client-reports/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
+
+# Archived sites - noindex
+/archive/*
+  X-Robots-Tag: noindex, nofollow
